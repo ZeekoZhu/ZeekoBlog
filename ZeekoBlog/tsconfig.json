@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "alwaysStrict": true,
+        "sourceMap": true,
+        "target": "es2015",
+        "module": "none",
+        "noEmitOnError": false
+    },
+    "include": [
+        "wwwroot/ts"
+    ],
+    "exclude": [
+        "node_modules/"
+    ],
+    "compileOnSave": false
+}

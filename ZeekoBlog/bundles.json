@@ -1,0 +1,30 @@
+[
+    {
+        "outputFileName": "wwwroot/css/site.css",
+        "inputFiles": [
+            "wwwroot/css/theme.css"
+        ]
+    },
+    {
+        "outputFileName": "wwwroot/js/site.js",
+        "inputFiles": [
+            "wwwroot/ts/Article.ts"
+        ]
+    },
+    {
+        "outputFileName": "wwwroot/js/zeeko.js",
+        "inputFiles": [
+            "wwwroot/ts/Utils.ts",
+            "wwwroot/ts/Article.ts",
+            "wwwroot/ts/Zeeko.ts"
+        ]
+    },
+    {
+        "outputFileName": "wwwroot/lib",
+        "inputFiles": [
+            "node_modules/gridlex/docs/gridlex.css",
+            "node_modules/minireset.css/minireset.css",
+            "node_modules/zepto/dist/zepto.js"
+        ]
+    }
+]

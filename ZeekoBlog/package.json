@@ -1,0 +1,27 @@
+{
+    "version": "1.0.0",
+    "name": "zeeko-blog",
+    "private": true,
+    "devDependencies": {
+        "@types/zepto": "^1.0.29",
+        "del": "^3.0.0",
+        "gulp": "^3.9.1",
+        "gulp-autoprefixer": "^4.0.0",
+        "gulp-clone": "^1.0.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-cssmin": "^0.2.0",
+        "gulp-filter": "^5.0.1",
+        "gulp-rename": "^1.2.2",
+        "gulp-sourcemaps": "^2.6.1",
+        "gulp-typescript": "^3.2.3",
+        "gulp-uglify": "^3.0.0",
+        "merge-stream": "^1.0.1",
+        "typescript": "^2.6.1",
+        "uglify-es": "^3.1.8"
+    },
+    "dependencies": {
+        "gridlex": "^2.4.1",
+        "minireset.css": "0.0.3",
+        "zepto": "^1.2.0"
+    }
+}

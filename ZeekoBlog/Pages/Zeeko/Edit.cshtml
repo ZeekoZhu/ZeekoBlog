@@ -1,0 +1,35 @@
+@page "{id?}"
+@model ZeekoBlog.Pages.Zeeko.EditModel
+@{
+    ViewData["Title"] = "编辑博客";
+    ViewData["Head"] = "写点东西吧~";
+    Layout = "~/Pages/Zeeko/_Layout.cshtml";
+}
+<div class="col-12">
+    <a href="@Url.Page("/Zeeko/Index")">返回列表</a>
+</div>
+<div class="col-12">
+    <label for="title">文章标题：</label>
+    <input id="title" type="text" name="Title" value="@Model.Article?.Title" />
+    <input id="id" hidden type="text" value="@Model.Article?.Id" />
+</div>
+
+<div class="col-12">
+    <label for="summary">摘要：</label>
+</div>
+
+<div class="col-12">
+    <textarea id="summary" style="resize: none; width:100%; height:5em;">@Model.Article?.Summary</textarea>
+</div>
+
+<div class="col-12">
+    <label for="content">博客正文：</label>
+</div>
+<div class="col-12">
+    <textarea id="content" style="resize: none; width:100%; height:30em;">@Model.Article?.Content</textarea>
+</div>
+<div class="col-12 grid-right">
+    <span id="save-success" style="display: none;">保存成功！</span>
+    <span id="save-error" style="display: none;">保存失败！</span>
+    <button id="save">保存</button>
+</div>

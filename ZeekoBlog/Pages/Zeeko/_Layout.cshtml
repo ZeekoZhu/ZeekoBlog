@@ -1,0 +1,20 @@
+@{
+    Layout = "~/Pages/_Layout.cshtml";
+}
+<div class="grid-spaceAround">
+    <div class="col-8 grid">
+        <div class="col-12">
+            <h2>@ViewData["Head"]</h2>
+        </div>
+        @RenderBody()
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="~/js/zeeko.js"></script>
+}
+
+@section Styles {
+    @RenderSection("Styles", false)
+}

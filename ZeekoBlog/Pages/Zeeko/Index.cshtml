@@ -1,0 +1,30 @@
+@page
+@model ZeekoBlog.Pages.Zeeko.IndexModel
+@{
+    ViewData["Title"] = "管理文章";
+    ViewData["Head"] = "今天干些啥呢？";
+    Layout = "~/Pages/Zeeko/_Layout.cshtml";
+}
+<div class="col-12">
+    <a href="@Url.Page("/Zeeko/Edit", null)">新随笔</a>
+</div>
+<div class="col-12">
+    <ul class="grid" style="list-style: none;">
+        @foreach (var article in Model.Articles)
+        {
+        <li id="a-@article.Id" class="col-12 grid">
+            <a class="col-8" href="@Url.Page("/Article", new {id = article.Id})" target="_blank">@article.Title</a>
+            <a href="@Url.Page("/Zeeko/Edit",new {id = article.Id})">编辑</a>
+            <a class="delete-art" art-id="@article.Id" href="#">删除</a>
+        </li>
+        }
+    </ul>
+</div>  
+
+@section Styles{
+    <style>
+        .delete-art {
+            margin-left: 2em;
+        }
+    </style>
+}
