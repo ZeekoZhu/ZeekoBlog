@@ -23,5 +23,8 @@
         "gridlex": "^2.4.1",
         "minireset.css": "0.0.3",
         "zepto": "^1.2.0"
+    },
+    "scripts":{
+        "build":"gulp build"
     }
 }

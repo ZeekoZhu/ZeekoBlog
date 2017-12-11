@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta lang="zh-CN"/>
+    <meta lang="zh-CN" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - 网上冲浪指南</title>
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -12,7 +12,14 @@
 
 </head>
 <body>
-    @RenderBody()
+    <div class="grid-center">
+        <div class="col-7_md-12_sm grid">
+            @RenderBody()
+        </div>
+        <div class="col-3_md-12_sm grid-column">
+            @RenderSection("Sidebar", required: false)
+        </div>
+    </div>
     <script src="~/lib/zepto.js" cdn="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
