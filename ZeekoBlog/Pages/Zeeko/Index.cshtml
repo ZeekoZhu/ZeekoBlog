@@ -12,14 +12,15 @@
     <ul class="grid" style="list-style: none;">
         @foreach (var article in Model.Articles)
         {
-        <li id="a-@article.Id" class="col-12 grid">
-            <a class="col-8" href="@Url.Page("/Article", new {id = article.Id})" target="_blank">@article.Title</a>
-            <a href="@Url.Page("/Zeeko/Edit",new {id = article.Id})">编辑</a>
-            <a class="delete-art" art-id="@article.Id" href="#">删除</a>
-        </li>
+            <li id="a-@article.Id" class="col-12 grid">
+                <a class="col-8" href="@Url.Page("/Article", new {id = article.Id})" target="_blank">@article.Title</a>
+                <a href="@Url.Page("/Zeeko/Edit",new {id = article.Id})">编辑</a>
+                <a class="delete-art" art-id="@article.Id" href="#">删除</a>
+            </li>
         }
     </ul>
-</div>  
+</div>
+<script>window.__pageModule = 'list'</script>
 
 @section Styles{
     <style>

@@ -5,20 +5,17 @@
     Layout = "_Layout";
 }
 
-<div class="grid-spaceAround">
-    <div class="col-7_md-12_sm grid">
-        <h1 class="col-12">@Model.Article.Title</h1>
-        <div class="col-12">
-            <span class="weak">@Model.Article.LastEdited.ToString("yyyy/MM/dd")</span>
-        </div>
-        <div class="divide wide-divide"></div>
 
-        <div class="col-12 content">
-            <markdown>@Html.Raw(Model.Article.Content)</markdown>
-        </div>
-        <div id="hypercomments_widget" class="col-12"></div>
-    </div>
+<h1 class="col-12">@Model.Article.Title</h1>
+<div class="col-12">
+    <span class="weak">@Model.Article.LastEdited.ToString("yyyy/MM/dd")</span>
 </div>
+<div class="divide wide-divide"></div>
+
+<div class="col-12 content">
+    <markdown>@Html.Raw(Model.Article.Content)</markdown>
+</div>
+<div id="hypercomments_widget" class="col-12"></div>
 
 @section Styles{
     <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/vs2015.min.css" rel="stylesheet">
@@ -27,6 +24,7 @@
             font-family: Consolas, 微软雅黑, monospace;
             word-wrap: break-word;
         }
+
         a {
             word-wrap: break-word;
         }
@@ -60,13 +58,13 @@
     <script>hljs.initHighlightingOnLoad();</script>
     <script type="text/javascript">
         _hcwp = window._hcwp || [];
-        _hcwp.push({widget:"Stream", widget_id: 97476});
-        (function() {
-            if("HC_LOAD_INIT" in window)return;
+        _hcwp.push({ widget: "Stream", widget_id: 97476 });
+        (function () {
+            if ("HC_LOAD_INIT" in window) return;
             HC_LOAD_INIT = true;
             var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
             var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
-            hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/97476/"+lang+"/widget.js";
+            hcc.src = ("https:" == document.location.protocol ? "https" : "http") + "://w.hypercomments.com/widget/hc/97476/" + lang + "/widget.js";
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hcc, s.nextSibling);
         })();

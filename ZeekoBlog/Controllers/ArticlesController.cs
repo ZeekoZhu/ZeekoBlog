@@ -1,12 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ZeekoBlog.Filters;
 using ZeekoBlog.Models;
-using ZeekoUtilsPack.AspNetCore.Jwt;
 
 namespace ZeekoBlog.Controllers
 {
@@ -49,7 +47,7 @@ namespace ZeekoBlog.Controllers
 
         // PUT: api/Articles/5
         [HttpPut("{id}")]
-        [BearerAuthorize]
+        [JwtAuthorize]
         public async Task<IActionResult> PutArticle([FromRoute] int id, [FromBody] Article article)
         {
             if (!ModelState.IsValid)
@@ -85,7 +83,7 @@ namespace ZeekoBlog.Controllers
 
         // POST: api/Articles
         [HttpPost]
-        [BearerAuthorize]
+        [JwtAuthorize]
         public async Task<IActionResult> PostArticle([FromBody] Article article)
         {
             if (!ModelState.IsValid)
@@ -101,7 +99,7 @@ namespace ZeekoBlog.Controllers
 
         // DELETE: api/Articles/5
         [HttpDelete("{id}")]
-        [BearerAuthorize]
+        [JwtAuthorize]
         public async Task<IActionResult> DeleteArticle([FromRoute] int id)
         {
             if (!ModelState.IsValid)

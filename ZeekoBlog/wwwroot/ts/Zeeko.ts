@@ -1,14 +1,5 @@
 /// <reference path="./Article.ts" />
 /// <reference path="./Utils.ts" />
-
-$(document).ready(() => {
-    appHeader.append('authorization', localStorage.getItem('authorization'));
-    let path = document.location.pathname.toLowerCase();
-    if (/\/zeeko\/edit\/?\d*/.test(path)) editModule();
-    if (/\/zeeko(\/index\/?\d*)?/.test(path)) listModule();
-    if (/\/zeeko\/login/.test(path)) loginModule();
-});
-
 let editModule = () => {
     let saveBtn = $('#save');
     let titleInput = $('#title');
@@ -76,7 +67,7 @@ let listModule = () => {
         fetch(`/api/Articles/${id}`,
             {
                 method: 'DELETE',
-                headers: appHeader,
+                headers: appHeader
             })
             .then(resp => {
                 if (resp.status < 200 || resp.status >= 300) {
@@ -103,9 +94,35 @@ let loginModule = () => {
             })
             .then(resp => {
                 if (resp.status === 200) {
-                    localStorage.setItem('authorization', resp.headers.get('authorization'));
-                    window.open('/zeeko', '_self');
+                    let token = resp.headers.get('tk').substring(7);
+                    localStorage.setItem('tk', token);
+                    window.open('/api/Token/ToPage/?tk=' + token, '_self');
                 }
             });
     });
 }
+
+class PageModule {
+    static modules: { name: string; func: Function }[] = [];
+    static register(name: string, func: Function) {
+        PageModule.modules.push({ name: name, func: func });
+    }
+    static active(name: string) {
+        let module = PageModule.modules.find(m => m.name === name);
+        if (module) {
+            module.func();
+        }
+    }
+}
+
+PageModule.register("edit",editModule);
+PageModule.register("list",listModule);
+PageModule.register("login", loginModule);
+
+$(document).ready(() => {
+    appHeader.append("authorization", `Bearer ${localStorage.getItem('tk')}`);
+    let pageModule = (window as any).__pageModule;
+    if (pageModule) {
+        PageModule.active(pageModule);
+    }
+});
