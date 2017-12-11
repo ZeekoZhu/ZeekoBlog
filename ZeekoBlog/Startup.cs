@@ -1,11 +1,15 @@
 using System;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
+using ZeekoBlog.Jwt;
 using ZeekoBlog.Models;
 using ZeekoBlog.Services;
 using ZeekoUtilsPack.AspNetCore.Jwt;
@@ -39,9 +43,28 @@ namespace ZeekoBlog
             var tokenOptions = new JwtConfigOptions(keyDir, "blog", "blog");
             services.AddSingleton(tokenOptions.TokenOptions);
             services.AddJwtAuthorization(tokenOptions);
-            services.AddJwtAuthentication(tokenOptions);
+            // 使用 JWT 保护 API
+            services.AddAuthentication().AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = tokenOptions.JwTokenValidationParameters;
+                });
+            // 使用 Cookie 保护页面
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Zeeko/Login";
+                    options.Cookie.Name = "tk";
+                    options.Cookie.Path = "/";
+                    options.TicketDataFormat = new JwtCookieDataFormat(tokenOptions.TokenOptions);
+                    options.ClaimsIssuer = "Zeeko";
+                });
             services.AddScoped<ArticleService>();
-            services.AddMvc();
+            services.AddMvc()
+                .AddRazorPagesOptions(options =>
+                {
+                    options.Conventions.AuthorizeFolder("/Zeeko");
+                    options.Conventions.AllowAnonymousToPage("/Zeeko/Login");
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +79,12 @@ namespace ZeekoBlog
             {
                 app.UseExceptionHandler("/Error");
             }
+            var cookiePolicyOptions = new CookiePolicyOptions
+            {
+                MinimumSameSitePolicy = SameSiteMode.Strict,
+            };
+            app.UseAuthentication();
+            app.UseCookiePolicy(cookiePolicyOptions);
 
             app.UseStaticFiles();
 

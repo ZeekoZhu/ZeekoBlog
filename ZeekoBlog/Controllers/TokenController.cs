@@ -3,9 +3,11 @@ using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using ZeekoBlog.Filters;
 using ZeekoUtilsPack.AspNetCore.Jwt;
 
 namespace ZeekoBlog.Controllers
@@ -28,7 +30,7 @@ namespace ZeekoBlog.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [BearerAuthorize]
+        [JwtAuthorize]
         public IActionResult Get()
         {
             return Ok("");
@@ -54,9 +56,9 @@ namespace ZeekoBlog.Controllers
                 ModelState.AddModelError(nameof(user.UserName), "用户名或密码错误");
                 return BadRequest(ModelState);
             }
-            string token = "Bearer " + CreateToken(user.UserName, expire, "blog");
-            HttpContext.Response.Headers.Add("Authorization", token);
-            HttpContext.Response.Cookies.Append("Authorization",token);
+            var token = CreateToken(user.UserName, expire, "blog");
+            string headerToken = "Bearer " + CreateToken(user.UserName, expire, "blog");
+            HttpContext.Response.Headers.Add("tk", headerToken);
             return Ok();
         }
 
@@ -80,6 +82,13 @@ namespace ZeekoBlog.Controllers
                 Expires = expire
             });
             return token;
+        }
+
+        [HttpGet("ToPage")]
+        public IActionResult ToPage([Required][FromQuery] string tk)
+        {
+            HttpContext.Response.Cookies.Append("tk", tk);
+            return RedirectToPage("/Zeeko/Index");
         }
     }
 
