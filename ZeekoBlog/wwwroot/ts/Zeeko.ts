@@ -2,6 +2,7 @@
 /// <reference path="./Utils.ts" />
 
 $(document).ready(() => {
+    appHeader.append("authorization", `Bearer ${localStorage.getItem('tk')}`);
     let path = document.location.pathname.toLowerCase();
     if (/\/zeeko\/edit\/?\d*/.test(path)) editModule();
     if (/\/zeeko(\/index\/?\d*)?/.test(path)) listModule();
@@ -30,8 +31,7 @@ let editModule = () => {
                 {
                     method: 'PUT',
                     body: JSON.stringify(newArticle),
-                    headers: appHeader,
-                    credentials: "same-origin"
+                    headers: appHeader
                 })
                 .then(resp => {
                     if (resp.status < 200 || resp.status >= 300) {
@@ -50,8 +50,7 @@ let editModule = () => {
                 {
                     method: 'POST',
                     body: JSON.stringify(newArticle),
-                    headers: appHeader,
-                    credentials: "same-origin"
+                    headers: appHeader
                 })
                 .then(resp => {
                     if (resp.status < 200 || resp.status >= 300) {
@@ -77,8 +76,7 @@ let listModule = () => {
         fetch(`/api/Articles/${id}`,
             {
                 method: 'DELETE',
-                headers: appHeader,
-                credentials: "same-origin"
+                headers: appHeader
             })
             .then(resp => {
                 if (resp.status < 200 || resp.status >= 300) {
@@ -106,7 +104,7 @@ let loginModule = () => {
             .then(resp => {
                 if (resp.status === 200) {
                     let token = resp.headers.get('tk').substring(7);
-                    console.log(resp.headers.get('tk'));
+                    localStorage.setItem('tk', token);
                     window.open('/api/Token/ToPage/?tk=' + token, '_self');
                 }
             });
