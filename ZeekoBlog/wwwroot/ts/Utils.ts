@@ -1,3 +1,3 @@
-const appHeader = new Headers({
+export const appHeader = new Headers({
     'Content-Type': 'application/json'
 });

@@ -4,27 +4,21 @@
     "private": true,
     "devDependencies": {
         "@types/zepto": "^1.0.29",
-        "del": "^3.0.0",
-        "gulp": "^3.9.1",
-        "gulp-autoprefixer": "^4.0.0",
-        "gulp-clone": "^1.0.0",
-        "gulp-concat": "^2.6.1",
-        "gulp-cssmin": "^0.2.0",
-        "gulp-filter": "^5.0.1",
-        "gulp-rename": "^1.2.2",
-        "gulp-sourcemaps": "^2.6.1",
-        "gulp-typescript": "^3.2.3",
-        "gulp-uglify": "^3.0.0",
-        "merge-stream": "^1.0.1",
+        "babel-minify-webpack-plugin": "^0.2.0",
+        "css-loader": "^0.28.7",
+        "extract-text-webpack-plugin": "^3.0.2",
+        "source-map-loader": "^0.2.3",
+        "ts-loader": "^3.2.0",
         "typescript": "^2.6.1",
-        "uglify-es": "^3.1.8"
+        "webpack": "^3.10.0"
     },
     "dependencies": {
         "gridlex": "^2.4.1",
         "minireset.css": "0.0.3",
+        "normalize.css": "^7.0.0",
         "zepto": "^1.2.0"
     },
-    "scripts":{
-        "build":"gulp build"
+    "scripts": {
+        "build": "webpack"
     }
 }

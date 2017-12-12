@@ -1,4 +1,4 @@
-class Article implements IArticle {
+export class Article implements IArticle {
     id?: number;
     title: string = '';
     summary: string = '';

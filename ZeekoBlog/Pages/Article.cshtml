@@ -17,6 +17,10 @@
 </div>
 <div id="hypercomments_widget" class="col-12"></div>
 
+@section Sidebar {
+    <vc:side-item head="内容导航" item-content="<ul class='toc-list'></ul>"></vc:side-item>
+}
+
 @section Styles{
     <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/vs2015.min.css" rel="stylesheet">
     <style>
@@ -36,6 +40,8 @@
 }
 
 @section Scripts {
+    <script>window.__pageModule='article-ro'</script>
+    <script src="~/dist/article.js"></script>
     <script>
         $('input[type=checkbox][disabled][checked]').replaceWith('<i class="fa fa-check-square-o" aria-hidden="true"></i>')
         $('input[type=checkbox][disabled]').replaceWith('<i class="fa fa-square-o" aria-hidden="true"></i>');

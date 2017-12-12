@@ -7,12 +7,13 @@
     <title>@ViewData["Title"] - 网上冲浪指南</title>
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/lib/gridlex.css" cdn="https://cdn.bootcss.com/gridlex/2.4.1/gridlex.min.css" rel="stylesheet" />
-    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/dist/theme.css" rel="stylesheet" />
+    <script src="~/dist/commons.js"></script>
     @RenderSection("Styles", required: false)
 
 </head>
 <body>
-    <div class="grid-center">
+    <div class="grid-center grid-noGutter">
         <div class="col-7_md-12_sm grid">
             @RenderBody()
         </div>

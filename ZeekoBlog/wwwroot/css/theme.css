@@ -1,3 +1,5 @@
+@import '../../node_modules/normalize.css/normalize.css';
+
 html {
     font-family: "Segoe UI", SegoeUI, "Microsoft YaHei", 微软雅黑, "Helvetica Neue", Helvetica, Arial, sans-serif;
     word-break: break-all;
