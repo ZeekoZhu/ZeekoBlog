@@ -1,7 +1,5 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.Runtime.InteropServices.ComTypes;
-using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Tokens;

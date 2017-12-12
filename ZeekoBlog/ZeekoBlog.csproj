@@ -14,6 +14,8 @@
     <Compile Remove="Migrations\20171104153223_init.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Remove="wwwroot\ts\ArticleModule.ts" />
+    <Content Remove="wwwroot\ts\PageModule.ts" />
     <Content Remove="wwwroot\ts\Utils.ts" />
   </ItemGroup>
   <ItemGroup>
@@ -41,7 +43,29 @@
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\ts\ArticleModule.ts" />
+    <TypeScriptCompile Include="wwwroot\ts\PageModule.ts" />
     <TypeScriptCompile Include="wwwroot\ts\Utils.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\ts\Article.js">
+      <DependentUpon>Article.ts</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\ts\Article.js.map">
+      <DependentUpon>Article.ts</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\ts\Utils.js">
+      <DependentUpon>Utils.ts</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\ts\Utils.js.map">
+      <DependentUpon>Utils.ts</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\ts\Zeeko.js">
+      <DependentUpon>Zeeko.ts</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\ts\Zeeko.js.map">
+      <DependentUpon>Zeeko.ts</DependentUpon>
+    </Content>
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptTarget>ES2016</TypeScriptTarget>
