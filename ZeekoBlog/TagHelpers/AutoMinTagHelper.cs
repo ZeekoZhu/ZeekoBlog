@@ -1,5 +1,4 @@
 using System;
-using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;
@@ -28,37 +27,23 @@ namespace ZeekoBlog.TagHelpers
         {
             do
             {
-
                 if (_env.IsDevelopment()) break;
                 var srcVal = (Attr: "", Val: "");
                 if (context.TagName.Equals("script", StringComparison.CurrentCultureIgnoreCase))
                 {
                     var src = context.AllAttributes["src"];
                     srcVal.Attr = "src";
-                    srcVal.Val = (src?.Value as HtmlString)?.Value;
+                    srcVal.Val = (src?.Value as HtmlString)?.Value ?? "";
                 }
                 else if (context.TagName.Equals("link", StringComparison.CurrentCultureIgnoreCase))
                 {
                     var href = context.AllAttributes["href"];
                     srcVal.Attr = "href";
-                    srcVal.Val = (href?.Value as HtmlString)?.Value;
+                    srcVal.Val = (href?.Value as HtmlString)?.Value ?? "";
                 }
                 else break;
-
-                if (string.IsNullOrEmpty(srcVal.Val))
-                {
-                    break;
-                }
-                if (srcVal.Val.TrimStart(' ').StartsWith("http"))
-                {
-                    break;
-                }
-                if (string.IsNullOrEmpty(Cdn)) // using local min file
-                {
-                    var extReg = new Regex(@"(\.js|\.css)$", RegexOptions.IgnoreCase);
-                    srcVal.Val = extReg.Replace(srcVal.Val, ".min." + (srcVal.Attr == "src" ? "js" : "css"));
-                }
-                else // using cdn resource
+                
+                if (string.IsNullOrEmpty(Cdn) == false)
                 {
                     srcVal.Val = Cdn;
                 }

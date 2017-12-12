@@ -268,5 +268,5 @@ __pycache__/
 **/wwwroot/**/*.map
 **/*.min.js
 **/*.min.css
-ZeekoBlog/wwwroot/css/site.css
+ZeekoBlog/wwwroot/dist
 /ZeekoBlog/Properties/launchSettings.json

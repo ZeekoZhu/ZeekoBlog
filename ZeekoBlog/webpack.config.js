@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const MinifyPlugin = require("babel-minify-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+let isProd = process.env.ASPNETCORE_ENVIRONMENT === 'Production';
 
 let entries = {
     'zeeko.js': './wwwroot/ts/Zeeko.ts',
@@ -10,16 +11,46 @@ let entries = {
 }
 function createEntries() {
     let result = {};
+    let key;
     for (key in entries) {
         if (entries.hasOwnProperty(key)) {
-            // result[`${key}.min`] = entries[key];
             result[key] = entries[key];
         }
     }
     return result;
 }
 
-console.dir(createEntries())
+let rules = [
+    {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/
+    },
+    {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+            use: {
+                loader: 'css-loader',
+                options: {
+                    minimize: true,
+                    import: true,
+                    sourceMap: !isProd
+                }
+            }
+        })
+    }
+];
+
+let srcMapLoader = {
+    enforce: 'pre',
+    test: /\.ts$/,
+    use: 'source-map-loader'
+};
+
+if (isProd) {
+    rules.push(srcMapLoader);
+}
+
 
 module.exports = {
     entry: createEntries(),
@@ -31,43 +62,20 @@ module.exports = {
         new ExtractTextPlugin({
             filename: '[name]'
         }),
-        new MinifyPlugin({}, {
-            test: /\.js$/
-        }),
+        new MinifyPlugin({},
+            {
+                test: /\.js$/
+            }),
     ],
     output: {
-        path: __dirname + '/wwwroot/dist',//打包后的文件存放的地方
-        filename: '[name]'//打包后输出文件的文件名
+        path: __dirname + '/wwwroot/dist', //打包后的文件存放的地方
+        filename: '[name]' //打包后输出文件的文件名
     },
     module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                loader: 'ts-loader',
-                exclude: /node_modules/
-            },
-            {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    use: {
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true,
-                            import: true,
-                            sourceMap: true
-                        }
-                    }
-                })
-            },
-            {
-                enforce: 'pre',
-                test: /\.ts$/,
-                use: 'source-map-loader'
-            },
-        ]
+        rules: rules
     },
     resolve: {
         extensions: ['.ts', '.css']
     },
-    devtool: 'inline-source-map',
+    devtool: isProd ? '' : 'inline-source-map'
 }
