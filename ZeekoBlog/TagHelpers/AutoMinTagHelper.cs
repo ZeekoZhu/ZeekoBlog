@@ -46,9 +46,9 @@ namespace ZeekoBlog.TagHelpers
                 if (string.IsNullOrEmpty(Cdn) == false)
                 {
                     srcVal.Val = Cdn;
+                    output.Attributes.RemoveAll(srcVal.Attr);
+                    output.Attributes.Add(new TagHelperAttribute(srcVal.Attr, _url.Content(srcVal.Val)));
                 }
-                output.Attributes.RemoveAll(srcVal.Attr);
-                output.Attributes.Add(new TagHelperAttribute(srcVal.Attr, _url.Content(srcVal.Val)));
             } while (false);
 
         }
