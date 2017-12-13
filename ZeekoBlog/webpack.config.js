@@ -1,8 +1,9 @@
+'use strict';
 const webpack = require('webpack');
 const MinifyPlugin = require("babel-minify-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-let isProd = process.env.ASPNETCORE_ENVIRONMENT === 'Production';
+let isProd = process.env.ASPNETCORE_ENVIRONMENT === 'Production' || process.env.NODE_ENV === 'production';
 
 let entries = {
     'zeeko.js': './wwwroot/ts/Zeeko.ts',

@@ -15,6 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\ts\ArticleModule.ts" />
+    <Content Remove="wwwroot\ts\MobileSidebar.ts" />
     <Content Remove="wwwroot\ts\PageModule.ts" />
     <Content Remove="wwwroot\ts\Utils.ts" />
   </ItemGroup>
@@ -45,6 +46,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="wwwroot\ts\ArticleModule.ts" />
     <TypeScriptCompile Include="wwwroot\ts\PageModule.ts" />
+    <TypeScriptCompile Include="wwwroot\ts\MobileSidebar.ts" />
     <TypeScriptCompile Include="wwwroot\ts\Utils.ts" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">

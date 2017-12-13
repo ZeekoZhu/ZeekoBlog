@@ -17,11 +17,14 @@
         <div class="col-7_md-12_sm grid">
             @RenderBody()
         </div>
-        <div class="col-3_md-12_sm grid-column">
+        <div class="col-3_md-12_sm grid-column side-container">
             @RenderSection("Sidebar", required: false)
         </div>
     </div>
-    <script src="~/lib/zepto.js" cdn="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+    <div class="action-btn">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+    <script src="~/lib/zepto.min.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
