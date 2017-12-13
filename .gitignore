@@ -260,13 +260,10 @@ paket-files/
 __pycache__/
 *.pyc
 
-# bower
-**/wwwroot/lib
 
 # Bundle Artifacts
-**/wwwroot/**/*.js
+**/wwwroot/ts/**/*.js
 **/wwwroot/**/*.map
-**/*.min.js
-**/*.min.css
+**/wwwroot/lib/*.css
 ZeekoBlog/wwwroot/dist
 /ZeekoBlog/Properties/launchSettings.json
