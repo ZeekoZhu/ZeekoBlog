@@ -21,17 +21,15 @@ let articleModule = () => {
     let tocLink = $('.toc-list a');
     let sidebar = new SidebarModule();
     let tocLinkNavigate = e => {
-        e.preventDefault();
         sidebar.hide();
-        e.target.click();
         return true;
     }
     sidebar.bind(SideBarEventType.Hide, () => {
-        tocLink.unbind('tap', tocLinkNavigate);
+        tocLink.unbind('click', tocLinkNavigate);
         return true;
     });
     sidebar.bind(SideBarEventType.Show, () => {
-        tocLink.bind('tap', tocLinkNavigate);
+        tocLink.bind('click', tocLinkNavigate);
         return true;
     });
 
