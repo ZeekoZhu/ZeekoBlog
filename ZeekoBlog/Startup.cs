@@ -85,6 +85,7 @@ namespace ZeekoBlog
             };
             app.UseAuthentication();
             app.UseCookiePolicy(cookiePolicyOptions);
+            app.UseStatusCodePagesWithReExecute("/Opps/{0}");
 
             app.UseStaticFiles();
 

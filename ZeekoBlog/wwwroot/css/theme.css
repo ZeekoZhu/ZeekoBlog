@@ -119,7 +119,13 @@ pre > code:not(.hljs) {
     padding-left: 3em;
 }
 
-@media (max-width: 48em) {
+@media screen and (min-width: 48em) {
+    .action-btn {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 48em) {
     .MathJax_Display {
         overflow: auto!important;
     }
