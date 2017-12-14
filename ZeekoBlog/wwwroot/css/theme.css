@@ -120,9 +120,12 @@ pre > code:not(.hljs) {
 }
 
 @media (max-width: 48em) {
+    .MathJax_Display {
+        overflow: auto!important;
+    }
     .side-container {
         position: fixed;
-        width: 100%;
+        width: 100vw;
         height: 0;
         background: white;
         z-index: 10;
