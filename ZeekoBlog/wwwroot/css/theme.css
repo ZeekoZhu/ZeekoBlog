@@ -52,6 +52,10 @@ a {
     margin-bottom: .2em;
 }
 
+.side-body {
+    margin-top: .2em;
+}
+
 @media screen and (min-width: 768px) {
     /* 直接出现在 grid 中的分割线 */
     .wide-divide {
@@ -119,10 +123,20 @@ pre > code:not(.hljs) {
     padding-left: 3em;
 }
 
-@media (max-width: 48em) {
+@media screen and (min-width: 48em) {
+    .action-btn {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 48em) {
+    .MathJax_Display {
+        overflow: auto !important;
+    }
+
     .side-container {
         position: fixed;
-        width: 100%;
+        width: 100vw;
         height: 0;
         background: white;
         z-index: 10;
@@ -149,8 +163,9 @@ pre > code:not(.hljs) {
         justify-content: center;
         align-items: center;
     }
-    .action-btn i {
-        font-size:1.2em;
-        color: white;
-    }
+
+        .action-btn i {
+            font-size: 1.2em;
+            color: white;
+        }
 }

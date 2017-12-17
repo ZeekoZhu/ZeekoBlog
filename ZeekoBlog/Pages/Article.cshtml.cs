@@ -22,7 +22,7 @@ namespace ZeekoBlog.Pages
             Article = await _articleService.GetById(id);
             if (Article == null)
             {
-                return RedirectToPage("/Error");
+                return NotFound();
             }
             return Page();
         }

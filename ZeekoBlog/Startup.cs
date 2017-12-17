@@ -61,6 +61,7 @@ namespace ZeekoBlog
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
                 {
+                    options.Conventions.AddPageRoute("/Article", "a/{id}");
                     options.Conventions.AuthorizeFolder("/Zeeko");
                     options.Conventions.AllowAnonymousToPage("/Zeeko/Login");
                 });
@@ -84,6 +85,7 @@ namespace ZeekoBlog
             };
             app.UseAuthentication();
             app.UseCookiePolicy(cookiePolicyOptions);
+            app.UseStatusCodePagesWithReExecute("/Opps/{0}");
 
             app.UseStaticFiles();
 
