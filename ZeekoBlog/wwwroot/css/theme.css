@@ -169,3 +169,7 @@ pre > code:not(.hljs) {
             color: white;
         }
 }
+
+p {
+    line-height:1.5;
+}
