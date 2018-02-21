@@ -3,7 +3,7 @@
         "alwaysStrict": true,
         "sourceMap": true,
         "target": "es2015",
-        "module": "none",
+        "module": "es6",
         "noEmitOnError": false
     },
     "include": [
