@@ -6,12 +6,12 @@
         "COPY ./src/ZeekoBlog/*.csproj ./ZeekoBlog/",
         "COPY ./src/ZeekoBlog/*.json ./ZeekoBlog/",
         "COPY ./src/Nuget.Config .",
-        "RUN cd ZeekoBlog && dotnet restore --configfile ../Nuget.Config && npm install && npm cache clean --force",
+        "RUN cd ZeekoBlog && dotnet restore --configfile ../Nuget.Config && npm install",
         "COPY ./src .",
         "RUN cd ZeekoBlog && npm run build && dotnet publish -c Release -o /app/",
         "FROM microsoft/aspnetcore:2.0.5",
         "WORKDIR /app",
         "COPY --from=builder /app .",
-        "ENTRYPOINT [\"dotnet\", \"TooYoung.dll\"]"
+        "ENTRYPOINT [\"dotnet\", \"ZeekoBlog.dll\"]"
     ]
 }
