@@ -13,7 +13,9 @@
         <div class="col-12 article">
             <h2><a href="@Url.Page("/Article",new {id = article.Id})" target="_blank">@article.Title</a></h2>
             <span class="weak">@article.LastEdited.ToString("yyyy/MM/dd")</span>
-            <p class="weak summary">@article.Summary</p>
+            <p class="weak summary">
+                <markdown>@Html.Raw(article.Summary)</markdown>
+            </p>
         </div>
     }
 </div>
