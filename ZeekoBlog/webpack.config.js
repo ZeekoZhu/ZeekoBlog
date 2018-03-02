@@ -1,3 +1,4 @@
+/// <binding BeforeBuild='Run - Development' />
 'use strict';
 const webpack = require('webpack');
 const MinifyPlugin = require("babel-minify-webpack-plugin");

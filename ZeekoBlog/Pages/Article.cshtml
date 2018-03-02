@@ -12,7 +12,7 @@
 </div>
 <div class="divide wide-divide"></div>
 
-<div class="col-12 content">
+<div class="col-12 content article">
     <markdown>@Html.Raw(Model.Article.Content)</markdown>
 </div>
 <div id="hypercomments_widget" class="col-12"></div>
@@ -23,20 +23,6 @@
 
 @section Styles{
     <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/vs2015.min.css" rel="stylesheet">
-    <style>
-        code {
-            font-family: Consolas, 微软雅黑, monospace;
-            word-wrap: break-word;
-        }
-
-        a {
-            word-wrap: break-word;
-        }
-
-        img {
-            max-width: 100%;
-        }
-    </style>
 }
 
 @section Scripts {
@@ -62,6 +48,7 @@
     </script>
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/languages/typescript.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/languages/fsharp.min.js"></script>
     <script>
         hljs.initHighlightingOnLoad()
     </script>

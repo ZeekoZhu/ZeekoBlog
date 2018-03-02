@@ -171,5 +171,45 @@ pre > code:not(.hljs) {
 }
 
 p {
-    line-height:1.5;
+    line-height: 1.5;
+}
+
+code {
+    font-family: Consolas, 微软雅黑, monospace;
+    word-wrap: break-word;
+}
+
+.article.content a {
+    word-wrap: break-word;
+}
+
+.article.content img {
+    max-width: 100%;
+}
+
+.article table {
+    border-collapse: collapse;
+    width: 100%;
+    overflow: scroll;
+}
+
+.article th, .article td {
+    border: 1px solid #ddd;
+    padding: .5em;
+}
+
+.article th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #0072d0;
+    color: white;
+}
+
+.article table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.article table tr:hover {
+    background-color: #ddd;
 }
