@@ -6,7 +6,7 @@
 }
 
 
-<div class="article">
+<div class="article col-12 grid">
     <h1 class="col-12">@Model.Article.Title</h1>
     <div class="col-12">
         <span class="weak">@Model.Article.LastEdited.ToString("yyyy/MM/dd")</span>
@@ -53,8 +53,9 @@
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/languages/typescript.min.js"></script>
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/languages/fsharp.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/languages/less.min.js"></script>
     <script>
-        hljs.initHighlightingOnLoad()
+        hljs.initHighlightingOnLoad();
     </script>
     <script type="text/javascript">
         _hcwp = window._hcwp || [];
