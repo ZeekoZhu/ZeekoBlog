@@ -65,6 +65,7 @@ namespace ZeekoBlog
                 });
             services.AddScoped<ArticleService>();
             services.AddScoped<MarkdownService>();
+            services.AddMemoryCache();
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
                 {
