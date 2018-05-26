@@ -29,18 +29,11 @@ namespace ZeekoBlog.TagHelpers
 
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            var content = await GetContentAsync(output);
+            var content = output.Content.IsModified ? output.Content.GetContent() :
+                (await output.GetChildContentAsync()).GetContent();
             var html = Markdown.ToHtml(content, Pipeline);
             output.Content.SetHtmlContent(html);
-            output.TagName = "div";
-        }
-
-        private async Task<string> GetContentAsync(TagHelperOutput output)
-        {
-            if (Content == null)
-                return (await output.GetChildContentAsync()).GetContent();
-
-            return Content.Model?.ToString();
+            output.TagName = null;
         }
     }
 }

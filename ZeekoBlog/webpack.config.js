@@ -9,7 +9,7 @@ let isProd = process.env.ASPNETCORE_ENVIRONMENT === 'Production' || process.env.
 let entries = {
     'zeeko.js': './wwwroot/ts/Zeeko.ts',
     'article.js': './wwwroot/ts/ArticleModule.ts',
-    'theme.css': './wwwroot/css/theme.css'
+    'theme.css': './wwwroot/css/theme.styl'
 }
 function createEntries() {
     let result = {};
@@ -29,16 +29,32 @@ let rules = [
         exclude: /node_modules/
     },
     {
-        test: /\.css$/,
+        test: /\.styl$/,
         use: ExtractTextPlugin.extract({
-            use: {
-                loader: 'css-loader',
-                options: {
-                    minimize: true,
-                    import: true,
-                    sourceMap: !isProd
+            use: [
+                {
+                    loader: 'css-loader',
+                    options: {
+                        minimize: true,
+                        import: true,
+                        sourceMap: !isProd
+                    }
+                },
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        plugins: [
+                            require('autoprefixer')
+                        ]
+                    }
+                },
+                {
+                    loader: 'stylus-loader',
+                    options: {
+                        preferPathResolver: 'webpack'
+                    }
                 }
-            }
+            ]
         })
     }
 ];

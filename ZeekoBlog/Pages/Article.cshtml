@@ -6,16 +6,18 @@
 }
 
 
-<h1 class="col-12">@Model.Article.Title</h1>
-<div class="col-12">
-    <span class="weak">@Model.Article.LastEdited.ToString("yyyy/MM/dd")</span>
-</div>
-<div class="divide wide-divide"></div>
+<div class="article">
+    <h1 class="col-12">@Model.Article.Title</h1>
+    <div class="col-12">
+        <span class="weak">@Model.Article.LastEdited.ToString("yyyy/MM/dd")</span>
+    </div>
+    <div class="divide wide-divide"></div>
 
-<div class="col-12 content article">
-    <markdown>@Html.Raw(Model.Article.Content)</markdown>
+    <div class="col-12 content article-md">
+        <markdown>@Html.Raw(Model.Article.Content)</markdown>
+    </div>
+    <div id="hypercomments_widget" class="col-12"></div>
 </div>
-<div id="hypercomments_widget" class="col-12"></div>
 
 @section Sidebar {
     <vc:side-item head="内容导航" item-content="<ul class='toc-list'></ul>"></vc:side-item>
