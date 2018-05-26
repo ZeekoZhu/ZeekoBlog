@@ -54,6 +54,8 @@ a {
 
 .side-body {
     margin-top: .2em;
+    display: flex;
+    flex-flow: column nowrap;
 }
 
 @media screen and (min-width: 768px) {

@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Mvc.ViewComponents;
 
 namespace ZeekoBlog.ViewComponents
 {
-    public class SideItemViewComponent : ViewComponent
+    public class SideGroupViewComponent : ViewComponent
     {
-        public Task<ViewViewComponentResult> InvokeAsync(string head, string itemContent)
+        public Task<ViewViewComponentResult> InvokeAsync(string title, string content)
         {
-            ViewBag.Head = head;
-            ViewBag.Content = itemContent;
+            ViewBag.Title = title;
+            ViewBag.Content = content;
             return Task.FromResult(View());
         }
     }

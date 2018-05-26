@@ -21,11 +21,14 @@
 </div>
 
 @section Sidebar {
-    <vc:side-item head="友情链接" item-content="<a href='https://rocka.me' target='_blank'>https://rocka.me</a><br /><a href='http://blog.neatline.cn' target='_blank'>http://blog.neatline.cn</a>"></vc:side-item>
-    <vc:side-item head="测试" item-content="测试"></vc:side-item>
+    <div side-group title="友情链接">
+        <a href="https://rocka.me" target="_blank">https://rocka.me</a>
+        <a href="http://blog.neatline.cn" target="_blank">http://blog.neatline.cn</a>
+    </div>
+    @*@Component.InvokeAsync("SideGroup", new { title="测试", content="测试"})*@
 }
 
 @section Scripts {
-    <script>window.__pageModule='article-list'</script>
+    <script>window.__pageModule = 'article-list'</script>
     <script src="~/dist/article.js"></script>
 }
