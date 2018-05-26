@@ -20,9 +20,16 @@
 </div>
 
 @section Sidebar {
-    <side-group title="内容导航">
-        <ul class='toc-list'></ul>
-    </side-group>
+<side-group title="内容导航">
+    <ul class='toc-list'>
+        @foreach (var item in Model.TOCList)
+        {
+            <li class="toc-H@(item.Level)">
+                <a href="#@item.Id">@item.Name</a>
+            </li>
+        }
+    </ul>
+</side-group>
 }
 
 @section Styles{
@@ -51,9 +58,10 @@
         });
     </script>
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/languages/typescript.min.js"></script>
-    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/languages/fsharp.min.js"></script>
-    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/languages/less.min.js"></script>
+    @foreach (var lang in Model.Languages)
+    {
+        <script src="https://cdn.bootcss.com/highlight.js/9.12.0/languages/@(lang).min.js"></script>
+    }
     <script>
         hljs.initHighlightingOnLoad();
     </script>

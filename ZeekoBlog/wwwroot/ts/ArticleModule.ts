@@ -4,18 +4,6 @@ import { MobileSidebar as SidebarModule, SideBarEventType } from './MobileSideba
 let articleModule = () => {
     console.log('article actived');
 
-    // 生成 TOC
-    let headingSelector = [2, 3, 4, 5].map(n => `.content h${n}`).join(',');
-    let headings = $(headingSelector).map((_, h: HTMLHeadingElement) => {
-        let a = $('<a/>', {
-            href: `#${h.id}`,
-            text: h.innerText
-        });
-        return $('<li />', { class: `toc-${h.tagName}` }).append(a);
-    });
-    let tocList = $('.toc-list');
-    tocList.append(headings);
-
 
     // 为 action button 绑定事件
     let tocLink = $('.toc-list a');

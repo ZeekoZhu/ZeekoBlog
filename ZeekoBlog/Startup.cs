@@ -64,6 +64,7 @@ namespace ZeekoBlog
                     options.ClaimsIssuer = "Zeeko";
                 });
             services.AddScoped<ArticleService>();
+            services.AddScoped<MarkdownService>();
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
                 {
