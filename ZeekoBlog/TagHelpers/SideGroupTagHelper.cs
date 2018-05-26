@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace ZeekoBlog.TagHelpers
 {
-    [HtmlTargetElement(Attributes = "side-group")]
+    [HtmlTargetElement("side-group")]
     public class SideGroupTagHelper : TagHelper
     {
         private readonly IViewComponentHelper _componentHelper;

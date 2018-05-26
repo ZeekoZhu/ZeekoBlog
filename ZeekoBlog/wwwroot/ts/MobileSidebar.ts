@@ -1,6 +1,10 @@
 /**
  * 用来控制侧边栏，需要在 DOM 加载完成后实例化
  */
+
+export enum SideBarEventType {
+    Show, Hide
+}
 export class MobileSidebar {
     actionBtn: ZeptoCollection;
     sidebar: ZeptoCollection;
@@ -62,8 +66,4 @@ export class MobileSidebar {
         $('body').css('overflow', 'auto');
         this.isShowing = false;
     }
-}
-
-export enum SideBarEventType {
-    Show, Hide
 }
