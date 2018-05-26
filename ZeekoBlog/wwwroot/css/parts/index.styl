@@ -12,7 +12,17 @@ index-part() {
         line-height: 1.8;
     }
 
-    .article-short > h2 {
-        margin-bottom: 0.3em;
+    .article-short {
+        border-left: transparent solid 0.3rem;
+        transition: border-left-color 0s;
+
+        &:hover {
+            transition: border-left-color 0.3s;
+            border-left: #0072c6 solid 0.3rem;
+        }
+
+        h2 {
+            margin-bottom: 0.3em;
+        }
     }
 }

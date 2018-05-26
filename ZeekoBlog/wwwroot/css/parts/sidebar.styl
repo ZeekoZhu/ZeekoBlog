@@ -1,26 +1,4 @@
 sidebar-part() {
-    @media screen and (min-width: 768px) {
-        .side-card {
-            margin-left: 3em;
-        }
-    }
-
-    @media screen and (max-width: 48em) {
-        .side-container {
-            position: fixed;
-            width: 100vw;
-            height: 0;
-            background: white;
-            z-index: 10;
-            overflow: auto;
-            opacity: 0;
-        }
-
-        .toc-list li {
-            margin: 2em 0;
-        }
-    }
-
     .side-title > h3 {
         margin-bottom: 0.2em;
     }
@@ -29,6 +7,14 @@ sidebar-part() {
         margin-top: 0.2em;
         display: flex;
         flex-flow: column nowrap;
+
+        .side-item {
+            padding: 0.5rem 0 0.5rem 0.3rem;
+
+            &:hover {
+                background-color: #eeeeee;
+            }
+        }
     }
 
     .toc-list {
@@ -51,5 +37,27 @@ sidebar-part() {
 
     .toc-H5 {
         padding-left: 3em;
+    }
+
+    @media screen and (min-width: 768px) {
+        .side-card {
+            margin-left: 3em;
+        }
+    }
+
+    @media screen and (max-width: 48em) {
+        .side-container {
+            position: fixed;
+            width: 100vw;
+            height: 0;
+            background: white;
+            z-index: 10;
+            overflow: auto;
+            opacity: 0;
+        }
+
+        .toc-list li {
+            margin: 2em 0;
+        }
     }
 }

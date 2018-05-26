@@ -24,13 +24,27 @@
 
 @section Sidebar {
     <side-group title="友情链接">
-        <a href="https://rocka.me" target="_blank">https://rocka.me</a>
-        <a href="http://blog.neatline.cn" target="_blank">http://blog.neatline.cn</a>
+        <a class="side-item" href="https://rocka.me" target="_blank">Rocket1184</a>
+        <a class="side-item" href="http://blog.neatline.cn" target="_blank">Neatline</a>
     </side-group>
     @*@Component.InvokeAsync("SideGroup", new { title="测试", content="测试"})*@
 }
 
 @section Scripts {
+    <script src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js"></script>
+    <script>
+        MathJax.Hub.Config({
+            messageStyle: 'none',
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\[', '\]']],
+                processEscapes: true
+            },
+            'HTML-CSS': { availableFonts: ['TeX'] }
+        });
+    </script>
     <script>window.__pageModule = 'article-list'</script>
     <script src="~/dist/article.js"></script>
 }
