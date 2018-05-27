@@ -13,6 +13,7 @@ before_install:
 jobs:
   include:
     - stage: build
+      if: tag =~ ^\d+\.\d+\.\d+-[a-zA-Z0-9]+$
       script: docker build -t hkccr.ccs.tencentyun.com/zeeko/blog-server:tmp .
       deploy:
         - provider: script
