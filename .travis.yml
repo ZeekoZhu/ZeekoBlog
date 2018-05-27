@@ -14,7 +14,7 @@ jobs:
   include:
     - stage: build
       if: tag =~ ^\d+\.\d+\.\d+-[a-zA-Z0-9]+$
-      script: docker build -t hkccr.ccs.tencentyun.com/zeeko/blog-server:tmp .
+      script: docker build -t hkccr.ccs.tencentyun.com/zeeko/blog-server:tmp --build-arg APPENV=Production .
       deploy:
         - provider: script
           script: pwsh Publish.ps1 $TRAVIS_TAG hkccr.ccs.tencentyun.com/zeeko/blog-server -IsLatest
