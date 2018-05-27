@@ -1,3 +1,5 @@
+@import './utis.styl';
+
 index-part() {
     h1, h2, h3, h4, h5, h6 {
         font-weight: initial;
@@ -23,6 +25,51 @@ index-part() {
 
         h2 {
             margin-bottom: 0.3em;
+        }
+    }
+
+    .pager {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: stretch;
+
+        pager-arrow() {
+            font-size: 3rem;
+            hover-block();
+        }
+
+        .prev {
+            margin-bottom: 0.2rem;
+            pager-arrow();
+            padding-top: 0.2rem;
+
+            &::before {
+                padding: 0 1rem;
+                font-size: 2rem;
+                content: '\E830';
+            }
+        }
+
+        .current {
+            display: none;
+            margin-bottom: 0.5rem;
+        }
+
+        .next {
+            padding-top: 0.7rem;
+            pager-arrow();
+
+            &::before {
+                padding: 0 1rem;
+                content: '\EA47';
+            }
+        }
+
+        .hide {
+            &::before {
+                display: none;
+            }
         }
     }
 }

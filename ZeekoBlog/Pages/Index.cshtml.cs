@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZeekoBlog.Models;
 using ZeekoBlog.Services;
@@ -12,16 +14,24 @@ namespace ZeekoBlog.Pages
 
         public IndexModel(ArticleService articleService)
         {
-            this._articleService = articleService;
+            _articleService = articleService;
         }
 
         public List<Article> Articles { get; set; }
         public int CurrentIndex { get; set; }
         public int TotalPages { get; set; }
 
-        public async Task OnGet()
+        public async Task<IActionResult> OnGetAsync([FromQuery(Name = "p")]int page = 1)
         {
-            (Articles, TotalPages) = await _articleService.GetPaged(0, 20);
+            if (page < 1) page = 1;
+            CurrentIndex = page;
+            (Articles, TotalPages) = await _articleService.GetPaged(page - 1, 20);
+            if (Articles.Any() == false)
+            {
+                return NotFound();
+            }
+
+            return Page();
         }
     }
 }

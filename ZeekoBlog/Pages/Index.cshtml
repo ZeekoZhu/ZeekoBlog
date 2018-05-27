@@ -20,6 +20,11 @@
             </div>
         }
     </div>
+    <div class="col-12 pager">
+        <span class="current">@Model.CurrentIndex</span>
+        <a class="prev mdl2 @(Model.CurrentIndex == 1 ? "hide" : "")" href="/?p=@(Model.CurrentIndex - 1)"></a>
+        <a class="next mdl2 @(Model.CurrentIndex == Model.TotalPages ? "hide" : "")" href="/?p=@(Model.CurrentIndex + 1)"></a>
+    </div>
 </div>
 
 @section Sidebar {
@@ -27,7 +32,6 @@
         <a class="side-item" href="https://rocka.me" target="_blank">Rocket1184</a>
         <a class="side-item" href="http://blog.neatline.cn" target="_blank">Neatline</a>
     </side-group>
-    @*@Component.InvokeAsync("SideGroup", new { title="测试", content="测试"})*@
 }
 
 @section Scripts {

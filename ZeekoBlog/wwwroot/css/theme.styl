@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Segoe MDL2 Assets';
+    src: url('/assets/SegoeMDL2Assets.eot?#iefix') format('embedded-opentype'), url('/assets/SegoeMDL2Assets.woff') format('woff'), url('/assets/SegoeMDL2Assets.ttf') format('truetype'), url('/assets/SegoeMDL2Assets.svg#SegoeMDL2Assets') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 @import './parts/index';
 @import './parts/article.styl';
 @import './parts/code.styl';
@@ -42,6 +49,10 @@ h1 {
     width: 100%;
 }
 
+.mdl2 {
+    font-family: 'Segoe MDL2 Assets';
+}
+
 @media screen and (max-width: 48em) {
     .action-btn {
         height: 3em;
@@ -51,15 +62,15 @@ h1 {
         position: fixed;
         display: block;
         bottom: 1.5em;
-        right: 1.5em;
+        right: calc(50% - 1.5em);
         opacity: 0.7;
         display: flex;
         flex-flow: row nowrap;
         justify-content: center;
         align-items: center;
 
-        i {
-            font-size: 1.2em;
+        b {
+            font-size: 1.3em;
             color: white;
         }
     }
