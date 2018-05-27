@@ -81,7 +81,7 @@ if ($Tag -match $tagReg) {
     $patch = $version.Patch
     $preRelease = $version.PreRelease
     Write-Output "Version is $major.$minor.$patch"
-    Write-Output $ENV:DOCKER_PASSWORD | docker login -u $ENV:DOCKER_USERNAME --password-stdin
+    Write-Output $ENV:DOCKER_PASSWORD | docker login -u $ENV:DOCKER_USERNAME --password-stdin hkccr.ccs.tencentyun.com/zeeko
     Push-Image -ImageName $ImageName -Version "$major.$minor.$patch$preRelease" -Suffix $TagSuffix
     # Push-Image -ImageName $ImageName -Version "$major.$minor" -Suffix $TagSuffix
     if ($IsLatest) {
