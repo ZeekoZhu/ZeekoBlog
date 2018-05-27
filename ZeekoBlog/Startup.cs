@@ -38,9 +38,13 @@ namespace ZeekoBlog
             {
                 var dbUser = Environment.GetEnvironmentVariable("BLOG_DB_USER");
                 var dbPwd = Environment.GetEnvironmentVariable("BLOG_DB_PWD");
+                var dbAddr = Environment.GetEnvironmentVariable("BLOG_DB_ADDR");
+                var dbPort = Environment.GetEnvironmentVariable("BLOG_DB_PORT");
                 var connectionString = Configuration.GetConnectionString("mysql")
-                .Replace("{BLOG_DB_USER}", dbUser)
-                .Replace("{BLOG_DB_PWD}", dbPwd);
+                    .Replace("{BLOG_DB_ADDR}", dbAddr)
+                    .Replace("{BLOG_DB_PORT}", dbPort)
+                    .Replace("{BLOG_DB_USER}", dbUser)
+                    .Replace("{BLOG_DB_PWD}", dbPwd);
 
                 options.UseMySql(connectionString);
             });

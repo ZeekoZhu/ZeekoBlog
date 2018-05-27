@@ -1,0 +1,21 @@
+sudo: required
+
+services:
+  - docker
+
+# install pwsh
+before_install:
+  - curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+  - sudo curl -o /etc/apt/sources.list.d/microsoft.list https://packages.microsoft.com/config/ubuntu/14.04/prod.list
+  - sudo apt-get update -q
+  - sudo apt-get install -y powershell
+
+jobs:
+  include:
+    - stage: build
+      script: docker build -t hkccr.ccs.tencentyun.com/zeeko/blog-server:tmp .
+      deploy:
+        - provider: script
+          script: pwsh Publish.ps1 $TRAVIS_TAG hkccr.ccs.tencentyun.com/zeeko/blog-server -IsLatest
+          on:
+            tags: true
