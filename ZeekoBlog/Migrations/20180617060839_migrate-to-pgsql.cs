@@ -1,10 +1,10 @@
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ZeekoBlog.Migrations
 {
-    public partial class Init : Migration
+    public partial class migratetopgsql : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,12 +12,12 @@ namespace ZeekoBlog.Migrations
                 name: "Articles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Content = table.Column<string>(type: "longtext", nullable: true),
-                    LastEdited = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Summary = table.Column<string>(type: "longtext", nullable: true),
-                    Title = table.Column<string>(type: "longtext", nullable: true)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    Title = table.Column<string>(nullable: true),
+                    Summary = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: true),
+                    LastEdited = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
