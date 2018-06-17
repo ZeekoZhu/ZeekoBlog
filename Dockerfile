@@ -1,4 +1,4 @@
-FROM zeekzhu/aspnetcore-build-yarn:2.1 AS builder
+FROM zeekozhu/aspnetcore-build-yarn:2.1 AS builder
 WORKDIR /source
 COPY ./ZeekoBlog/*.csproj ./ZeekoBlog/
 COPY ./ZeekoBlog/*.json ./ZeekoBlog/
