@@ -38,6 +38,15 @@ namespace ZeekoBlog.Services
             "vim", "x86asm", "xl", "xml", "xquery", "yaml", "zephir"
         };
 
+        private readonly Dictionary<string, string> _languageShort = new Dictionary<string, string>
+        {
+            ["ts"] = "typescript",
+            ["js"] = "javascript",
+            ["posh"] = "powershell",
+            ["fs"] = "fsharp",
+            ["sh"] = "shell",
+        };
+
         public MarkdownService(IMemoryCache cache)
         {
             _cache = cache;
@@ -75,7 +84,11 @@ namespace ZeekoBlog.Services
             }
             var doc = Markdown.Parse(mdContent);
             var languages = doc.Descendants<FencedCodeBlock>()
-                .Select(c => c.Info).Where(l => l != null).Distinct().Where(l => _languages.Contains(l)).ToList();
+                .Select(c => c.Info).Where(l => l != null)
+                .Distinct()
+                .Where(l => _languages.Contains(l) || _languageShort.ContainsKey(l))
+                .Select(l => _languageShort.TryGetValue(l, out string result) ? result : l)
+                .ToList();
             _cache.Set(key, languages, new MemoryCacheEntryOptions
             {
                 SlidingExpiration = TimeSpan.FromDays(1)
