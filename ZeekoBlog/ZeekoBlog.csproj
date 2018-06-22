@@ -36,9 +36,6 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="wwwroot\lib\" />
-  </ItemGroup>
-  <ItemGroup>
     <TypeScriptCompile Include="wwwroot\ts\ArticleModule.ts" />
     <TypeScriptCompile Include="wwwroot\ts\PageModule.ts" />
     <TypeScriptCompile Include="wwwroot\ts\MobileSidebar.ts" />

@@ -1,0 +1,29 @@
+@page
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Yame</title>
+    <style>
+        .my-editor {
+            height: 600px;
+            display: block;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@vutk/yame@0.0.2/dist/yame-index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@vutk/yame@0.0.2/dist/yame-vendors.min.js"></script>
+    <script>
+        YameInit();
+    </script>
+</head>
+<body>
+    <h1>YAME - Yet another markdown editor.</h1>
+    <ya-markdown class="my-editor"></ya-markdown>
+</body>
+</html>
