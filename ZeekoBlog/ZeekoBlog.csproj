@@ -2,6 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+    <ApplicationInsightsResourceId>/subscriptions/fd445dad-dda5-4164-94c1-de2c3ea341ab/resourcegroups/default/providers/microsoft.insights/components/myblog</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/fd445dad-dda5-4164-94c1-de2c3ea341ab/resourcegroups/default/providers/microsoft.insights/components/myblog</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="wwwroot\%40types\**" />
@@ -19,6 +21,7 @@
     <PackageReference Include="Markdig">
       <Version>0.15.0</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore">
       <Version>2.1.0</Version>
@@ -40,6 +43,9 @@
     <TypeScriptCompile Include="wwwroot\ts\PageModule.ts" />
     <TypeScriptCompile Include="wwwroot\ts\MobileSidebar.ts" />
     <TypeScriptCompile Include="wwwroot\ts\Utils.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptTarget>ES2016</TypeScriptTarget>

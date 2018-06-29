@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
@@ -10,9 +11,13 @@ namespace ZeekoBlog
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            var aiKey = Environment.GetEnvironmentVariable("AI_KEY");
+            return WebHost.CreateDefaultBuilder(args)
+                .UseApplicationInsights(aiKey)
                 .UseStartup<Startup>()
                 .Build();
+        }
     }
 }
