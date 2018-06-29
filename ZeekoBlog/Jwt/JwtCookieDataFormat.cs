@@ -47,7 +47,7 @@ namespace ZeekoBlog.Jwt
                 var principal = jwtHandler.ValidateToken(protectedText, tokenParam, out SecurityToken validatedToken);
                 return new AuthenticationTicket(principal, new AuthenticationProperties(), CookieAuthenticationDefaults.AuthenticationScheme);
             }
-            catch (ArgumentException)
+            catch
             {
                 return null;
             }
