@@ -10,6 +10,8 @@ param(
     $Prod
 )
 
+$ENV:LANGUAGE = "en_US.UTF-8"
+
 $Status = git status -uno -u
 $Branch = git rev-parse --abbrev-ref HEAD
 
