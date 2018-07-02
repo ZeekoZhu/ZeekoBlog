@@ -14,12 +14,17 @@ index-part() {
     }
 
     .article-short {
-        border-left: transparent solid 0.3rem;
-        transition: border-left-color 0s;
+        border = 0.4rem;
+        display: grid;
+        grid-template: auto auto auto / auto;
+        justify-items: stretch;
+        border-left: white solid border;
+        padding-left: 0.8rem;
 
         &:hover {
             transition: border-left-color 0.3s;
-            border-left: #0072c6 solid 0.3rem;
+            border-left: #0072c6 solid border;
+            padding-left: paddingLeft;
         }
 
         h2 {

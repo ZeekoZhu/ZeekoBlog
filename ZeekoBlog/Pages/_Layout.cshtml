@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - 网上冲浪指南</title>
     <link href="https://cdn.bootcss.com/normalize/8.0.0/normalize.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/gridlex/2.4.1/gridlex.min.css" rel="stylesheet" />
     <link href="~/dist/theme.css" rel="stylesheet" />
     <link rel="icon" type="image/png" href="~/assets/favicon-192x192.png" sizes="192x192">
     <link rel="icon" type="image/png" href="~/assets/favicon-160x160.png" sizes="160x160">
@@ -18,11 +17,11 @@
 
 </head>
 <body>
-    <div class="grid-center grid-noGutter">
-        <div class="col-7_md-12_sm grid">
+    <div class="layout">
+        <div class="module">
             @RenderBody()
         </div>
-        <div class="col-3_md-12_sm grid-column side-container">
+        <div class="side-container">
             @RenderSection("Sidebar", required: false)
         </div>
     </div>

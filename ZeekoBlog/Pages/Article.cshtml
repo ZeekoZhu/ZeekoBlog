@@ -6,17 +6,16 @@
 }
 
 
-<div class="article col-12 grid">
-    <h1 class="col-12">@Model.Article.Title</h1>
-    <div class="col-12">
+<div class="article">
+    <h1 class="title">@Model.Article.Title</h1>
+    <div class="">
         <span class="weak">@Model.Article.LastEdited.ToString("yyyy/MM/dd")</span>
     </div>
     <div class="divide wide-divide"></div>
 
-    <div class="col-12 content article-md">
+    <div class="content article-md">
         <markdown>@Html.Raw(Model.Article.Content)</markdown>
     </div>
-    <div id="hypercomments_widget" class="col-12"></div>
 </div>
 
 @section Sidebar {

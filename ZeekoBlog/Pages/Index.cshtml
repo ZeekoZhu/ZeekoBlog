@@ -5,13 +5,13 @@
     Layout = "_Layout";
 }
 
-<div class="index col-12 grid">
-    <h1 class="col-12">网上冲浪指南</h1>
+<div class="index">
+    <h1>网上冲浪指南</h1>
     <div class="divide wide-divide"></div>
-    <div class="col-12 grid articles">
+    <div class="articles">
         @foreach (var article in Model.Articles)
         {
-            <div class="col-12 article-short">
+            <div class="article-short">
                 <h2><a href="@Url.Page("/Article",new {id = article.Id})" target="_blank">@article.Title</a></h2>
                 <span class="weak">@article.LastEdited.ToString("yyyy/MM/dd")</span>
                 <div class="weak summary">
@@ -20,7 +20,7 @@
             </div>
         }
     </div>
-    <div class="col-12 pager">
+    <div class="pager">
         <span class="current">@Model.CurrentIndex</span>
         <a class="prev mdl2 @(Model.CurrentIndex == 1 ? "hide" : "")" href="/?p=@(Model.CurrentIndex - 1)"></a>
         <a class="next mdl2 @(Model.CurrentIndex == Model.TotalPages ? "hide" : "")" href="/?p=@(Model.CurrentIndex + 1)"></a>
