@@ -3,6 +3,7 @@ using Markdig;
 using Markdig.Extensions.AutoIdentifiers;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using ZeekoBlog.Markdown;
 using ZeekoBlog.Services;
 
 namespace ZeekoBlog.TagHelpers
@@ -23,8 +24,8 @@ namespace ZeekoBlog.TagHelpers
         {
             var content = output.Content.IsModified ? output.Content.GetContent() :
                 (await output.GetChildContentAsync()).GetContent();
-            var html = _mdService.Render(content);
-            output.Content.SetHtmlContent(html);
+            var result = _mdService.Process(content);
+            output.Content.SetHtmlContent(result.Html);
             output.TagName = null;
         }
     }

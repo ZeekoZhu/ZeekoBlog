@@ -1,6 +1,7 @@
 using System;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using EasyCaching.InMemory;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +13,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Extensions.WebEncoders;
 using ZeekoBlog.Jwt;
+using ZeekoBlog.Markdown;
+using ZeekoBlog.Markdown.Plugins;
+using ZeekoBlog.Markdown.Plugins.CodeLangDetectionPlugin;
+using ZeekoBlog.Markdown.Plugins.TOCItemsPlugin;
 using ZeekoBlog.Models;
 using ZeekoBlog.Services;
 using ZeekoUtilsPack.AspNetCore.Jwt;
@@ -67,8 +72,15 @@ namespace ZeekoBlog
                     options.TicketDataFormat = new JwtCookieDataFormat(tokenOptions.TokenOptions);
                     options.ClaimsIssuer = "Zeeko";
                 });
+            services.AddDefaultInMemoryCache();
             services.AddScoped<ArticleService>();
-            services.AddScoped<MarkdownService>();
+            services.AddMarkdownService(builder =>
+            {
+                builder.Add<HTMLRendererPlugin>()
+                    .Add<SyntaxParserPlugin>()
+                    .Add<CodeLangDetectionPlugin>()
+                    .Add<TOCItemsPlugin>();
+            });
             services.AddMemoryCache();
             services.AddMvc()
                 .AddRazorPagesOptions(options =>

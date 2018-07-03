@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ZeekoBlog.Markdown;
+using ZeekoBlog.Markdown.Plugins.CodeLangDetectionPlugin;
+using ZeekoBlog.Markdown.Plugins.TOCItemsPlugin;
 using ZeekoBlog.Models;
 using ZeekoBlog.Services;
-using ZeekoBlog.ViewModels;
 
 namespace ZeekoBlog.Pages
 {
@@ -31,8 +33,9 @@ namespace ZeekoBlog.Pages
                 return NotFound();
             }
 
-            Languages = _mdSvc.GetLanguages(Article.Content);
-            TOCList = _mdSvc.GetTableOfContent(Article.Content);
+            var mdResult = _mdSvc.Process(Article.Content);
+            Languages = mdResult.Storage.TryGet<List<string>>(CodeLangDetectionPlugin.ID).Value;
+            TOCList = mdResult.Storage.TryGet<List<TOCItem>>(TOCItemsPlugin.ID).Value;
             return Page();
         }
     }
