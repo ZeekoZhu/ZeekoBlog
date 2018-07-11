@@ -51,9 +51,6 @@
     <WCFMetadata Include="Connected Services" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ZeekoBlog.Markdown\ZeekoBlog.Markdown.csproj" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
