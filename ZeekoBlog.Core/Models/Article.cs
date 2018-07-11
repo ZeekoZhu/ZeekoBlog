@@ -1,6 +1,6 @@
 using System;
 
-namespace ZeekoBlog.Models
+namespace ZeekoBlog.Core.Models
 {
     public class Article
     {

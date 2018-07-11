@@ -17,7 +17,7 @@ using ZeekoBlog.Markdown;
 using ZeekoBlog.Markdown.Plugins;
 using ZeekoBlog.Markdown.Plugins.CodeLangDetectionPlugin;
 using ZeekoBlog.Markdown.Plugins.TOCItemsPlugin;
-using ZeekoBlog.Models;
+using ZeekoBlog.Core.Models;
 using ZeekoBlog.Services;
 using ZeekoUtilsPack.AspNetCore.Jwt;
 

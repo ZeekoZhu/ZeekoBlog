@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using ZeekoBlog.Models;
+using ZeekoBlog.Core.Models;
 
 namespace ZeekoBlog.Services
 {

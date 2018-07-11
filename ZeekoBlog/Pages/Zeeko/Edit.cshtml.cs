@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ZeekoBlog.Models;
+using ZeekoBlog.Core.Models;
 using ZeekoBlog.Services;
 
 namespace ZeekoBlog.Pages.Zeeko

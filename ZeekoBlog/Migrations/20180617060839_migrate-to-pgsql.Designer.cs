@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using ZeekoBlog.Models;
+using ZeekoBlog.Core.Models;
 
 namespace ZeekoBlog.Migrations
 {
@@ -21,7 +21,7 @@ namespace ZeekoBlog.Migrations
                 .HasAnnotation("ProductVersion", "2.1.0-rtm-30799")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("ZeekoBlog.Models.Article", b =>
+            modelBuilder.Entity("ZeekoBlog.Core.Models.Article", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();

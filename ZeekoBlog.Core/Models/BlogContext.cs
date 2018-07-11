@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace ZeekoBlog.Models
+namespace ZeekoBlog.Core.Models
 {
     public class BlogContext : DbContext
     {

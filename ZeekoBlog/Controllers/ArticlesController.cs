@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ZeekoBlog.Filters;
-using ZeekoBlog.Models;
+using ZeekoBlog.Core.Models;
 
 namespace ZeekoBlog.Controllers
 {

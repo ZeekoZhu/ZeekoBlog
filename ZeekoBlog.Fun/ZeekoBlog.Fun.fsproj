@@ -22,12 +22,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.fs" />
+    <Compile Include="Pages\Common.fs" />
     <Compile Include="Pages\Layout.fs" />
+    <Compile Include="Pages\Index.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="WebRoot\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZeekoBlog.Core\ZeekoBlog.Core.csproj" />
   </ItemGroup>
 </Project>

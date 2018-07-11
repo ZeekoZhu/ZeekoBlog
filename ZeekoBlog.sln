@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeekoBlog.Markdown", "Zeeko
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ZeekoBlog.Fun", "ZeekoBlog.Fun\ZeekoBlog.Fun.fsproj", "{1D57F311-2187-4098-B115-4ABFC729DAD5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeekoBlog.Core", "ZeekoBlog.Core\ZeekoBlog.Core.csproj", "{CC8C2EFE-E14E-4CE2-9369-6585DB5D3751}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{1D57F311-2187-4098-B115-4ABFC729DAD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D57F311-2187-4098-B115-4ABFC729DAD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D57F311-2187-4098-B115-4ABFC729DAD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC8C2EFE-E14E-4CE2-9369-6585DB5D3751}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC8C2EFE-E14E-4CE2-9369-6585DB5D3751}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC8C2EFE-E14E-4CE2-9369-6585DB5D3751}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC8C2EFE-E14E-4CE2-9369-6585DB5D3751}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
