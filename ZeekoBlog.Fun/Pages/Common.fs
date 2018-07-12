@@ -1,6 +1,7 @@
 module internal Common
 
 open Giraffe.GiraffeViewEngine
+open ZeekoBlog.Markdown
 let mathJaxScript = [
     script [ _src "https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js" ] []
     script [] [
@@ -17,6 +18,10 @@ tex2jax: {
 'HTML-CSS': { availableFonts: ['TeX'] }
         });""" ]
 ]
+
+let createMd (mdSvc: MarkdownService) content =
+    let res = mdSvc.Process(content)
+    rawText res.Html
 
 let sideGroup title content =
     div [ _class "side-card" ] [
