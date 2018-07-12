@@ -47,7 +47,7 @@ module IndexPage =
 
             let viewBody =
                 div [ _class "index" ]
-                    [ h1 [] [ rawText "网上冲浪指南 (Beta)" ]
+                    [ h1 [] [ rawText "网上冲浪指南 λ" ]
                       div [ _class "divide wide-divide" ] []
                       div [ _class "articles" ]
                           ( model.Articles

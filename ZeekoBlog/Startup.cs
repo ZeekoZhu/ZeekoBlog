@@ -2,7 +2,6 @@ using System;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using EasyCaching.InMemory;
-using Giraffe;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +14,7 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Extensions.WebEncoders;
 using ZeekoBlog.Core.Models;
 using ZeekoBlog.Core.Services;
+using ZeekoBlog.Fun;
 using ZeekoBlog.Jwt;
 using ZeekoBlog.Markdown;
 using ZeekoBlog.Markdown.Plugins;
@@ -83,7 +83,7 @@ namespace ZeekoBlog
                     .Add<TOCItemsPlugin>();
             });
             services.AddMemoryCache();
-            services.AddGiraffe();
+            services.AddZeekoBlogFun();
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
                 {
@@ -112,9 +112,8 @@ namespace ZeekoBlog
             app.UseAuthentication();
             app.UseCookiePolicy(cookiePolicyOptions);
             app.UseStatusCodePagesWithReExecute("/Opps/{0}");
-
             app.UseStaticFiles();
-
+            app.UseZeekoBlogFun();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
