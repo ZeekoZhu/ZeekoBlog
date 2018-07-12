@@ -20,7 +20,7 @@ module IndexPage =
 
     let layoutData =
         { Title = "首页" }
-            
+
     let scripts =
         mathJaxScript @
             [ script [] [ rawText "window.__pageModule = 'article-list'" ]

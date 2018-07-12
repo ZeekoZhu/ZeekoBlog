@@ -21,6 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EasyCaching.InMemory" Version="0.2.3" />
+    <PackageReference Include="Giraffe" Version="1.1.*" />
     <PackageReference Include="Markdig">
       <Version>0.15.0</Version>
     </PackageReference>
@@ -53,6 +54,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ZeekoBlog.Core\ZeekoBlog.Core.csproj" />
     <ProjectReference Include="..\ZeekoBlog.Markdown\ZeekoBlog.Markdown.csproj" />
+    <ProjectReference Include="..\ZeekoBlog.Fun\ZeekoBlog.Fun.fsproj" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptTarget>ES2016</TypeScriptTarget>

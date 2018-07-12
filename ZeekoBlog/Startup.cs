@@ -2,6 +2,7 @@ using System;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using EasyCaching.InMemory;
+using Giraffe;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -82,6 +83,7 @@ namespace ZeekoBlog
                     .Add<TOCItemsPlugin>();
             });
             services.AddMemoryCache();
+            services.AddGiraffe();
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
                 {
