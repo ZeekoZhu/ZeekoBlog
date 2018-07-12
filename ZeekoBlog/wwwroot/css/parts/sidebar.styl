@@ -47,19 +47,13 @@ sidebar-part() {
         margin-left: 4.8rem;
     }
 
-    @media screen and ({on}: phone) {
-        .side-container {
-            position: fixed;
-            width: 100vw;
-            height: 0;
-            background: white;
-            z-index: 10;
-            overflow: auto;
-            opacity: 0;
-        }
-
+    @media screen and ({on}: tablet) {
         .toc-list li {
             margin: 3.2rem 0;
+        }
+
+        .side-card {
+            margin-left: 0;
         }
     }
 }

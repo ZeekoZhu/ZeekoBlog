@@ -66,12 +66,28 @@ h1 {
     grid-template-columns: 75% 25%;
     margin: 0 150px;
     align-items: start;
+
+    @media screen and ({on}: tablet) {
+        margin: 1rem;
+        grid-template-rows: auto auto;
+        grid-template-columns: 100%;
+    }
 }
 
 code-part();
 
 .side-container {
     sidebar-part();
+
+    @media screen and ({on}: tablet) {
+        position: fixed;
+        width: calc(100vw - 2rem);
+        height: 0;
+        background: white;
+        z-index: 10;
+        overflow: auto;
+        opacity: 0;
+    }
 }
 
 /* Index.cshtml */
@@ -104,8 +120,8 @@ code-part();
         z-index: 11;
         position: fixed;
         display: block;
-        bottom: 2.4rem;
-        right: calc(50% - 2.4rem);
+        top: 2.4rem;
+        right: 2.4rem;
         opacity: 0.7;
         display: flex;
         flex-flow: row nowrap;
