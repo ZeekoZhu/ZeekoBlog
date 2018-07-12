@@ -35,7 +35,7 @@ let view (data: LayoutModel) (slots: LayoutSlot) =
                       meta [ _lang "zh" ]
                       meta [ _name "viewport"
                              _content "width=device-width, initial-scale=1.0" ]
-                      title []  [ rawText data.Title ]
+                      title []  [ rawText (sprintf "网上冲浪指南 - %s" data.Title) ]
                       linkStyle "https://cdn.bootcss.com/normalize/8.0.0/normalize.min.css"
                       linkStyle "/dist/theme.css"
                       script [ _src "/dist/commons.js" ] []

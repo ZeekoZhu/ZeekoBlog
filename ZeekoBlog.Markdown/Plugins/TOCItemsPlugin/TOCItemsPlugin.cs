@@ -10,7 +10,7 @@ using ZeekoUtilsPack.BCLExt;
 
 namespace ZeekoBlog.Markdown.Plugins.TOCItemsPlugin
 {
-    public class TOCItemsPlugin : MarkdownPlugin
+    public class TOCItemsPlugin : MarkdownPlugin<List<TOCItem>>
     {
         private readonly IEasyCachingProvider _cache;
         public static readonly string ID = "rocks.gianthard.toc-items";

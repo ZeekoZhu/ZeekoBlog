@@ -43,7 +43,10 @@ module Index =
 
         let viewBody =
             div [ _class "index" ]
-                [ h1 [] [ rawText "网上冲浪指南 λ" ]
+                [ h1 []
+                     [ rawText "网上冲浪指南 "
+                       code [] [ rawText " |> λ" ]
+                     ]
                   div [ _class "divide wide-divide" ] []
                   div [ _class "articles" ]
                       ( model.Articles

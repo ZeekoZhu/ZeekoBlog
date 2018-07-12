@@ -8,25 +8,25 @@ using ZeekoUtilsPack.BCLExt;
 
 namespace ZeekoBlog.Markdown.Plugins
 {
-    public class HTMLRendererPlugin : MarkdownPlugin
+    public class HTMLRendererPlugin : BaseMarkdownPlugin
     {
         private readonly MarkdownPipeline _pipeline;
 
         public static readonly MarkdownPipeline DefaultPipeline =
             new MarkdownPipelineBuilder()
-                .UseAbbreviations()
-                .UseAutoIdentifiers(AutoIdentifierOptions.AutoLink)
-                .UseCustomContainers()
-                .UseDefinitionLists()
-                .UseFootnotes()
-                .UseGridTables()
-                .UseMediaLinks()
-                .UsePipeTables()
-                .UseListExtras()
-                .UseTaskLists()
-                .UseAutoLinks()
-                .UseGenericAttributes()
-                .Build();
+            .UseAbbreviations()
+            .UseAutoIdentifiers(AutoIdentifierOptions.AutoLink)
+            .UseCustomContainers()
+            .UseDefinitionLists()
+            .UseFootnotes()
+            .UseGridTables()
+            .UseMediaLinks()
+            .UsePipeTables()
+            .UseListExtras()
+            .UseTaskLists()
+            .UseAutoLinks()
+            .UseGenericAttributes()
+            .Build();
         private readonly IEasyCachingProvider _cache;
         public override string Id { get; } = ID;
         public static string ID = "rocks.gianthard.html-renderer";

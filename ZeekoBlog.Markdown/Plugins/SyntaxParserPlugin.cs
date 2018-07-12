@@ -6,7 +6,7 @@ using ZeekoUtilsPack.BCLExt;
 
 namespace ZeekoBlog.Markdown.Plugins
 {
-    public class SyntaxParserPlugin:MarkdownPlugin
+    public class SyntaxParserPlugin : BaseMarkdownPlugin
     {
         private readonly IEasyCachingProvider _cache;
         private readonly MarkdownPipeline _pipeline;

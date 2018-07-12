@@ -18,9 +18,9 @@ let handler (id: int): HttpHandler =
                 return! RequestErrors.NOT_FOUND "" next ctx
             else
                 let mdResult = mdSvc.Process(article.Content)
-                let langResult = mdResult.Storage.TryGet<System.Collections.Generic.List<string>>(CodeLangDetectionPlugin.ID)
+                let langResult = CodeLangDetectionPlugin.TryGet<CodeLangDetectionPlugin>(mdResult.Storage)
                 let struct (_, languages) = langResult
-                let tocResult = mdResult.Storage.TryGet<System.Collections.Generic.List<TOCItem>>(TOCItemsPlugin.ID)
+                let tocResult = TOCItemsPlugin.TryGet<TOCItemsPlugin>(mdResult.Storage)
                 let struct (_, tocList) = tocResult
                 let model: ArticleModel =
                     { Languages = languages |> List.ofSeq

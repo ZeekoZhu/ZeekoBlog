@@ -1,6 +1,8 @@
+using System.Reflection;
+
 namespace ZeekoBlog.Markdown
 {
-    public abstract class MarkdownPlugin
+    public abstract class BaseMarkdownPlugin
     {
         /// <summary>
         /// Plugin id
@@ -10,9 +12,16 @@ namespace ZeekoBlog.Markdown
 
         public abstract MarkdownOutput Invoke(MarkdownOutput output);
 
-        public (bool IsSucess, TStorage Storage) TryGet<TStorage>(PluginStorage storage)
+    }
+
+    public abstract class MarkdownPlugin<TData> : BaseMarkdownPlugin
+    {
+        public static (bool IsSucess, TData Value) TryGet<TPlugin>(PluginStorage storage) where TPlugin : MarkdownPlugin<TData>
         {
-            return storage.TryGet<TStorage>(Id);
+            var pluginType = typeof(TPlugin);
+            var idInfo = pluginType.GetField("ID", BindingFlags.Static | BindingFlags.Public);
+            var id = idInfo.GetValue(null) as string;
+            return storage.TryGet<TData>(id);
         }
     }
 }
