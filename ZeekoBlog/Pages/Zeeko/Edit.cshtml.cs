@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZeekoBlog.Core.Models;
-using ZeekoBlog.Services;
+using ZeekoBlog.Core.Services;
 
 namespace ZeekoBlog.Pages.Zeeko
 {

@@ -17,3 +17,12 @@ tex2jax: {
 'HTML-CSS': { availableFonts: ['TeX'] }
         });""" ]
 ]
+
+let sideGroup title content =
+    div [ _class "side-card" ] [
+        div [ _class "side-title" ] [
+            h3 [] [ rawText title ]
+        ]
+        div [ _class "divide" ] []
+        div [ _class "side-body" ] content
+    ]

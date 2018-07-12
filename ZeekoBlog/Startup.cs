@@ -12,13 +12,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Extensions.WebEncoders;
+using ZeekoBlog.Core.Models;
+using ZeekoBlog.Core.Services;
 using ZeekoBlog.Jwt;
 using ZeekoBlog.Markdown;
 using ZeekoBlog.Markdown.Plugins;
 using ZeekoBlog.Markdown.Plugins.CodeLangDetectionPlugin;
 using ZeekoBlog.Markdown.Plugins.TOCItemsPlugin;
-using ZeekoBlog.Core.Models;
-using ZeekoBlog.Services;
 using ZeekoUtilsPack.AspNetCore.Jwt;
 
 namespace ZeekoBlog
@@ -59,9 +59,9 @@ namespace ZeekoBlog
             services.AddJwtAuthorization(tokenOptions);
             // 使用 JWT 保护 API
             services.AddAuthentication().AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = tokenOptions.JwTokenValidationParameters;
-                });
+            {
+                options.TokenValidationParameters = tokenOptions.JwTokenValidationParameters;
+            });
             // 使用 Cookie 保护页面
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>

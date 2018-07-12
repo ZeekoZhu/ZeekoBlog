@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZeekoBlog.Core.Models;
-using ZeekoBlog.Services;
+using ZeekoBlog.Core.Services;
 
 namespace ZeekoBlog.Pages.Zeeko
 {
@@ -14,7 +14,7 @@ namespace ZeekoBlog.Pages.Zeeko
         {
             this._articleService = articleService;
         }
-        
+
         public List<Article> Articles { get; set; }
         public int CurrentIndex { get; set; }
         public int TotalPages { get; set; }

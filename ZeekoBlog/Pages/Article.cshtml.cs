@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ZeekoBlog.Core.Models;
+using ZeekoBlog.Core.Services;
 using ZeekoBlog.Markdown;
 using ZeekoBlog.Markdown.Plugins.CodeLangDetectionPlugin;
 using ZeekoBlog.Markdown.Plugins.TOCItemsPlugin;
-using ZeekoBlog.Core.Models;
-using ZeekoBlog.Services;
 
 namespace ZeekoBlog.Pages
 {

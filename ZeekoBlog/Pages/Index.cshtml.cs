@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZeekoBlog.Core.Models;
-using ZeekoBlog.Services;
+using ZeekoBlog.Core.Services;
 
 namespace ZeekoBlog.Pages
 {
@@ -21,7 +21,7 @@ namespace ZeekoBlog.Pages
         public int CurrentIndex { get; set; }
         public int TotalPages { get; set; }
 
-        public async Task<IActionResult> OnGetAsync([FromQuery(Name = "p")]int page = 1)
+        public async Task<IActionResult> OnGetAsync([FromQuery(Name = "p")] int page = 1)
         {
             if (page < 1) page = 1;
             CurrentIndex = page;

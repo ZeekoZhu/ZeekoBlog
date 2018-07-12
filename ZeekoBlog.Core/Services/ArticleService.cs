@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ZeekoBlog.Core.Models;
 
-namespace ZeekoBlog.Services
+namespace ZeekoBlog.Core.Services
 {
     public class ArticleService
     {
