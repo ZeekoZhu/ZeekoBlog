@@ -13,3 +13,4 @@ module AppExtensions =
     [<System.Runtime.CompilerServices.Extension>]
     let UseZeekoBlogFun (app : IApplicationBuilder) =
         app.UseGiraffe webApp
+        app.UseGiraffeErrorHandler ErrorHandler.handler

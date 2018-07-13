@@ -5,6 +5,7 @@ open ZeekoBlog.Core.Services
 open ZeekoBlog.Markdown
 open Utils.TryParse
 open IndexPage
+open System.Linq
 
 let handler: HttpHandler =
     fun (next: HttpFunc) (ctx: HttpContext) ->
@@ -21,10 +22,14 @@ let handler: HttpHandler =
             |> max 1
         task {
             let! struct (articles, totalPages) = articleSvc.GetPaged(page - 1, 20);
-            let model =
-                { CurrentIndex = page
-                  TotalPages = totalPages
-                  Articles = List.ofSeq articles
-                  Markdown = mdService }
-            return! htmlView (Index.view model) next ctx
+            if articles.Any()
+            then
+                let model =
+                    { CurrentIndex = page
+                      TotalPages = totalPages
+                      Articles = List.ofSeq articles
+                      Markdown = mdService }
+                return! htmlView (Index.view model) next ctx
+            else
+                return! setStatusCode 404 next ctx
         }

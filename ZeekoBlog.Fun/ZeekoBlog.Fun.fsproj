@@ -13,8 +13,10 @@
     <Compile Include="Pages/Layout.fs" />
     <Compile Include="Pages/Index.fs" />
     <Compile Include="Pages/Article.fs" />
+    <Compile Include="Pages/Error.fs" />
     <Compile Include="Handlers/Index.fs" />
     <Compile Include="Handlers/Article.fs" />
+    <Compile Include="Handlers/Error.fs" />
     <Compile Include="App.fs" />
     <Compile Include="Export.fs" />
   </ItemGroup>

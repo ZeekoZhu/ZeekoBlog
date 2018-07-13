@@ -111,7 +111,7 @@ namespace ZeekoBlog
             };
             app.UseAuthentication();
             app.UseCookiePolicy(cookiePolicyOptions);
-            app.UseStatusCodePagesWithReExecute("/Opps/{0}");
+            app.UseStatusCodePagesWithReExecute("/oops/{0}");
             app.UseStaticFiles();
             app.UseZeekoBlogFun();
             app.UseMvc(routes =>

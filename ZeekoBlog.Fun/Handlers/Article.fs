@@ -15,7 +15,7 @@ let handler (id: int): HttpHandler =
             let! article = articleSvc.GetById(id)
             if article |> isNull
             then
-                return! RequestErrors.NOT_FOUND "" next ctx
+                return! setStatusCode 404 next ctx
             else
                 let mdResult = mdSvc.Process(article.Content)
                 let langResult = CodeLangDetectionPlugin.TryGet<CodeLangDetectionPlugin>(mdResult.Storage)

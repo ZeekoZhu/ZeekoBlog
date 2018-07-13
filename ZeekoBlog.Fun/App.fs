@@ -6,6 +6,10 @@ open Giraffe
 
 let webApp: HttpHandler =
     choose [
-        route "/" >=> GET >=> IndexHandler.handler
-        GET >=>  routef "/a/%i" ArticleHandler.handler
+        GET >=>
+            choose [
+                route "/" >=> IndexHandler.handler
+                routeCif "/a/%i" ArticleHandler.handler
+                routeCif "/oops/%i" ErrorHandler.errorCodeHandler
+            ]
     ]
