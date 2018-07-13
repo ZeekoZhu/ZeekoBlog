@@ -1,0 +1,137 @@
+@font-face {
+    font-family: 'Segoe MDL2 Assets';
+    src: url('/assets/SegoeMDL2Assets.eot?#iefix') format('embedded-opentype'), url('/assets/SegoeMDL2Assets.woff') format('woff'), url('/assets/SegoeMDL2Assets.ttf') format('truetype'), url('/assets/SegoeMDL2Assets.svg#SegoeMDL2Assets') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import './parts/index';
+@import './parts/article.styl';
+@import './parts/code.styl';
+@import './parts/sidebar.styl';
+@import './parts/utils.styl';
+
+:root {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 16px;
+    line-height: 1.5em;
+    font-family: 'Segoe UI', SegoeUI, 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    word-break: break-all;
+    color: #2e2e2e;
+}
+
+a {
+    color: #0072c6;
+    text-decoration: none;
+
+    &:visited {
+        color: gray;
+    }
+
+    &:hover {
+        color: #004185;
+    }
+}
+
+.weak {
+    color: #454545;
+    font-size: 90%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: initial;
+    line-height: 1.5em;
+}
+
+h1 {
+    color: #303671;
+}
+
+.divide {
+    height: 1px;
+    background: #969696;
+    padding: 0;
+    width: 100%;
+}
+
+.mdl2 {
+    font-family: 'Segoe MDL2 Assets';
+}
+
+.layout {
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 75% 25%;
+    margin: 0 150px;
+    align-items: start;
+
+    @media screen and ({on}: tablet) {
+        margin: 1rem;
+        grid-template-rows: auto auto;
+        grid-template-columns: 100%;
+    }
+}
+
+code-part();
+
+.side-container {
+    sidebar-part();
+
+    @media screen and ({on}: tablet) {
+        position: fixed;
+        width: calc(100vw - 2rem);
+        height: 0;
+        background: white;
+        z-index: 10;
+        overflow: auto;
+        opacity: 0;
+    }
+}
+
+/* Index.cshtml */
+.index {
+    index-part();
+}
+
+/* Article Read Only */
+.article {
+    article-part();
+}
+
+.action-btn {
+    display: none;
+}
+
+@media screen and ({on}: tablet) {
+    // tablet
+    .wide-divide {
+        margin: 0;
+    }
+}
+
+@media screen and ({on}: phone) {
+    // phone
+    .action-btn {
+        height: 4.8rem;
+        width: 4.8rem;
+        background: #ff4d00;
+        z-index: 11;
+        position: fixed;
+        display: block;
+        top: 2.4rem;
+        right: 2.4rem;
+        opacity: 0.7;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+
+        b {
+            font-size: 2.1rem;
+            color: white;
+        }
+    }
+}

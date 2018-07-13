@@ -5,22 +5,30 @@
     <meta lang="zh-CN" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - 网上冲浪指南</title>
-    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="~/lib/gridlex.css" cdn="https://cdn.bootcss.com/gridlex/2.4.1/gridlex.min.css" rel="stylesheet" />
-    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="https://cdn.bootcss.com/normalize/8.0.0/normalize.min.css" rel="stylesheet">
+    <link href="~/dist/theme.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="~/assets/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="~/assets/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="~/assets/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="~/assets/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="~/assets/favicon-16x16.png" sizes="16x16">
+    <script src="~/dist/commons.js"></script>
     @RenderSection("Styles", required: false)
 
 </head>
 <body>
-    <div class="grid-center">
-        <div class="col-7_md-12_sm grid">
+    <div class="layout">
+        <div class="module">
             @RenderBody()
         </div>
-        <div class="col-3_md-12_sm grid-column">
+        <div class="side-container">
             @RenderSection("Sidebar", required: false)
         </div>
     </div>
-    <script src="~/lib/zepto.js" cdn="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+    <div class="action-btn">
+        <b class="mdl2" aria-hidden="true">&#xE700;</b>
+    </div>
+    <script src="~/lib/zepto.min.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

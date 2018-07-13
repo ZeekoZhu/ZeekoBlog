@@ -1,7 +1,5 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.Runtime.InteropServices.ComTypes;
-using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Tokens;
@@ -49,7 +47,7 @@ namespace ZeekoBlog.Jwt
                 var principal = jwtHandler.ValidateToken(protectedText, tokenParam, out SecurityToken validatedToken);
                 return new AuthenticationTicket(principal, new AuthenticationProperties(), CookieAuthenticationDefaults.AuthenticationScheme);
             }
-            catch (ArgumentException)
+            catch
             {
                 return null;
             }

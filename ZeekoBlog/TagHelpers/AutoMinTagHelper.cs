@@ -1,12 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -33,42 +27,28 @@ namespace ZeekoBlog.TagHelpers
         {
             do
             {
-
                 if (_env.IsDevelopment()) break;
                 var srcVal = (Attr: "", Val: "");
                 if (context.TagName.Equals("script", StringComparison.CurrentCultureIgnoreCase))
                 {
                     var src = context.AllAttributes["src"];
                     srcVal.Attr = "src";
-                    srcVal.Val = (src?.Value as HtmlString)?.Value;
+                    srcVal.Val = (src?.Value as HtmlString)?.Value ?? "";
                 }
                 else if (context.TagName.Equals("link", StringComparison.CurrentCultureIgnoreCase))
                 {
                     var href = context.AllAttributes["href"];
                     srcVal.Attr = "href";
-                    srcVal.Val = (href?.Value as HtmlString)?.Value;
+                    srcVal.Val = (href?.Value as HtmlString)?.Value ?? "";
                 }
                 else break;
-
-                if (string.IsNullOrEmpty(srcVal.Val))
-                {
-                    break;
-                }
-                if (srcVal.Val.TrimStart(' ').StartsWith("http"))
-                {
-                    break;
-                }
-                if (string.IsNullOrEmpty(Cdn)) // using local min file
-                {
-                    var extReg = new Regex(@"(\.js|\.css)$", RegexOptions.IgnoreCase);
-                    srcVal.Val = extReg.Replace(srcVal.Val, ".min." + (srcVal.Attr == "src" ? "js" : "css"));
-                }
-                else // using cdn resource
+                
+                if (string.IsNullOrEmpty(Cdn) == false)
                 {
                     srcVal.Val = Cdn;
+                    output.Attributes.RemoveAll(srcVal.Attr);
+                    output.Attributes.Add(new TagHelperAttribute(srcVal.Attr, _url.Content(srcVal.Val)));
                 }
-                output.Attributes.RemoveAll(srcVal.Attr);
-                output.Attributes.Add(new TagHelperAttribute(srcVal.Attr, _url.Content(srcVal.Val)));
             } while (false);
 
         }

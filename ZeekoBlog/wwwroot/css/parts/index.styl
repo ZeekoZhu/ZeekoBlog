@@ -1,0 +1,82 @@
+@import './utils.styl';
+
+index-part() {
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: initial;
+    }
+
+    h1 {
+        color: #303671;
+
+        code {
+            padding: 0;
+            background: none;
+        }
+    }
+
+    .summary {
+        margin-top: 0.4rem;
+    }
+
+    .article-short {
+        border = 0.4rem;
+        display: grid;
+        grid-template: auto auto auto / auto;
+        justify-items: stretch;
+        border-left: white solid border;
+        padding-left: 0.8rem;
+
+        &:hover {
+            transition: border-left-color 0.3s;
+            border-left: #0072c6 solid border;
+            padding-left: paddingLeft;
+        }
+
+        h2 {
+            margin-bottom: 0.4rem;
+        }
+    }
+
+    .pager {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: stretch;
+
+        pager-arrow() {
+            font-size: 3rem;
+            hover-block();
+        }
+
+        .prev {
+            pager-arrow();
+            padding-top: 0.7rem;
+
+            &::before {
+                padding: 0 1rem;
+                content: '\E830';
+            }
+        }
+
+        .current {
+            display: none;
+            margin-bottom: 0.5rem;
+        }
+
+        .next {
+            padding-top: 0.7rem;
+            pager-arrow();
+
+            &::before {
+                padding: 0 1rem;
+                content: '\EA47';
+            }
+        }
+
+        .hide {
+            &::before {
+                display: none;
+            }
+        }
+    }
+}

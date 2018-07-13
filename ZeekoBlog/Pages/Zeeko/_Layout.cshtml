@@ -2,8 +2,8 @@
     Layout = "~/Pages/_Layout.cshtml";
 }
 <div class="grid-spaceAround">
-    <div class="col-8 grid">
-        <div class="col-12">
+    <div class="">
+        <div class="">
             <h2>@ViewData["Head"]</h2>
         </div>
         @RenderBody()
@@ -12,7 +12,7 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/zeeko.js"></script>
+    <script src="~/dist/zeeko.js"></script>
 }
 
 @section Styles {

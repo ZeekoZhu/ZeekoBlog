@@ -1,5 +1,7 @@
-/// <reference path="./Article.ts" />
-/// <reference path="./Utils.ts" />
+import {Article} from './Article';
+import { appHeader } from './Utils';
+import {PageModule} from './PageModule';
+
 let editModule = () => {
     let saveBtn = $('#save');
     let titleInput = $('#title');
@@ -102,22 +104,10 @@ let loginModule = () => {
     });
 }
 
-class PageModule {
-    static modules: { name: string; func: Function }[] = [];
-    static register(name: string, func: Function) {
-        PageModule.modules.push({ name: name, func: func });
-    }
-    static active(name: string) {
-        let module = PageModule.modules.find(m => m.name === name);
-        if (module) {
-            module.func();
-        }
-    }
-}
+PageModule.register('login',loginModule);
+PageModule.register('edit',editModule);
+PageModule.register('list', listModule);
 
-PageModule.register("edit",editModule);
-PageModule.register("list",listModule);
-PageModule.register("login", loginModule);
 
 $(document).ready(() => {
     appHeader.append("authorization", `Bearer ${localStorage.getItem('tk')}`);

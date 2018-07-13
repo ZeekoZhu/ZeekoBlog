@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using System;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace ZeekoBlog
 {
@@ -17,9 +11,13 @@ namespace ZeekoBlog
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            var aiKey = Environment.GetEnvironmentVariable("AI_KEY");
+            return WebHost.CreateDefaultBuilder(args)
+                .UseApplicationInsights(aiKey)
                 .UseStartup<Startup>()
                 .Build();
+        }
     }
 }

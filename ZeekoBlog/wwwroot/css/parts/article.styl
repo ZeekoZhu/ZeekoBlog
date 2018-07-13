@@ -1,0 +1,65 @@
+@import './utils.styl';
+
+article-part() {
+    blockquote {
+        background-color: #F4F4F4;
+        margin: 0;
+        padding: 1.6rem 2.4rem;
+        border-left: 0.4rem solid #737373;
+    }
+
+    .action-btn {
+        display: none;
+    }
+
+    @media screen and ({on}: tablet) {
+        .MathJax_Display {
+            overflow: auto !important;
+        }
+    }
+
+    p {
+        line-height: 1.5;
+    }
+
+    .article-md {
+        &.content {
+            a {
+                word-wrap: break-word;
+            }
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            overflow: scroll;
+
+            th, td {
+                border: 1px solid #ddd;
+                padding: 0.8rem;
+            }
+
+            th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #0072d0;
+                color: white;
+            }
+
+            tr {
+                &:nth-child(even) {
+                    background-color: #f2f2f2;
+                }
+
+                &:hover {
+                    background-color: #ddd;
+                }
+            }
+        }
+    }
+}
