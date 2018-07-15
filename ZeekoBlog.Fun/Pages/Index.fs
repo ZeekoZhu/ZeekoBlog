@@ -70,7 +70,7 @@ module Index =
                             _href (model.CurrentIndex + 1 |> sprintf "/?p=%d")
                           ] []
                       ]
-            ]
+                ]
         { Scripts = scripts
           Styles = [ emptyText ]
           Body = [ viewBody ]

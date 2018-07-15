@@ -101,6 +101,21 @@ code-part();
     article-part();
 }
 
+.footer {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    background: #e6e7e8;
+    color: #333;
+    font-size: small;
+    margin-top: 2rem;
+    padding: 1rem 0 1rem 155px;
+
+    @media screen and ({on}: tablet) {
+        padding: 1rem;
+    }
+}
+
 .action-btn {
     display: none;
 }

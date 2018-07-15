@@ -2,6 +2,7 @@ module LayoutPage
 
 open Giraffe
 open GiraffeViewEngine
+open System
 
 type LayoutModel =
     { Title: string }
@@ -47,6 +48,10 @@ let view (data: LayoutModel) (slots: LayoutSlot) =
                    ([ div [ _class "layout" ]
                           [ div [ _class "module" ] slots.Body 
                             div [ _class "side-container" ] slots.Sidebar
+                          ]
+                      div [ _class "footer" ]
+                          [ span [ _class "copyright" ] [ rawText (sprintf "&copy; %d Zeeko" DateTime.Now.Year) ]
+                            span [ _class "powered" ] [ rawText "Powered by ASP.NET Core 🐳" ]
                           ]
                       div [ _class "action-btn" ]
                           [ b [ _class "mdl2" ] [ rawText "&#xE700;" ] ]
