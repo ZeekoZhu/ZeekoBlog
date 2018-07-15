@@ -50,7 +50,9 @@ $('input[type=checkbox][disabled]').replaceWith('<b class="mdl2" aria-hidden="tr
             (fun lang ->
                 script [ _src (sprintf "https://cdn.bootcss.com/highlight.js/9.12.0/languages/%s.min.js" lang ) ] []
             )
-        )
+        ) @
+        [ script [] [ rawText """hljs.initHighlightingOnLoad();""" ]
+        ]
     // view
     let viewBody =
         div [ _class "article" ]
@@ -63,7 +65,7 @@ $('input[type=checkbox][disabled]').replaceWith('<b class="mdl2" aria-hidden="tr
             ]
 
     { Scripts = scripts
-      Styles = []
+      Styles = [ link [ _href "https://cdn.bootcss.com/highlight.js/9.12.0/styles/vs2015.min.css"; _rel "stylesheet"] ]
       Body = [ viewBody ]
       Sidebar = [ sidebar ]
     }
