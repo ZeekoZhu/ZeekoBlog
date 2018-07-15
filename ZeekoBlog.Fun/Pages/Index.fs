@@ -67,7 +67,7 @@ module Index =
                             _href (model.CurrentIndex - 1 |> sprintf "/?p=%d")
                           ] []
                         a [ _class (hideWhen (model.CurrentIndex = model.TotalPages) |> sprintf "next mdl2 %s")
-                            _href (model.CurrentIndex - 1 |> sprintf "/?p=%d")
+                            _href (model.CurrentIndex + 1 |> sprintf "/?p=%d")
                           ] []
                       ]
             ]
