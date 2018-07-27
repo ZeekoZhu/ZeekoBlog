@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -15,12 +16,12 @@ namespace ZeekoBlog.Controllers
     [Produces("application/json")]
     public class TokenController : Controller
     {
-        private readonly JwtOptions _jwtOptions;
+        private readonly EasyJwt _jwt;
         private readonly IConfiguration _configuration;
 
-        public TokenController(JwtOptions jwtOptions, IConfiguration configuration)
+        public TokenController(EasyJwt jwt, IConfiguration configuration)
         {
-            _jwtOptions = jwtOptions;
+            _jwt = jwt;
             _configuration = configuration;
         }
 
@@ -55,32 +56,12 @@ namespace ZeekoBlog.Controllers
                 ModelState.AddModelError(nameof(user.UserName), "用户名或密码错误");
                 return BadRequest(ModelState);
             }
-            var token = CreateToken(user.UserName, expire, "blog");
-            string headerToken = "Bearer " + CreateToken(user.UserName, expire, "blog");
-            HttpContext.Response.Headers.Add("tk", headerToken);
-            return Ok();
-        }
 
-        /// <summary>
-        /// 生成一个新的 Token
-        /// </summary>
-        /// <param name="user">用户信息实体</param>
-        /// <param name="expire">token 过期时间</param>
-        /// <param name="audience">Token 接收者</param>
-        /// <returns></returns>
-        private string CreateToken(string user, DateTime expire, string audience)
-        {
-            var handler = new JwtSecurityTokenHandler();
-            ClaimsIdentity identity = new ClaimsIdentity(new GenericIdentity(user, "TokenAuth"));
-            var token = handler.CreateEncodedJwt(new SecurityTokenDescriptor
-            {
-                Issuer = _jwtOptions.Issuer,
-                Audience = audience,
-                SigningCredentials = _jwtOptions.Credentials,
-                Subject = identity,
-                Expires = expire
-            });
-            return token;
+            var claims = new[] {new Claim(ClaimTypes.NameIdentifier, userName)};
+            var token = _jwt.GenerateToken(userName, claims, expire);
+            var ( principal, authProp) = _jwt.GenerateAuthTicket(userName, claims, expire);
+            HttpContext.SignInAsync(principal, authProp);
+            return Ok(new {Token = token});
         }
 
         [HttpGet("ToPage")]

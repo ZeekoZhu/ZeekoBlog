@@ -23,19 +23,19 @@
     <PackageReference Include="EasyCaching.InMemory" Version="0.2.3" />
     <PackageReference Include="Giraffe" Version="1.1.*" />
     <PackageReference Include="Markdig">
-      <Version>0.15.0</Version>
+      <Version>0.15.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.3.0" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore">
       <Version>2.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design">
       <Version>2.1.1</Version>
     </PackageReference>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.1.1" />
     <PackageReference Include="ZeekoUtilsPack.AspNetCore">
-      <Version>2.0.0</Version>
+      <Version>3.0.1</Version>
     </PackageReference>
     <PackageReference Include="ZeekoUtilsPack.BCLExt" Version="1.1.0" />
   </ItemGroup>

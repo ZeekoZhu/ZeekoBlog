@@ -15,7 +15,6 @@ using Microsoft.Extensions.WebEncoders;
 using ZeekoBlog.Core.Models;
 using ZeekoBlog.Core.Services;
 using ZeekoBlog.Fun;
-using ZeekoBlog.Jwt;
 using ZeekoBlog.Markdown;
 using ZeekoBlog.Markdown.Plugins;
 using ZeekoBlog.Markdown.Plugins.CodeLangDetectionPlugin;
@@ -54,25 +53,18 @@ namespace ZeekoBlog
 
                 options.UseNpgsql(connectionString);
             });
-            string keyDir = PlatformServices.Default.Application.ApplicationBasePath;
-            var tokenOptions = new JwtConfigOptions(keyDir, "blog", "blog");
-            services.AddSingleton(tokenOptions.TokenOptions);
-            services.AddJwtAuthorization(tokenOptions);
-            // 使用 JWT 保护 API
-            services.AddAuthentication().AddJwtBearer(options =>
+            services.AddEasyJwt(new EasySymmetricOptions("zeeko's blog")
             {
-                options.TokenValidationParameters = tokenOptions.JwTokenValidationParameters;
-            });
-            // 使用 Cookie 保护页面
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
+                Audience = "blog",
+                Issuer = "blog",
+                EnableCookie = true,
+                CookieOptions = options =>
                 {
                     options.LoginPath = "/Zeeko/Login";
                     options.Cookie.Name = "tk";
                     options.Cookie.Path = "/";
-                    options.TicketDataFormat = new JwtCookieDataFormat(tokenOptions.TokenOptions);
-                    options.ClaimsIssuer = "Zeeko";
-                });
+                }
+            });
             services.AddDefaultInMemoryCache();
             services.AddScoped<ArticleService>();
             services.AddMarkdownService(builder =>
@@ -87,6 +79,7 @@ namespace ZeekoBlog
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
                 {
+                    // todo: add EazyJwtFitler
                     options.Conventions.AddPageRoute("/Article", "a/{id}");
                     options.Conventions.AuthorizeFolder("/Zeeko");
                     options.Conventions.AllowAnonymousToPage("/Zeeko/Login");
