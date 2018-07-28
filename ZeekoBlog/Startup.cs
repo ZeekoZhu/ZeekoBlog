@@ -67,6 +67,7 @@ namespace ZeekoBlog
             });
             services.AddDefaultInMemoryCache();
             services.AddScoped<ArticleService>();
+            services.AddScoped<AccountService>();
             services.AddMarkdownService(builder =>
             {
                 builder.Add<HTMLRendererPlugin>()

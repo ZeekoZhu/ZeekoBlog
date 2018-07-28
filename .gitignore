@@ -267,3 +267,4 @@ __pycache__/
 **/wwwroot/lib/*.css
 ZeekoBlog/wwwroot/dist
 /ZeekoBlog/Properties/launchSettings.json
+*.DotSettings
