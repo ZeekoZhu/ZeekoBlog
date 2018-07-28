@@ -7,9 +7,10 @@ open Utils.TryParse
 open IndexPage
 open System.Linq
 
-let handler: HttpHandler =
+let handler (user: string): HttpHandler =
     fun (next: HttpFunc) (ctx: HttpContext) ->
         let articleSvc = ctx.GetService<ArticleService> ()
+        let accountSvc = ctx.GetService<AccountService>()
         let mdService = ctx.GetService<MarkdownService> ()
         let page =
             match ctx.TryGetQueryStringValue("p") with
@@ -21,7 +22,9 @@ let handler: HttpHandler =
             | None -> 1
             |> max 1
         task {
-            let! struct (articles, totalPages) = articleSvc.GetPaged(page - 1, 20);
+            let! blogUser = accountSvc.GetUserByNameAsync(user)
+            let blogUserId = if blogUser |> isNull then 1 else blogUser.Id
+            let! struct (articles, totalPages) = articleSvc.GetPaged(page - 1, 20, blogUserId);
             if articles.Any()
             then
                 let model =

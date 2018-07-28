@@ -21,7 +21,7 @@ namespace ZeekoBlog.Pages.Zeeko
 
         public async Task OnGet()
         {
-            (Articles, TotalPages) = await _articleService.GetPaged(0, 20);
+            (Articles, TotalPages) = await _articleService.GetPaged(0, 50, 1);
         }
     }
 }

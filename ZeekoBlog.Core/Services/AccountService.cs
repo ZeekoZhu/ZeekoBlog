@@ -57,5 +57,16 @@ namespace ZeekoBlog.Core.Services
             var result = await _users.FirstOrDefaultAsync(u => u.UserName == username && u.Password == storedPassword);
             return result;
         }
+
+        /// <summary>
+        /// 根据用户名获取用户信息
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public async Task<BlogUser> GetUserByNameAsync(string userName)
+        {
+            var result = await _users.FirstOrDefaultAsync(u => u.UserName == userName);
+            return result;
+        }
     }
 }

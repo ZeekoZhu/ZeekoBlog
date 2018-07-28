@@ -15,9 +15,10 @@ namespace ZeekoBlog.Core.Services
             _context = context;
         }
 
-        public async Task<(List<Article> Articles, int TotalPages)> GetPaged(int index, int pageSize)
+        public async Task<(List<Article> Articles, int TotalPages)> GetPaged(int index, int pageSize, int userId)
         {
             var results = await _context.Articles
+                .Where(a => a.BlogUser.Id == userId)
                 .OrderByDescending(a => a.Id)
                 .Skip(index * pageSize)
                 .Take(pageSize)
