@@ -3,10 +3,12 @@ using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using ZeekoBlog.Core.Services;
 using ZeekoBlog.Filters;
 using ZeekoUtilsPack.AspNetCore.Jwt;
 
@@ -17,12 +19,12 @@ namespace ZeekoBlog.Controllers
     public class TokenController : Controller
     {
         private readonly EasyJwt _jwt;
-        private readonly IConfiguration _configuration;
+        private readonly AccountService _accountSvc;
 
-        public TokenController(EasyJwt jwt, IConfiguration configuration)
+        public TokenController(EasyJwt jwt, AccountService accountSvc)
         {
             _jwt = jwt;
-            _configuration = configuration;
+            _accountSvc = accountSvc;
         }
 
         /// <summary>
@@ -42,26 +44,30 @@ namespace ZeekoBlog.Controllers
         /// <param name="user"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Post([FromBody]LoginModel user)
+        public async Task<IActionResult> Post([FromBody]LoginModel user)
         {
             if (ModelState.IsValid == false)
             {
                 return BadRequest(ModelState);
             }
             DateTime expire = DateTime.Now.AddDays(7);
-            var pwd = Environment.GetEnvironmentVariable("BLOG_PWD");
-            var userName = Environment.GetEnvironmentVariable("BLOG_USER");
-            if (user.UserName != userName || user.Password != pwd)
+            var loggedInUser = await _accountSvc.GetUserAsync(user.UserName, user.Password);
+            if (loggedInUser == null)
             {
                 ModelState.AddModelError(nameof(user.UserName), "用户名或密码错误");
                 return BadRequest(ModelState);
             }
 
-            var claims = new[] {new Claim(ClaimTypes.NameIdentifier, userName)};
-            var token = _jwt.GenerateToken(userName, claims, expire);
-            var ( principal, authProp) = _jwt.GenerateAuthTicket(userName, claims, expire);
-            HttpContext.SignInAsync(principal, authProp);
-            return Ok(new {Token = token});
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, loggedInUser.Id.ToString(),ClaimValueTypes.Integer),
+                new Claim(ClaimTypes.Name, loggedInUser.UserName,ClaimValueTypes.String),
+                new Claim("DisplayName", loggedInUser.DisplayName,ClaimValueTypes.String),
+            };
+            var token = _jwt.GenerateToken(loggedInUser.UserName, claims, expire);
+            var (principal, authProp) = _jwt.GenerateAuthTicket(loggedInUser.UserName, claims, expire);
+            await HttpContext.SignInAsync(principal, authProp);
+            return Ok(new { Token = token });
         }
 
         [HttpGet("ToPage")]
