@@ -51,7 +51,7 @@ namespace ZeekoBlog
                     .Replace("{BLOG_DB_USER}", dbUser)
                     .Replace("{BLOG_DB_PWD}", dbPwd);
 
-                options.UseNpgsql(connectionString);
+                options.UseNpgsql(connectionString, b => b.MigrationsAssembly("ZeekoBlog"));
             });
             services.AddEasyJwt(new EasySymmetricOptions("zeeko's blog")
             {
