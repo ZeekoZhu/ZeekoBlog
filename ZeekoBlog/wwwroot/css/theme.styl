@@ -68,14 +68,23 @@ h1 {
 .layout {
     display: grid;
     grid-template-rows: 100%;
-    grid-template-columns: 75% 25%;
-    margin: 0 150px;
+    grid-template-columns: 10% 60% 20% 10%;
+    grid-template-areas: '. module side .';
     align-items: start;
+    width: 100vw;
+
+    .module {
+        grid-area: module;
+    }
+
+    .side-container {
+        grid-area: side;
+    }
 
     @media screen and ({on}: tablet) {
-        margin: 1rem;
         grid-template-rows: auto auto;
-        grid-template-columns: 100%;
+        grid-template-columns: 5% 90% 5%;
+        grid-template-areas: '. module .' '. side .';
     }
 }
 
@@ -86,12 +95,13 @@ code-part();
 
     @media screen and ({on}: tablet) {
         position: fixed;
-        width: calc(100vw - 2rem);
+        padding: 0 2rem;
         height: 0;
         background: white;
         z-index: 10;
         overflow: auto;
         opacity: 0;
+        width: calc(100vw - 4rem);
     }
 }
 
