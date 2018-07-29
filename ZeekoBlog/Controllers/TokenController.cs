@@ -1,15 +1,10 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using ZeekoBlog.Core.Services;
-using ZeekoBlog.Filters;
 using ZeekoUtilsPack.AspNetCore.Jwt;
 
 namespace ZeekoBlog.Controllers
@@ -32,7 +27,7 @@ namespace ZeekoBlog.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [JwtAuthorize]
+        [EasyJwtAuthorize]
         public IActionResult Get()
         {
             return Ok("");

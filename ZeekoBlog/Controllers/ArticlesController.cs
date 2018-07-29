@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ZeekoBlog.Filters;
 using ZeekoBlog.Core.Models;
+using ZeekoBlog.Core.Services;
+using ZeekoUtilsPack.AspNetCore.Jwt;
 
 namespace ZeekoBlog.Controllers
 {
@@ -13,10 +15,12 @@ namespace ZeekoBlog.Controllers
     public class ArticlesController : Controller
     {
         private readonly BlogContext _context;
+        private readonly ArticleService _articleSvc;
 
-        public ArticlesController(BlogContext context)
+        public ArticlesController(BlogContext context, ArticleService articleSvc)
         {
             _context = context;
+            _articleSvc = articleSvc;
         }
 
         // GET: api/Articles
@@ -47,7 +51,7 @@ namespace ZeekoBlog.Controllers
 
         // PUT: api/Articles/5
         [HttpPut("{id}")]
-        [JwtAuthorize]
+        [EasyJwtAuthorize]
         public async Task<IActionResult> PutArticle([FromRoute] int id, [FromBody] Article article)
         {
             if (!ModelState.IsValid)
@@ -60,30 +64,19 @@ namespace ZeekoBlog.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(article).State = EntityState.Modified;
+            var result = await _articleSvc.UpdateAsync(article);
 
-            try
+            if (result.Success)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ArticleExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NoContent();
             }
 
-            return NoContent();
+            return BadRequest(result.Msg);
         }
 
         // POST: api/Articles
         [HttpPost]
-        [JwtAuthorize]
+        [EasyJwtAuthorize]
         public async Task<IActionResult> PostArticle([FromBody] Article article)
         {
             if (!ModelState.IsValid)
@@ -91,15 +84,15 @@ namespace ZeekoBlog.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Articles.Add(article);
-            await _context.SaveChangesAsync();
+            int.TryParse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value, out var userId);
+            await _articleSvc.AddAsync(article, userId);
 
             return CreatedAtAction("GetArticle", new { id = article.Id }, article);
         }
 
         // DELETE: api/Articles/5
         [HttpDelete("{id}")]
-        [JwtAuthorize]
+        [EasyJwtAuthorize]
         public async Task<IActionResult> DeleteArticle([FromRoute] int id)
         {
             if (!ModelState.IsValid)
