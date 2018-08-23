@@ -35,7 +35,7 @@ let sidebar =
               _href "http://blog.neatline.cn"
               _target "_blank" ] [ rawText "Neatline" ]
           a [ _class "side-item"
-              _href "http://www.jijiwuming.cn/
+              _href "http://www.jijiwuming.cn/"
               _target "_blank" ] [ rawText "jijiwuming" ]
         ]
     ]
