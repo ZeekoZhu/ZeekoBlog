@@ -54,26 +54,16 @@ namespace ZeekoBlog.Core.Services
             return article;
         }
 
-        public async Task<BooleanResult<Article>> UpdateAsync(Article article)
+        public async Task<BooleanResult<Article>> UpdateAsync(Article article, int userId)
         {
+            var canModify = await _context.Articles.AnyAsync(a => a.Id == article.Id && a.BlogUser.Id == userId);
+            if (canModify == false)
+            {
+                return new BooleanResult<Article>(false, "Article not found");
+            }
             _context.Entry(article).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ArticleExists(article.Id))
-                {
-                    return new BooleanResult<Article>(false,"Article not found");
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await _context.SaveChangesAsync();
             return new BooleanResult<Article>(true, article);
         }
 

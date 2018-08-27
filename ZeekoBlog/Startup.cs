@@ -1,8 +1,8 @@
 using System;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using AutoMapper;
 using EasyCaching.InMemory;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,10 +10,10 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Extensions.WebEncoders;
 using ZeekoBlog.Core.Models;
 using ZeekoBlog.Core.Services;
+using ZeekoBlog.DTOs;
 using ZeekoBlog.Fun;
 using ZeekoBlog.Markdown;
 using ZeekoBlog.Markdown.Plugins;
@@ -85,6 +85,17 @@ namespace ZeekoBlog
                     options.Conventions.AuthorizeFolder("/Zeeko");
                     options.Conventions.AllowAnonymousToPage("/Zeeko/Login");
                 });
+            Mapper.Initialize(mapperCfg =>
+            {
+                mapperCfg.CreateMap<Article, ArticleListDto>()
+                    .ForSourceMember(a => a.BlogUser, opt => opt.Ignore())
+                    .ForSourceMember(a => a.Content, opt => opt.Ignore());
+
+                mapperCfg.CreateMap<ArticlePostDto, Article>();
+
+                mapperCfg.CreateMap<Article, ArticleDetailDto>()
+                    .ForSourceMember(a => a.BlogUser, opt => opt.Ignore());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

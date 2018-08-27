@@ -1,11 +1,16 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ZeekoBlog.Core.Models;
 using ZeekoBlog.Core.Services;
+using ZeekoBlog.DTOs;
+using ZeekoBlog.Extensions;
 using ZeekoUtilsPack.AspNetCore.Jwt;
 
 namespace ZeekoBlog.Controllers
@@ -23,23 +28,34 @@ namespace ZeekoBlog.Controllers
             _articleSvc = articleSvc;
         }
 
-        // GET: api/Articles
+        /// <summary>
+        /// GET: /api/Articles
+        ///
+        /// 获取当前用户的文章列表
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public IEnumerable<Article> GetArticles()
+        public IEnumerable<ArticleListDto> GetArticles()
         {
-            return _context.Articles;
+            var userId = User.GetId();
+            return _context.Articles.Where(x => x.BlogUser.Id == userId).ProjectTo<ArticleListDto>();
         }
 
-        // GET: api/Articles/5
+        // GET: /api/Articles/5
+        /// <summary>
+        /// 获取文章详情
+        /// </summary>
+        /// <param name="id">文章 Id</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetArticle([FromRoute] int id)
+        public async Task<ActionResult<ArticleDetailDto>> GetArticle([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var article = await _context.Articles.SingleOrDefaultAsync(m => m.Id == id);
+            var article = await _context.Articles.ProjectTo<ArticleDetailDto>().SingleOrDefaultAsync(m => m.Id == id);
 
             if (article == null)
             {
@@ -49,22 +65,26 @@ namespace ZeekoBlog.Controllers
             return Ok(article);
         }
 
-        // PUT: api/Articles/5
+        // PUT: /api/Articles/5
+        /// <summary>
+        /// 修改文章的内容
+        /// </summary>
+        /// <param name="id">文章 Id</param>
+        /// <param name="dto">数据</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         [EasyJwtAuthorize]
-        public async Task<IActionResult> PutArticle([FromRoute] int id, [FromBody] Article article)
+        public async Task<IActionResult> PutArticle([FromRoute] int id, [FromBody] ArticlePostDto dto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != article.Id)
-            {
-                return BadRequest();
-            }
+            var article = Mapper.Map<Article>(dto);
+            article.Id = id;
 
-            var result = await _articleSvc.UpdateAsync(article);
+            var result = await _articleSvc.UpdateAsync(article, User.GetId());
 
             if (result.Success)
             {
@@ -74,23 +94,35 @@ namespace ZeekoBlog.Controllers
             return BadRequest(result.Msg);
         }
 
-        // POST: api/Articles
+        // POST: /api/Articles
+        /// <summary>
+        /// 发表一篇文章
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         [EasyJwtAuthorize]
-        public async Task<IActionResult> PostArticle([FromBody] Article article)
+        public async Task<IActionResult> PostArticle([FromBody] ArticlePostDto dto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            int.TryParse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value, out var userId);
-            await _articleSvc.AddAsync(article, userId);
+            var article = Mapper.Map<Article>(dto);
+            article.LastEdited = DateTime.UtcNow;
+
+            await _articleSvc.AddAsync(article, User.GetId());
 
             return CreatedAtAction("GetArticle", new { id = article.Id }, article);
         }
 
         // DELETE: api/Articles/5
+        /// <summary>
+        /// 删除一篇文章
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         [EasyJwtAuthorize]
         public async Task<IActionResult> DeleteArticle([FromRoute] int id)
@@ -100,7 +132,7 @@ namespace ZeekoBlog.Controllers
                 return BadRequest(ModelState);
             }
 
-            var article = await _context.Articles.SingleOrDefaultAsync(m => m.Id == id);
+            var article = await _context.Articles.SingleOrDefaultAsync(m => m.Id == id && m.BlogUser.Id == User.GetId());
             if (article == null)
             {
                 return NotFound();
@@ -110,11 +142,6 @@ namespace ZeekoBlog.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(article);
-        }
-
-        private bool ArticleExists(int id)
-        {
-            return _context.Articles.Any(e => e.Id == id);
         }
     }
 }
