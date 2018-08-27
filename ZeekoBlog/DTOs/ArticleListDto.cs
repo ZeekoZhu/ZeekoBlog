@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ZeekoBlog.DTOs
 {
@@ -21,8 +22,11 @@ namespace ZeekoBlog.DTOs
 
     public class ArticlePostDto
     {
+        [Required]
         public string Title { get; set; }
+        [Required]
         public string Summary { get; set; }
+        [Required]
         public string Content { get; set; }
     }
 }
