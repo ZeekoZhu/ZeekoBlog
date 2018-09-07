@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ZeekoBlog.CodeHighlight\ZeekoBlog.CodeHighlight.csproj" />
+    <ProjectReference Include="..\ZeekoBlog.Core\ZeekoBlog.Core.csproj" />
   </ItemGroup>
 
 </Project>

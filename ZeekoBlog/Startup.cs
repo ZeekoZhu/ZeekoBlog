@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.WebEncoders;
+using ZeekoBlog.CodeHighlight;
 using ZeekoBlog.Core.Models;
 using ZeekoBlog.Core.Services;
 using ZeekoBlog.DTOs;
@@ -18,6 +19,7 @@ using ZeekoBlog.Fun;
 using ZeekoBlog.Markdown;
 using ZeekoBlog.Markdown.Plugins;
 using ZeekoBlog.Markdown.Plugins.CodeLangDetectionPlugin;
+using ZeekoBlog.Markdown.Plugins.HLJSPlugin;
 using ZeekoBlog.Markdown.Plugins.TOCItemsPlugin;
 using ZeekoUtilsPack.AspNetCore.Jwt;
 
@@ -68,11 +70,13 @@ namespace ZeekoBlog
             services.AddDefaultInMemoryCache();
             services.AddScoped<ArticleService>();
             services.AddScoped<AccountService>();
+            services.AddCodeHighlight();
             services.AddMarkdownService(builder =>
             {
-                builder.Add<HTMLRendererPlugin>()
+                builder
+                    .Add<HLJSPlugin>()
+                    .Add<HTMLRendererPlugin>()
                     .Add<SyntaxParserPlugin>()
-                    .Add<CodeLangDetectionPlugin>()
                     .Add<TOCItemsPlugin>();
             });
             services.AddMemoryCache();

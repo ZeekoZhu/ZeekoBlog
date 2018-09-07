@@ -6,6 +6,7 @@ using EasyCaching.Core;
 using Markdig.Renderers;
 using Markdig.Renderers.Html;
 using Markdig.Syntax;
+using ZeekoBlog.Core.Models;
 using ZeekoUtilsPack.BCLExt;
 
 namespace ZeekoBlog.Markdown.Plugins.TOCItemsPlugin
