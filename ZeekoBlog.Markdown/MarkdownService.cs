@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ZeekoBlog.Markdown
@@ -15,7 +16,7 @@ namespace ZeekoBlog.Markdown
             return this;
         }
 
-        public MarkdownOutput Process(string md)
+        public async Task<MarkdownOutput> Process(string md)
         {
             var output = new MarkdownOutput
             {
@@ -24,7 +25,7 @@ namespace ZeekoBlog.Markdown
             };
             foreach (var plugin in _plugins)
             {
-                output = plugin.Invoke(output);
+                output = await plugin.InvokeAsync(output);
             }
 
             return output;

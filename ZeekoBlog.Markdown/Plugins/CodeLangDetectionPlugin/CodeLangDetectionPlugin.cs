@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using EasyCaching.Core;
 using Markdig.Syntax;
 using ZeekoUtilsPack.BCLExt;
+// ReSharper disable StringLiteralTypo
 
 namespace ZeekoBlog.Markdown.Plugins.CodeLangDetectionPlugin
 {

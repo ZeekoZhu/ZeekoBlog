@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using ZeekoBlog.Core.Models;
 
 namespace ZeekoBlog.DTOs
 {
@@ -9,6 +10,7 @@ namespace ZeekoBlog.DTOs
         public string Title { get; set; }
         public string Summary { get; set; }
         public DateTime LastEdited { get; set; }
+        public ArticleDocType DocType { get; set; }
     }
 
     public class ArticleDetailDto
@@ -18,6 +20,7 @@ namespace ZeekoBlog.DTOs
         public string Summary { get; set; }
         public string Content { get; set; }
         public DateTime LastEdited { get; set; }
+        public ArticleDocType DocType { get; set; }
     }
 
     public class ArticlePostDto
@@ -28,5 +31,7 @@ namespace ZeekoBlog.DTOs
         public string Summary { get; set; }
         [Required]
         public string Content { get; set; }
+        [Required]
+        public ArticleDocType DocType { get; set; }
     }
 }

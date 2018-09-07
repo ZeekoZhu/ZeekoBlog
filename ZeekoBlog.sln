@@ -17,11 +17,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Trigger-CI.ps1 = Trigger-CI.ps1
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeekoBlog.Markdown", "ZeekoBlog.Markdown\ZeekoBlog.Markdown.csproj", "{C535B8AE-06B3-4815-93D9-CEA3FC7B8AC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZeekoBlog.Markdown", "ZeekoBlog.Markdown\ZeekoBlog.Markdown.csproj", "{C535B8AE-06B3-4815-93D9-CEA3FC7B8AC0}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ZeekoBlog.Fun", "ZeekoBlog.Fun\ZeekoBlog.Fun.fsproj", "{1D57F311-2187-4098-B115-4ABFC729DAD5}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ZeekoBlog.Fun", "ZeekoBlog.Fun\ZeekoBlog.Fun.fsproj", "{1D57F311-2187-4098-B115-4ABFC729DAD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeekoBlog.Core", "ZeekoBlog.Core\ZeekoBlog.Core.csproj", "{CC8C2EFE-E14E-4CE2-9369-6585DB5D3751}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZeekoBlog.Core", "ZeekoBlog.Core\ZeekoBlog.Core.csproj", "{CC8C2EFE-E14E-4CE2-9369-6585DB5D3751}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeekoBlog.CodeHighlight", "ZeekoBlog.CodeHighlight\ZeekoBlog.CodeHighlight.csproj", "{0A473A92-64BE-42FF-A858-26FB7F39B698}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{4E43FD94-81B7-46FE-8DFC-CCB906BFFE27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{CC8C2EFE-E14E-4CE2-9369-6585DB5D3751}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC8C2EFE-E14E-4CE2-9369-6585DB5D3751}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC8C2EFE-E14E-4CE2-9369-6585DB5D3751}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A473A92-64BE-42FF-A858-26FB7F39B698}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A473A92-64BE-42FF-A858-26FB7F39B698}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A473A92-64BE-42FF-A858-26FB7F39B698}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A473A92-64BE-42FF-A858-26FB7F39B698}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E43FD94-81B7-46FE-8DFC-CCB906BFFE27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E43FD94-81B7-46FE-8DFC-CCB906BFFE27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E43FD94-81B7-46FE-8DFC-CCB906BFFE27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E43FD94-81B7-46FE-8DFC-CCB906BFFE27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,6 +6,9 @@ using ZeekoUtilsPack.BCLExt;
 
 namespace ZeekoBlog.Markdown.Plugins
 {
+    /// <summary>
+    /// Markdown 语法分析插件，将一个 Markdown 文档的语法树存入插件存储中，供其他插件使用
+    /// </summary>
     public class SyntaxParserPlugin : BaseMarkdownPlugin
     {
         private readonly IEasyCachingProvider _cache;
@@ -14,7 +17,7 @@ namespace ZeekoBlog.Markdown.Plugins
         public SyntaxParserPlugin(IEasyCachingProvider cache, MarkdownPipeline pipeline = null)
         {
             _cache = cache;
-            _pipeline = pipeline ?? HTMLRendererPlugin.DefaultPipeline;
+            _pipeline = pipeline;
         }
 
         public override string Id { get; } = "rocks.gianthard.parser";
@@ -30,7 +33,7 @@ namespace ZeekoBlog.Markdown.Plugins
                 output.Document = cached.Value;
                 return output;
             }
-            var result = Markdig.Markdown.Parse(output.Source, _pipeline);
+            var result = Markdig.Markdown.Parse(output.Source, _pipeline ?? output.Pipeline);
             _cache.Set(key, result, expiration);
             output.Storage.Upsert(key, result);
             output.Document = result;

@@ -1,4 +1,6 @@
+using System;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace ZeekoBlog.Markdown
 {
@@ -10,7 +12,15 @@ namespace ZeekoBlog.Markdown
         /// <example>com.example.AwesomePlugin</example>
         public abstract string Id { get; }
 
-        public abstract MarkdownOutput Invoke(MarkdownOutput output);
+        public virtual Task<MarkdownOutput> InvokeAsync(MarkdownOutput output)
+        {
+            return Task.FromResult(Invoke(output));
+        }
+
+        public virtual MarkdownOutput Invoke(MarkdownOutput output)
+        {
+            throw new NotImplementedException("You must override either Invoke or InvokeAsync");
+        }
 
     }
 

@@ -5,18 +5,14 @@ open Giraffe
 open GiraffeViewEngine
 open LayoutPage
 open Common
-open ZeekoBlog.Markdown.Plugins.TOCItemsPlugin
-open ZeekoBlog.Markdown
 
 type ArticleModel =
     { Article: Article
       Languages: string list
       TOCList: TOCItem list
-      Markdown: MarkdownService
     }
 
 let view (model: ArticleModel) =
-    let markdown = createMd model.Markdown
     let layoutModel: LayoutModel =
         { Title = model.Article.Title }
     let sidebar =
@@ -61,7 +57,7 @@ $('input[type=checkbox][disabled]').replaceWith('<b class="mdl2" aria-hidden="tr
                   [ span [ _class "weak" ] [ rawText (model.Article.LastEdited.ToString("yyyy/MM/dd")) ] ]
               div [ _class "divide wide-divide" ] []
               div [ _class "content article-md" ]
-                  [ markdown model.Article.Content ]
+                  [ rawText model.Article.RenderedContent ]
             ]
 
     { Scripts = scripts

@@ -1,6 +1,5 @@
 module IndexPage
 open ZeekoBlog.Core.Models
-open ZeekoBlog.Markdown
 open Giraffe
 open GiraffeViewEngine
 open LayoutPage
@@ -9,8 +8,7 @@ open Common
 type IndexModel =
     { Articles: Article list
       CurrentIndex: int
-      TotalPages: int
-      Markdown: MarkdownService }
+      TotalPages: int }
 
 
 let hideWhen condition =
@@ -42,7 +40,6 @@ let sidebar =
 
 module Index =
     let view model =
-        let markdown = createMd model.Markdown
 
         let viewBody =
             div [ _class "index" ]
@@ -60,7 +57,7 @@ module Index =
                                      [ a [ _href (sprintf "/a/%d" article.Id) ] [ rawText article.Title ]
                                      ]
                                   span [ _class "weak" ] [ rawText (article.LastEdited.ToString("yyyy/MM/dd")) ]
-                                  div [ _class "weak summary" ] [ markdown article.Summary ]
+                                  div [ _class "weak summary" ] [ rawText article.RenderedSummary ]
                                 ]
                             )
                       )

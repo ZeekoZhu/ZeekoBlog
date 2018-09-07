@@ -23,7 +23,8 @@ namespace ZeekoBlog.Controllers
         }
 
         /// <summary>
-        /// 
+        /// GET /api/token
+        /// 用来检查是否已经登录或者登录信息是否过期
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -35,6 +36,7 @@ namespace ZeekoBlog.Controllers
 
         /// <summary>
         /// 用户登录，并将 Token 写入响应头
+        /// POST /api/token
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
