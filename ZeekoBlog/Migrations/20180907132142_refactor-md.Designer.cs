@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ZeekoBlog.Core.Models;
@@ -9,9 +10,10 @@ using ZeekoBlog.Core.Models;
 namespace ZeekoBlog.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    partial class BlogContextModelSnapshot : ModelSnapshot
+    [Migration("20180907132142_refactor-md")]
+    partial class refactormd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,12 +71,10 @@ namespace ZeekoBlog.Migrations
 
             modelBuilder.Entity("ZeekoBlog.Core.Models.TOCItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AnchorName");
-
-                    b.Property<int>("ArticleId");
+                    b.Property<int?>("ArticleId");
 
                     b.Property<int>("Level");
 
@@ -98,8 +98,7 @@ namespace ZeekoBlog.Migrations
                 {
                     b.HasOne("ZeekoBlog.Core.Models.Article")
                         .WithMany("TOCList")
-                        .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ArticleId");
                 });
 #pragma warning restore 612, 618
         }

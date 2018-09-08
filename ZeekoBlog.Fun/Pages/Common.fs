@@ -20,10 +20,6 @@ MathJax.Hub.Config({
 });""" ]
 ]
 
-let createMd (mdSvc: MarkdownService) content =
-    let res = mdSvc.Process(content)
-    rawText res.Html
-
 let sideGroup title content =
     div [ _class "side-card" ] [
         div [ _class "side-title" ] [

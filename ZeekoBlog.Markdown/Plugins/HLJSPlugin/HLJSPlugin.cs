@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using ZeekoBlog.CodeHighlight;
 
 namespace ZeekoBlog.Markdown.Plugins.HLJSPlugin
@@ -13,10 +11,11 @@ namespace ZeekoBlog.Markdown.Plugins.HLJSPlugin
             _hljsSvc = hljsSvc;
         }
         public override string Id { get; }
-        public override Task<MarkdownOutput> InvokeAsync(MarkdownOutput output)
+        public override MarkdownOutput Invoke(MarkdownOutput output)
         {
             //output.Pipeline
-            throw new NotImplementedException();
+            output.Pipeline.Extensions.AddIfNotAlready(new HLJSExtension(_hljsSvc));
+            return output;
         }
     }
 }

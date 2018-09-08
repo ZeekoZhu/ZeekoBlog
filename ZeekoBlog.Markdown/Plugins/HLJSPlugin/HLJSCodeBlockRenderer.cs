@@ -29,20 +29,21 @@ namespace ZeekoBlog.Markdown.Plugins.HLJSPlugin
             var codeLines = block.Lines.Lines.Select(l => l.ToString());
             var code = string.Join("\n", codeLines);
             var hlResult = ApplySyntaxHighlighting(code, block.Info);
-            attributes.AddProperty("data-language", hlResult.Language);
             if (hlResult.IsSuccess == false)
             {
                 // 代码高亮失败或者被跳过，由默认的渲染器进行渲染
                 _underlyingRenderer.Write(renderer, block);
                 return;
             }
+            attributes.AddProperty("data-language", hlResult.Language);
+            attributes.AddClass("hljs");
             if (string.IsNullOrWhiteSpace(block.Info))
             {
                 attributes.AddClass($"language-{hlResult.Language}");
             }
 
             renderer
-                .Write("<pre class=\"hljs\">")
+                .Write("<pre>")
                 .Write("<code")
                 .WriteAttributes(attributes)
                 .Write(">");

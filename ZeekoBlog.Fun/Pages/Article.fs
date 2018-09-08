@@ -23,7 +23,7 @@ let view (model: ArticleModel) =
                          |> List.map
                             ( fun item ->
                                 li [ _class (sprintf "toc-H%d" item.Level) ]
-                                   [ a [ _href (sprintf "#%s" item.Id) ]
+                                   [ a [ _href (sprintf "#%s" item.AnchorName) ]
                                        [ rawText item.Name ]
                                    ]
                             )
@@ -38,23 +38,13 @@ $('input[type=checkbox][disabled][checked]').replaceWith('<b class="mdl2" aria-h
 $('input[type=checkbox][disabled]').replaceWith('<b class="mdl2" aria-hidden="true" style="font-size: .8rem;">&#xF16B;</b>');"""
                  ]
         ]
-        @ mathJaxScript @
-        [ script [ _src "https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js" ] []
-        ] @
-        ( model.Languages
-          |> List.map
-            (fun lang ->
-                script [ _src (sprintf "https://cdn.bootcss.com/highlight.js/9.12.0/languages/%s.min.js" lang ) ] []
-            )
-        ) @
-        [ script [] [ rawText """hljs.initHighlightingOnLoad();""" ]
-        ]
+        @ mathJaxScript
     // view
     let viewBody =
         div [ _class "article" ]
             [ h1 [ _class "title" ] [ rawText model.Article.Title ]
               div []
-                  [ span [ _class "weak" ] [ rawText (model.Article.LastEdited.ToString("yyyy/MM/dd")) ] ]
+                  [ span [ _class "weak" ] [ rawText (model.Article.Created.ToString("yyyy/MM/dd")) ] ]
               div [ _class "divide wide-divide" ] []
               div [ _class "content article-md" ]
                   [ rawText model.Article.RenderedContent ]

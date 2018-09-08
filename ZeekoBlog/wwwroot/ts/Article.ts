@@ -17,3 +17,14 @@ interface IArticle {
     content?: string;
     lastEdited?: Date;
 }
+
+export enum ArticleDocType {
+    Markdown, AsciiDoc, Raw
+}
+
+export interface IArticlePostDto {
+    title: string;
+    summary: string;
+    content: string;
+    docType: ArticleDocType;
+}

@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Z.EntityFramework.Plus;
 using ZeekoBlog.Core.Models;
+using ZeekoBlog.Markdown;
+using ZeekoBlog.Markdown.Plugins.CodeLangDetectionPlugin;
+using ZeekoBlog.Markdown.Plugins.TOCItemsPlugin;
+using TOCItem = ZeekoBlog.Core.Models.TOCItem;
 
 namespace ZeekoBlog.Core.Services
 {
     public class ArticleService
     {
         private readonly BlogContext _context;
+        private readonly MarkdownService _mdSvc;
 
-        public ArticleService(BlogContext context)
+        public ArticleService(BlogContext context, MarkdownService mdSvc)
         {
             _context = context;
+            _mdSvc = mdSvc;
         }
 
         public async Task<(List<Article> Articles, int TotalPages)> GetPaged(int index, int pageSize, int userId)
@@ -30,7 +37,7 @@ namespace ZeekoBlog.Core.Services
 
         public async Task<Article> GetById(int id)
         {
-            return await _context.Articles.FirstOrDefaultAsync(a => a.Id == id);
+            return await _context.Articles.Include(a => a.TOCList).FirstOrDefaultAsync(a => a.Id == id);
         }
 
         /// <summary>
@@ -47,7 +54,10 @@ namespace ZeekoBlog.Core.Services
                 return null;
             }
 
+            article.Created = DateTime.UtcNow;
+            article.LastEdited = DateTime.UtcNow;
             article.BlogUser = user;
+            await RenderArticle(article);
             _context.Entry(article).State = EntityState.Added;
             await _context.SaveChangesAsync();
             article.BlogUser = null;
@@ -62,7 +72,12 @@ namespace ZeekoBlog.Core.Services
                 return new BooleanResult<Article>(false, "Article not found");
             }
             _context.Entry(article).State = EntityState.Modified;
+            await _context.Set<TOCItem>()
+                .Where(i => i.ArticleId == article.Id)
+                .DeleteAsync();
 
+            article.LastEdited = DateTime.UtcNow;
+            await RenderArticle(article);
             await _context.SaveChangesAsync();
             return new BooleanResult<Article>(true, article);
         }
@@ -70,6 +85,33 @@ namespace ZeekoBlog.Core.Services
         private bool ArticleExists(int id)
         {
             return _context.Articles.Any(e => e.Id == id);
+        }
+
+        private async Task RenderArticle(Article article)
+        {
+            switch (article.DocType)
+            {
+                case ArticleDocType.AsciiDoc:
+                    // TODO: Asciidoc
+                    article.RenderedSummary = article.Summary;
+                    article.RenderedContent = article.Content;
+                    break;
+                case ArticleDocType.Markdown:
+                    var summary = await _mdSvc.Process(article.Summary);
+                    article.RenderedSummary = summary.Html;
+                    var content = await _mdSvc.Process(article.Content);
+                    article.RenderedContent = content.Html;
+                    var (_, languages) = content.Storage.TryGet<List<string>>(CodeLangDetectionPlugin.ID);
+                    article.Languages = string.Join(",", languages);
+                    (_, article.TOCList) = content.Storage.TryGet<List<TOCItem>>(TOCItemsPlugin.ID);
+                    break;
+                case ArticleDocType.Raw:
+                    article.RenderedSummary = article.Summary;
+                    article.RenderedContent = article.Content;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

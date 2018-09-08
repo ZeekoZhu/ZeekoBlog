@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.NodeServices;
@@ -36,7 +37,10 @@ namespace ZeekoBlog.CodeHighlight
             }
             try
             {
-                var result = await _node.InvokeAsync<HighlightResult>("./scripts/highlight", source, lang);
+                var scriptPath = Path.Combine(
+                    Path.GetDirectoryName(typeof(CodeHighlightService).Assembly.Location) ?? throw new InvalidOperationException(),
+                    "scripts", "code-highlight");
+                var result = await _node.InvokeAsync<HighlightResult>(scriptPath, source, lang);
                 result.IsSuccess = true;
                 result.Result = result.Result.Trim();
                 return result;
@@ -57,7 +61,11 @@ namespace ZeekoBlog.CodeHighlight
     {
         public static IServiceCollection AddCodeHighlight(this IServiceCollection services, Action<NodeServicesOptions> setupOptions, string[] bypass = null)
         {
-            services.AddNodeServices(setupOptions);
+            services.AddNodeServices(options =>
+            {
+                options.InvocationTimeoutMilliseconds = 1000 * 5;
+                setupOptions(options);
+            });
             services.AddSingleton(provider =>
             {
                 var node = provider.GetService<INodeServices>();
@@ -68,7 +76,10 @@ namespace ZeekoBlog.CodeHighlight
 
         public static IServiceCollection AddCodeHighlight(this IServiceCollection services, string[] bypass = null)
         {
-            services.AddNodeServices();
+            services.AddNodeServices(options =>
+            {
+                options.InvocationTimeoutMilliseconds = 1000 * 5;
+            });
             services.AddSingleton(provider =>
             {
                 var node = provider.GetService<INodeServices>();

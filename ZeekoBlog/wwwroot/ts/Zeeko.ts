@@ -1,4 +1,4 @@
-import {Article} from './Article';
+import {Article, IArticlePostDto} from './Article';
 import { appHeader } from './Utils';
 import {PageModule} from './PageModule';
 
@@ -6,17 +6,18 @@ let editModule = () => {
     let saveBtn = $('#save');
     let titleInput = $('#title');
     let contentInput = $('#content');
+    let docType = $('#docType').val();
     let id = $('#id').val();
     let successTips = $('#save-success');
     let errorTips = $('#save-error');
     let summaryInput = $('#summary');
     saveBtn.click(() => {
-        let newArticle = new Article({
+        let newArticle:IArticlePostDto = {
             content: contentInput.val(),
             title: titleInput.val(),
-            id: +id,
-            summary: summaryInput.val()
-        });
+            summary: summaryInput.val(),
+            docType: +docType
+        };
         console.log(newArticle);
 
         if (id) {

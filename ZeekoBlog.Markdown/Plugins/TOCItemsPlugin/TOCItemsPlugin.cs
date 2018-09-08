@@ -46,7 +46,7 @@ namespace ZeekoBlog.Markdown.Plugins.TOCItemsPlugin
                 {
                     Level = block.Level,
                     Name = name,
-                    Id = block.GetAttributes().Id
+                    AnchorName = block.GetAttributes().Id
                 };
             }).ToList();
             output.Storage.Upsert(Id, items);

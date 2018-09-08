@@ -77,6 +77,7 @@ namespace ZeekoBlog
                     .Add<HLJSPlugin>()
                     .Add<HTMLRendererPlugin>()
                     .Add<SyntaxParserPlugin>()
+                    .Add<CodeLangDetectionPlugin>()
                     .Add<TOCItemsPlugin>();
             });
             services.AddMemoryCache();
