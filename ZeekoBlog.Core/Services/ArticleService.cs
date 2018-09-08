@@ -72,6 +72,7 @@ namespace ZeekoBlog.Core.Services
                 return new BooleanResult<Article>(false, "Article not found");
             }
             _context.Entry(article).State = EntityState.Modified;
+            _context.Entry(article).Property(a => a.Created).IsModified = false;
             await _context.Set<TOCItem>()
                 .Where(i => i.ArticleId == article.Id)
                 .DeleteAsync();

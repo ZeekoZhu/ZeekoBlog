@@ -192,45 +192,28 @@ namespace ZeekoBlog.Markdown.Plugins.CodeLangDetectionPlugin
                 "zephir"
             };
 
-        private readonly Dictionary<string, string> _languageShort = new Dictionary<string, string>
+        private readonly Dictionary<string, string> _languageAlias = new Dictionary<string, string>
         {
             ["ts"] = "typescript",
             ["js"] = "javascript",
             ["posh"] = "powershell",
             ["fs"] = "fsharp",
             ["sh"] = "shell",
+            ["csharp"] = "cs",
         };
-        private readonly IEasyCachingProvider _cache;
         public static readonly string ID = "rocks.gianthard.code-lang";
         public override string Id { get; } = ID;
 
-        public CodeLangDetectionPlugin(IEasyCachingProvider cache)
-        {
-            _cache = cache;
-        }
-
         public override MarkdownOutput Invoke(MarkdownOutput output)
         {
-            var key = Id + output.Source.GetMd5();
-            var expiration = TimeSpan.FromHours(6);
-            var cached = _cache.Get<List<string>>(key);
-
-            if (cached.HasValue)
-            {
-                _cache.Refresh(key, cached.Value, expiration);
-                output.Storage.Upsert(Id, cached.Value);
-                return output;
-            }
-
             var doc = output.Document;
             var languages = doc.Descendants<FencedCodeBlock>()
                 .Select(c => c.Info).Where(l => l != null)
                 .Distinct()
-                .Where(l => _languages.Contains(l) || _languageShort.ContainsKey(l))
-                .Select(l => _languageShort.TryGetValue(l, out string result) ? result : l)
+                .Where(l => _languages.Contains(l) || _languageAlias.ContainsKey(l))
+                .Select(l => _languageAlias.TryGetValue(l, out string result) ? result : l)
                 .ToList();
             output.Storage.Upsert(Id, languages);
-            _cache.Set(key, languages, expiration);
             return output;
         }
     }

@@ -9,7 +9,7 @@ function highlight(callback, source, lang) {
     let result;
     try {
         if (lang && hljs.getLanguage(lang)) {
-            result = hljs.highlight(lang, source);
+            result = hljs.highlight(lang, source, true);
         } else {
             result = hljs.highlightAuto(source);
         }
