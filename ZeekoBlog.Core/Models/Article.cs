@@ -24,6 +24,7 @@ namespace ZeekoBlog.Core.Models
         public string RenderedSummary { get; set; } = string.Empty;
         public List<TOCItem> TOCList { get; set; } = new List<TOCItem>();
         public DateTime Created { get; set; }
+        public bool SoftDelete { get; set; } = false;
     }
 
     public enum ArticleDocType

@@ -26,9 +26,9 @@ namespace ZeekoBlog.Application.Services
 
         public async Task<(List<Article> Articles, int TotalPages)> GetPaged(int index, int pageSize, int userId)
         {
-            var results = await _context.Articles
+            var results = await _context.ValidArticles
                 .Where(a => a.BlogUser.Id == userId)
-                .OrderByDescending(a => a.Id)
+                .OrderByDescending(a => a.Created)
                 .Skip(index * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -38,7 +38,7 @@ namespace ZeekoBlog.Application.Services
 
         public async Task<Article> GetById(int id)
         {
-            return await _context.Articles.Include(a => a.TOCList).FirstOrDefaultAsync(a => a.Id == id);
+            return await _context.ValidArticles.Include(a => a.TOCList).FirstOrDefaultAsync(a => a.Id == id);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace ZeekoBlog.Application.Services
 
         public async Task<BooleanResult<Article>> UpdateAsync(Article article, int userId)
         {
-            var canModify = await _context.Articles.AnyAsync(a => a.Id == article.Id && a.BlogUser.Id == userId);
+            var canModify = await _context.ValidArticles.AnyAsync(a => a.Id == article.Id && a.BlogUser.Id == userId);
             if (canModify == false)
             {
                 return new BooleanResult<Article>(false, "Article not found");
@@ -82,11 +82,6 @@ namespace ZeekoBlog.Application.Services
             await RenderArticle(article);
             await _context.SaveChangesAsync();
             return new BooleanResult<Article>(true, article);
-        }
-
-        private bool ArticleExists(int id)
-        {
-            return _context.Articles.Any(e => e.Id == id);
         }
 
         private async Task RenderArticle(Article article)

@@ -131,13 +131,12 @@ namespace ZeekoBlog.Controllers
                 return BadRequest(ModelState);
             }
 
-            var article = await _context.Articles.SingleOrDefaultAsync(m => m.Id == id && m.BlogUser.Id == User.GetId());
+            var article = await _context.ValidArticles.SingleOrDefaultAsync(m => m.Id == id && m.BlogUser.Id == User.GetId());
             if (article == null)
             {
                 return NotFound();
             }
-
-            _context.Articles.Remove(article);
+            article.SoftDelete = true;
             await _context.SaveChangesAsync();
 
             return Ok(article);
