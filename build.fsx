@@ -39,8 +39,15 @@ Target.create "build:node" (fun _ ->
 )
 
 Target.create "build:dotnet" (fun _ ->
-    !! "**/*.*proj"
+    [
+        "./ZeekoBlog/ZeekoBlog.csproj"
+        "./Tests/Tests.csproj"
+    ]
     |> Seq.iter (DotNet.build id)
+)
+
+Target.create "test" (fun _ ->
+    DotNet.test id "./Tests/Tests.csproj"
 )
 
 Target.create "publish" (fun _ ->
@@ -64,6 +71,7 @@ Target.create "restore" ignore
 "restore"
     ==> "build:node"
     ==> "build:dotnet"
+    ==> "test"
     ==> "publish"
 
 
