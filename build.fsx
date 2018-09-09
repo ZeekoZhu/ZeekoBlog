@@ -38,6 +38,11 @@ Target.create "build:node" (fun _ ->
     yarnExec "./ZeekoBlog" "run build"
 )
 
+Target.create "build:dotnet" (fun _ ->
+    !! "**/*.*proj"
+    |> Seq.iter (DotNet.build id)
+)
+
 Target.create "publish" (fun _ ->
     DotNet.publish
         (fun o ->
@@ -56,7 +61,10 @@ Target.create "restore" ignore
 "restore:yarn" ==> "restore"
 "restore:dotnet" ==> "restore"
 
-"restore" ==> "build:node" ==> "publish"
+"restore"
+    ==> "build:node"
+    ==> "build:dotnet"
+    ==> "publish"
 
 
 // start build
