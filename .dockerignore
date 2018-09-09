@@ -1,0 +1,8 @@
+**/packages
+**/.paket
+**/.fake
+**/paket-files
+
+*/*/node_modules
+*/*/obj
+*/*/bin

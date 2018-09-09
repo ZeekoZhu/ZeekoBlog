@@ -268,3 +268,8 @@ __pycache__/
 ZeekoBlog/wwwroot/dist
 /ZeekoBlog/Properties/launchSettings.json
 *.DotSettings
+
+# FAKE
+packages/
+.paket/
+.fake/
