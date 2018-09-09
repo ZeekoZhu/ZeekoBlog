@@ -57,6 +57,7 @@
     <ProjectReference Include="..\ZeekoBlog.Core\ZeekoBlog.Core.csproj" />
     <ProjectReference Include="..\ZeekoBlog.Markdown\ZeekoBlog.Markdown.csproj" />
     <ProjectReference Include="..\ZeekoBlog.Fun\ZeekoBlog.Fun.fsproj" />
+    <ProjectReference Include="..\ZeekoBlog.Application\ZeekoBlog.Application.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filters\" />

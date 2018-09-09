@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.WebEncoders;
 using ZeekoBlog.CodeHighlight;
 using ZeekoBlog.Core.Models;
-using ZeekoBlog.Core.Services;
+using ZeekoBlog.Application.Services;
 using ZeekoBlog.DTOs;
 using ZeekoBlog.Fun;
 using ZeekoBlog.Markdown;

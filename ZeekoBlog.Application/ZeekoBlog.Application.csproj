@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZeekoBlog.Core\ZeekoBlog.Core.csproj" />
+    <ProjectReference Include="..\ZeekoBlog.Markdown\ZeekoBlog.Markdown.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>

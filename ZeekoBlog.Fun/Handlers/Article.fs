@@ -1,7 +1,7 @@
 module ArticleHandler
 open Microsoft.AspNetCore.Http
 open Giraffe
-open ZeekoBlog.Core.Services
+open ZeekoBlog.Application.Services
 open FSharp.Control.Tasks.V2
 open ArticlePage
 

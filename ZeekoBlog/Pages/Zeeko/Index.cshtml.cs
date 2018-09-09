@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZeekoBlog.Core.Models;
-using ZeekoBlog.Core.Services;
+using ZeekoBlog.Application.Services;
 
 namespace ZeekoBlog.Pages.Zeeko
 {

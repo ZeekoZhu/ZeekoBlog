@@ -7,7 +7,7 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ZeekoBlog.Core.Models;
-using ZeekoBlog.Core.Services;
+using ZeekoBlog.Application.Services;
 using ZeekoBlog.DTOs;
 using ZeekoBlog.Extensions;
 using ZeekoUtilsPack.AspNetCore.Jwt;

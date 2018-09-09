@@ -1,9 +1,10 @@
 using System.Threading.Tasks;
 using ZeekoBlog.Core.Models;
+using ZeekoBlog.Core;
 using Microsoft.EntityFrameworkCore;
 using ZeekoUtilsPack.BCLExt;
 
-namespace ZeekoBlog.Core.Services
+namespace ZeekoBlog.Application.Services
 {
     public class AccountService
     {

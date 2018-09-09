@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using ZeekoBlog.Core.Services;
+using ZeekoBlog.Application.Services;
 using ZeekoUtilsPack.AspNetCore.Jwt;
 
 namespace ZeekoBlog.Controllers

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ZeekoBlog.Core.Models;
-using ZeekoBlog.Core.Services;
+using ZeekoBlog.Application.Services;
 
 namespace ZeekoBlog
 {

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Z.EntityFramework.Plus;
+using ZeekoBlog.Core;
 using ZeekoBlog.Core.Models;
 using ZeekoBlog.Markdown;
 using ZeekoBlog.Markdown.Plugins.CodeLangDetectionPlugin;
 using ZeekoBlog.Markdown.Plugins.TOCItemsPlugin;
 using TOCItem = ZeekoBlog.Core.Models.TOCItem;
 
-namespace ZeekoBlog.Core.Services
+namespace ZeekoBlog.Application.Services
 {
     public class ArticleService
     {
