@@ -39,7 +39,7 @@ namespace ZeekoBlog.CodeHighlight
             {
                 var scriptPath = Path.Combine(
                     Path.GetDirectoryName(typeof(CodeHighlightService).Assembly.Location) ?? throw new InvalidOperationException(),
-                    "scripts", "code-highlight");
+                    "codehighlight-scripts", "code-highlight");
                 var result = await _node.InvokeAsync<HighlightResult>(scriptPath, source, lang);
                 result.IsSuccess = true;
                 result.Result = result.Result.Trim();
@@ -59,27 +59,8 @@ namespace ZeekoBlog.CodeHighlight
 
     public static class CodeHighlightServiceExt
     {
-        public static IServiceCollection AddCodeHighlight(this IServiceCollection services, Action<NodeServicesOptions> setupOptions, string[] bypass = null)
-        {
-            services.AddNodeServices(options =>
-            {
-                options.InvocationTimeoutMilliseconds = 1000 * 5;
-                setupOptions(options);
-            });
-            services.AddSingleton(provider =>
-            {
-                var node = provider.GetService<INodeServices>();
-                return new CodeHighlightService(node, bypass);
-            });
-            return services;
-        }
-
         public static IServiceCollection AddCodeHighlight(this IServiceCollection services, string[] bypass = null)
         {
-            services.AddNodeServices(options =>
-            {
-                options.InvocationTimeoutMilliseconds = 1000 * 5;
-            });
             services.AddSingleton(provider =>
             {
                 var node = provider.GetService<INodeServices>();

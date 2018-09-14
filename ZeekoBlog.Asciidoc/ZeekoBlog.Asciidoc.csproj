@@ -9,7 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="codehighlight-scripts\**\*">
+    <ProjectReference Include="..\ZeekoBlog.Core\ZeekoBlog.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="asciidoc-scripts\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

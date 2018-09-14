@@ -15,6 +15,7 @@ namespace Tests
         public FencedCodeBlockRenderTests()
         {
             var services = new ServiceCollection();
+            services.AddNodeServices();
             services.AddCodeHighlight(new[] { "summary" });
             var hlSvc = services.BuildServiceProvider().GetService<CodeHighlightService>();
             var output = new MarkdownOutput();

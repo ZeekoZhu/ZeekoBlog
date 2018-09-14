@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Z.EntityFramework.Plus;
+using ZeekoBlog.AsciiDoc;
 using ZeekoBlog.Core;
 using ZeekoBlog.Core.Models;
 using ZeekoBlog.Markdown;
@@ -17,11 +18,13 @@ namespace ZeekoBlog.Application.Services
     {
         private readonly BlogContext _context;
         private readonly MarkdownService _mdSvc;
+        private readonly AsciiDocService _asciiDocSvc;
 
-        public ArticleService(BlogContext context, MarkdownService mdSvc)
+        public ArticleService(BlogContext context, MarkdownService mdSvc, AsciiDocService asciiDocSvc)
         {
             _context = context;
             _mdSvc = mdSvc;
+            _asciiDocSvc = asciiDocSvc;
         }
 
         public async Task<(List<Article> Articles, int TotalPages)> GetPaged(int index, int pageSize, int userId)
@@ -89,9 +92,12 @@ namespace ZeekoBlog.Application.Services
             switch (article.DocType)
             {
                 case ArticleDocType.AsciiDoc:
-                    // TODO: Asciidoc
-                    article.RenderedSummary = article.Summary;
-                    article.RenderedContent = article.Content;
+                    var summaryResult = await _asciiDocSvc.Process(article.Summary);
+                    var contentResult = await _asciiDocSvc.Process(article.Content);
+                    article.RenderedSummary = summaryResult.Value;
+                    article.RenderedContent = contentResult.Value;
+                    article.Languages = string.Join(",", contentResult.Languages);
+                    article.TOCList = contentResult.TableOfContents.ToList();
                     break;
                 case ArticleDocType.Markdown:
                     var summary = await _mdSvc.Process(article.Summary);

@@ -6,7 +6,7 @@ let editModule = () => {
     let saveBtn = $('#save');
     let titleInput = $('#title');
     let contentInput = $('#content');
-    let docType = $('#docType').val();
+    let docType = $('#docType');
     let id = $('#id').val();
     let successTips = $('#save-success');
     let errorTips = $('#save-error');
@@ -16,7 +16,7 @@ let editModule = () => {
             content: contentInput.val(),
             title: titleInput.val(),
             summary: summaryInput.val(),
-            docType: +docType
+            docType: +docType.val()
         };
         console.log(newArticle);
 

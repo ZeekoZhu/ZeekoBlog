@@ -14,6 +14,7 @@ using Microsoft.Extensions.WebEncoders;
 using ZeekoBlog.CodeHighlight;
 using ZeekoBlog.Core.Models;
 using ZeekoBlog.Application.Services;
+using ZeekoBlog.AsciiDoc;
 using ZeekoBlog.DTOs;
 using ZeekoBlog.Fun;
 using ZeekoBlog.Markdown;
@@ -70,6 +71,8 @@ namespace ZeekoBlog
             services.AddDefaultInMemoryCache();
             services.AddScoped<ArticleService>();
             services.AddScoped<AccountService>();
+            services.AddNodeServices();
+            services.AddAsciiDoc();
             services.AddCodeHighlight();
             services.AddMarkdownService(builder =>
             {

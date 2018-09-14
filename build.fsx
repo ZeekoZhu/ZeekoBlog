@@ -7,6 +7,7 @@ open Fake.IO.Globbing.Operators
 open Fake.JavaScript
 
 let yarnInstall workDir =
+    Trace.trace (sprintf "Yarn restoring: %s" workDir)
     Yarn.install (fun o -> { o with WorkingDirectory = workDir })
 
 let yarnExec workDir command =
@@ -23,7 +24,8 @@ Target.create "Default" (fun _ ->
 
 Target.create "restore:yarn" (fun _ ->
     yarnInstall "./ZeekoBlog"
-    yarnInstall "./ZeekoBlog.CodeHighlight/scripts"
+    yarnInstall "./ZeekoBlog.CodeHighlight/codehighlight-scripts"
+    yarnInstall "./ZeekoBlog.Asciidoc/asciidoc-scripts"
 )
 
 Target.create "restore:dotnet" (fun _ ->

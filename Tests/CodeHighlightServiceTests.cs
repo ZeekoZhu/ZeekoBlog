@@ -11,6 +11,7 @@ namespace Tests
         public CodeHighlightServiceTests()
         {
             var services = new ServiceCollection();
+            services.AddNodeServices();
             services.AddCodeHighlight();
             _hlSvc = services.BuildServiceProvider().GetService<CodeHighlightService>();
         }

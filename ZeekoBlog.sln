@@ -29,6 +29,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZeekoBlog.Application", "ZeekoBlog.Application\ZeekoBlog.Application.csproj", "{DFFCBC9E-A3D3-4439-8825-FD0044E7F2DC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZeekoBlog.AsciiDoc", "ZeekoBlog.Asciidoc\ZeekoBlog.AsciiDoc.csproj", "{6B1F1E66-07E1-4E44-88E5-0912D7C4CB80}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fake", "Fake", "{CC76CA11-5CCD-4423-AF9C-C56A3859EC60}"
+	ProjectSection(SolutionItems) = preProject
+		build.fsx = build.fsx
+		fake.cmd = fake.cmd
+		fake.sh = fake.sh
+		paket.dependencies = paket.dependencies
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,9 +73,16 @@ Global
 		{DFFCBC9E-A3D3-4439-8825-FD0044E7F2DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFFCBC9E-A3D3-4439-8825-FD0044E7F2DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFFCBC9E-A3D3-4439-8825-FD0044E7F2DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B1F1E66-07E1-4E44-88E5-0912D7C4CB80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B1F1E66-07E1-4E44-88E5-0912D7C4CB80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B1F1E66-07E1-4E44-88E5-0912D7C4CB80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B1F1E66-07E1-4E44-88E5-0912D7C4CB80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CC76CA11-5CCD-4423-AF9C-C56A3859EC60} = {BFA66487-A378-441B-9A9E-8328C8F19B13}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {245F29AB-53B0-4DD2-A480-F1A1E035D995}
