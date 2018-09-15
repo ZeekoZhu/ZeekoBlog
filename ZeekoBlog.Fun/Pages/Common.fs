@@ -1,7 +1,6 @@
 module internal Common
 
 open Giraffe.GiraffeViewEngine
-open ZeekoBlog.Markdown
 let mathJaxScript = [
     script [ _src "https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js" ] []
     script [] [
