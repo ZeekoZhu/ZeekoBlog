@@ -44,7 +44,7 @@ namespace Tests
                 .Should().BeEquivalentTo("h1", "h2", "h3", "二级标题");
             result.TableOfContents
                 .Select(x => x.Level)
-                .Should().BeEquivalentTo(1, 2, 3, 1);
+                .Should().BeEquivalentTo(2, 3, 4, 2);
         }
 
         [Fact]
