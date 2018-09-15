@@ -18,6 +18,10 @@ namespace ZeekoBlog.Core.Models
         /// 用作 href 的链接地址
         /// </summary>
         public string AnchorName { get; set; }
+        /// <summary>
+        /// TOC 的顺序
+        /// </summary>
+        public int Order { get; set; }
         public int ArticleId { get; set; }
     }
 }

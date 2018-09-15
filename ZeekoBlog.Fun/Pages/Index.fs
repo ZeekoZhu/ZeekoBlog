@@ -57,7 +57,7 @@ module Index =
                                      [ a [ _href (sprintf "/a/%d" article.Id) ] [ rawText article.Title ]
                                      ]
                                   span [ _class "weak" ] [ rawText (article.Created.ToString("yyyy/MM/dd")) ]
-                                  div [ _class "weak summary" ] [ rawText article.RenderedSummary ]
+                                  div [ _class "weak summary process_math" ] [ rawText article.RenderedSummary ]
                                 ]
                             )
                       )

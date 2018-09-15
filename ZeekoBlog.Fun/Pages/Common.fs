@@ -8,13 +8,15 @@ let mathJaxScript = [
                 rawText 
                     """
 MathJax.Hub.Config({
+    showProcessingMessages: false,
     messageStyle: 'none',
     extensions: ["tex2jax.js"],
     jax: ["input/TeX", "output/HTML-CSS"],
     tex2jax: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\[', '\]']],
-        processEscapes: true
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processClass: 'process_math'
     },
     'HTML-CSS': { availableFonts: ['TeX'] }
 });""" ]

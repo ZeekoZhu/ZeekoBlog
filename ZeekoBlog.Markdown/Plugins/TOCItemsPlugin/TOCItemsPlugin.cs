@@ -37,7 +37,7 @@ namespace ZeekoBlog.Markdown.Plugins.TOCItemsPlugin
             var doc = output.Document;
             var sw = new StringWriter();
             var htmlWriter = new HtmlRenderer(sw) { EnableHtmlForInline = false };
-            var items = doc.Descendants<HeadingBlock>().Select(block =>
+            var items = doc.Descendants<HeadingBlock>().Select((block, index) =>
             {
                 htmlWriter.WriteLeafInline(block);
                 var name = sw.ToString();
@@ -46,7 +46,8 @@ namespace ZeekoBlog.Markdown.Plugins.TOCItemsPlugin
                 {
                     Level = block.Level,
                     Name = name,
-                    AnchorName = block.GetAttributes().Id
+                    AnchorName = block.GetAttributes().Id,
+                    Order = index
                 };
             }).ToList();
             output.Storage.Upsert(Id, items);

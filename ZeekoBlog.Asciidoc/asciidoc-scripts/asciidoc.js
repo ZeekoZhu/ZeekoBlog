@@ -1,16 +1,12 @@
 const Asciidoctor = require('asciidoctor.js');
 const asciidoctor = Asciidoctor();
 const cheerio = require('cheerio');
-const hljs = require('highlight.js');
 const distinct = require('lodash.uniq');
-const Entities = require('html-entities').AllHtmlEntities;
 const highlightJsExt = require('asciidoctor-highlight.js')
 
 const registry = asciidoctor.Extensions.create();
 highlightJsExt.register(registry);
 
-
-const entities = new Entities();
 
 /**
  * @typedef {{source:string, value: string, languages: string[], tableOfContents:ITOCItem[]}} IRenderedResult
@@ -42,7 +38,7 @@ const convertOptions = {
     safe: 'safe',
     attributes: {
         icons: 'font',
-        stem: '',
+        stem: 'latexmath',
         toc: 'auto',
         'toc-title': '内容导航',
         toclevels: 5,
@@ -72,7 +68,7 @@ function extractToc(level1ul, $) {
      * @type {[number, CheerioElement][]}
      */
     let stack = [];
-    stack.push(...level1ul.children('li').toArray().map(li => [1, li]));
+    stack.push(...level1ul.children('li').toArray().map(li => [2, li]));
     while (stack.length > 0) {
         const current = stack[0];
         result.push(current);
@@ -98,9 +94,8 @@ function render(callback, source, bypass) {
     /**
      * @type {string []}
      */
-    const bypassedLangs = bypass instanceof Array ? bypass : [];
     try {
-        debugger;
+        // debugger;
         const result = asciidoctor.convert(source, convertOptions);
         const tmp = `<div>${result}</div>`;
         const $ = cheerio.load(tmp, { xmlMode: true, decodeEntities: false });
@@ -116,11 +111,7 @@ function render(callback, source, bypass) {
         }
         const rendered = renderedOf({
             source, languages,
-            value: $.root()
-                .children()
-                .map((_, el) => $(el).html())
-                .toArray()
-                .join('\n'),
+            value: result,
             tableOfContents: toc
         });
         callback(null, rendered);
@@ -129,20 +120,6 @@ function render(callback, source, bypass) {
         callback(e, renderedOf({
             source, languages: [], value: source
         }));
-    }
-}
-
-function highlight(source, lang) {
-    let result;
-    try {
-        if (lang && hljs.getLanguage(lang)) {
-            result = hljs.highlight(lang, source, true);
-        } else {
-            result = hljs.highlightAuto(source);
-        }
-        return { result: result.value, language: result.language };
-    } catch (e) {
-        return { result: source, language: lang };
     }
 }
 

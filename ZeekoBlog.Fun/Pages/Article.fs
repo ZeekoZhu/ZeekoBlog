@@ -46,12 +46,15 @@ $('input[type=checkbox][disabled]').replaceWith('<b class="mdl2" aria-hidden="tr
               div []
                   [ span [ _class "weak" ] [ rawText (model.Article.Created.ToString("yyyy/MM/dd")) ] ]
               div [ _class "divide wide-divide" ] []
-              div [ _class "content article-md" ]
-                  [ rawText model.Article.RenderedContent ]
+              article [ _class "content process_math" ]
+                  [ rawText model.Article.RenderedContent
+                  ]
             ]
 
     { Scripts = scripts
-      Styles = [ link [ _href "https://cdn.bootcss.com/highlight.js/9.12.0/styles/vs2015.min.css"; _rel "stylesheet"] ]
+      Styles = [ link [ _href "https://cdn.bootcss.com/highlight.js/9.12.0/styles/vs2015.min.css"; _rel "stylesheet"]
+                 link [ _href "https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"; _rel "stylesheet" ]
+               ]
       Body = [ viewBody ]
       Sidebar = [ sidebar ]
     }

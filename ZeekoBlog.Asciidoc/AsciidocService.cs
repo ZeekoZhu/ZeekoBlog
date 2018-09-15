@@ -35,6 +35,11 @@ namespace ZeekoBlog.AsciiDoc
                             Path.GetDirectoryName(typeof(AsciiDocService).Assembly.Location) ?? throw new InvalidOperationException(),
                             "asciidoc-scripts", "asciidoc");
                 var result = await _node.InvokeAsync<AsciiDocRenderedResult>(scriptPath, source, _bypass);
+                result.TableOfContents = result.TableOfContents ?? new TOCItem[] { };
+                for (int i = 0; i < result.TableOfContents.Length; i++)
+                {
+                    result.TableOfContents[i].Order = i;
+                }
                 return result;
             }
             catch
@@ -43,7 +48,8 @@ namespace ZeekoBlog.AsciiDoc
                 {
                     Languages = new string[] { },
                     Source = source,
-                    Value = source
+                    Value = source,
+                    TableOfContents = new TOCItem[] { }
                 };
             }
         }

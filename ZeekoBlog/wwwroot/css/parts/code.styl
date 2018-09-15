@@ -1,17 +1,38 @@
+@import './utils.styl';
+
 code-part() {
+    *:not(pre) > code {
+        font-size: 0.86667em;
+        padding: 1px 5px 1px 5px;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 1px solid #dddddd;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        text-shadow: none;
+    }
     code {
-        font-family: Consolas, 'Microsoft YaHei', monospace;
+        font-family: codeFont;
+        font-weight: normal;
+        color: #666666;
         word-wrap: break-word;
-        background: #F4F4F4;
-        display: inline;
-        padding: 0.3rem 0.3rem 0 0.3rem;
     }
 
-    pre > code {
-        background: #F4F4F4;
-        padding: 1.6rem;
-        display: block;
-        margin: 0.6rem 0;
-        overflow: auto;
+    pre, pre > code {
+        line-height: 1.6;
+        color: white;
+        font-family: codeFont;
+        font-weight: normal;
+        position: relative;
+    }
+
+    pre > code.hljs[class*=language]:hover:before {
+        text-transform: uppercase;
+        font-size: 0.9em;
+        color: #999;
+        position: absolute;
+        top: 0.4em;
+        right: 0.4em;
+        content: attr(data-language);
     }
 }

@@ -41,7 +41,9 @@ namespace ZeekoBlog.Application.Services
 
         public async Task<Article> GetById(int id)
         {
-            return await _context.ValidArticles.Include(a => a.TOCList).FirstOrDefaultAsync(a => a.Id == id);
+            var result = await _context.ValidArticles.Include(a => a.TOCList).FirstOrDefaultAsync(a => a.Id == id);
+            result.TOCList = result.TOCList.OrderBy(t => t.Order).ToList();
+            return result;
         }
 
         /// <summary>
