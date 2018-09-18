@@ -43,7 +43,7 @@ namespace ZeekoBlog
                 options.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.BasicLatin, UnicodeRanges.CjkUnifiedIdeographs));
 
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            services.AddDbContext<BlogContext>(options =>
+            services.AddDbContextPool<BlogContext>(options =>
             {
                 var dbUser = Environment.GetEnvironmentVariable("BLOG_DB_USER");
                 var dbPwd = Environment.GetEnvironmentVariable("BLOG_DB_PWD");
