@@ -23,6 +23,7 @@ using ZeekoBlog.Markdown.Plugins.CodeLangDetectionPlugin;
 using ZeekoBlog.Markdown.Plugins.HLJSPlugin;
 using ZeekoBlog.Markdown.Plugins.TOCItemsPlugin;
 using ZeekoUtilsPack.AspNetCore.Jwt;
+using Npgsql.Logging;
 
 namespace ZeekoBlog
 {
@@ -56,6 +57,7 @@ namespace ZeekoBlog
 
                 options.UseNpgsql(connectionString, b => b.MigrationsAssembly("ZeekoBlog"));
             });
+            NpgsqlLogManager.Provider = new ConsoleLoggingProvider(NpgsqlLogLevel.Debug, true, true);\
             services.AddEasyJwt(new EasySymmetricOptions("zeeko's blog")
             {
                 Audience = "blog",
