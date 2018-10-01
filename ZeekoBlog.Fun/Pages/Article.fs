@@ -52,8 +52,8 @@ $('input[type=checkbox][disabled]').replaceWith('<b class="mdl2" aria-hidden="tr
             ]
 
     { Scripts = scripts
-      Styles = [ link [ _href "https://cdn.bootcss.com/highlight.js/9.12.0/styles/vs2015.min.css"; _rel "stylesheet"]
-                 link [ _href "https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"; _rel "stylesheet" ]
+      Styles = [ link [ _href "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs2015.min.css"; _rel "stylesheet"]
+                 link [ _href "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"; _rel "stylesheet" ]
                ]
       Body = [ viewBody ]
       Sidebar = [ sidebar ]

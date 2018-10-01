@@ -2,7 +2,7 @@ module internal Common
 
 open Giraffe.GiraffeViewEngine
 let mathJaxScript = [
-    script [ _src "https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js" ] []
+    script [ _src "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js" ] []
     script [] [
                 rawText 
                     """
