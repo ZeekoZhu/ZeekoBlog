@@ -57,7 +57,6 @@ namespace ZeekoBlog
 
                 options.UseNpgsql(connectionString, b => b.MigrationsAssembly("ZeekoBlog"));
             });
-            NpgsqlLogManager.Provider = new ConsoleLoggingProvider(NpgsqlLogLevel.Debug, true, true);
             services.AddEasyJwt(new EasySymmetricOptions("zeeko's blog")
             {
                 Audience = "blog",
