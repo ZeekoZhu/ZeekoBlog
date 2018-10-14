@@ -89,6 +89,28 @@ namespace ZeekoBlog.Application.Services
             return new BooleanResult<Article>(true, article);
         }
 
+        /// <summary>
+        /// 重新渲染文章内容
+        /// </summary>
+        /// <param name="articleId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<BooleanResult<Article>> RerenderAsync(int articleId, int userId)
+        {
+            var target = await _context.ValidArticles.FirstOrDefaultAsync(a => a.Id == articleId && a.BlogUser.Id == userId);
+            if (target != null)
+            {
+                await _context.Set<TOCItem>()
+                    .Where(i => i.ArticleId == target.Id)
+                    .DeleteAsync();
+                await RenderArticle(target);
+                await _context.SaveChangesAsync();
+                return new BooleanResult<Article>(true, target);
+            }
+
+            return new BooleanResult<Article>(false, "Article not found");
+        }
+
         private async Task RenderArticle(Article article)
         {
             switch (article.DocType)

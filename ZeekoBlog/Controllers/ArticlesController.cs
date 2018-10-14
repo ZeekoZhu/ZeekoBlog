@@ -116,6 +116,18 @@ namespace ZeekoBlog.Controllers
             return CreatedAtAction("GetArticle", new { id = article.Id }, article);
         }
 
+        public async Task<IActionResult> PostArticle([FromRoute] int id)
+        {
+            var result = await _articleSvc.RerenderAsync(id, User.GetId());
+            if (result.Success)
+            {
+                return NoContent();
+            }
+
+            return BadRequest(result.Msg);
+
+        }
+
         // DELETE: api/Articles/5
         /// <summary>
         /// 删除一篇文章
