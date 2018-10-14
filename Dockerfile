@@ -1,6 +1,7 @@
 FROM zeekozhu/aspnetcore-build-yarn:2.1 AS builder
 WORKDIR /source
 COPY . .
+ENV $APPENV
 RUN ./fake.sh build
 FROM zeekozhu/aspnetcore-node:2.1-alpine
 WORKDIR /app
