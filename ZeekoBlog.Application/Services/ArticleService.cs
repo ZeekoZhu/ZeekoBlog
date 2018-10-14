@@ -64,7 +64,7 @@ namespace ZeekoBlog.Application.Services
             article.LastEdited = DateTime.UtcNow;
             article.BlogUser = user;
             await RenderArticle(article);
-            _context.Entry(article).State = EntityState.Added;
+            _context.Articles.Add(article);
             await _context.SaveChangesAsync();
             article.BlogUser = null;
             return article;

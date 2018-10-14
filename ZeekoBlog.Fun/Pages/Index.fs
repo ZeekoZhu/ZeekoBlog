@@ -5,6 +5,8 @@ open GiraffeViewEngine
 open LayoutPage
 open Common
 
+
+
 type IndexModel =
     { Articles: Article list
       CurrentIndex: int
@@ -23,19 +25,18 @@ let scripts =
           script [ _src "/dist/article.js" ] []
         ]
 
+let friendLinks =
+    [ "https://rocka.me", "Rocket1184"
+      "http://blog.neatline.cn", "Neatline"
+      "https://www.jijiwuming.cn", "jijiwuming"
+    ]
+    |> List.map
+        ( fun (link, text) -> a [ _class "site-item"; _href link; _target "_blank" ] [ rawText text ])
+ 
 let sidebar =
     [ sideGroup
         "友情链接"
-        [ a [ _class "side-item"
-              _href "https://rocka.me"
-              _target "_blank" ] [ rawText "Rocket1184" ]
-          a [ _class "side-item"
-              _href "http://blog.neatline.cn"
-              _target "_blank" ] [ rawText "Neatline" ]
-          a [ _class "side-item"
-              _href "http://www.jijiwuming.cn/"
-              _target "_blank" ] [ rawText "jijiwuming" ]
-        ]
+        friendLinks
     ]
 
 module Index =
