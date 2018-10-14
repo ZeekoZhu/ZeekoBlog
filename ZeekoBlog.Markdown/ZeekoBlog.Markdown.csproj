@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="EasyCaching.Core" Version="0.3.0" />
-    <PackageReference Include="Markdig" Version="0.15.2" />
+    <PackageReference Include="Markdig" Version="0.15.4" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
     <PackageReference Include="ZeekoUtilsPack.BCLExt" Version="1.1.0" />
   </ItemGroup>
