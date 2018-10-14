@@ -18,4 +18,4 @@ let errorCodeHandler (code: int) =
         { Code = code }
         |> ErrorPage.view
         |> htmlView
-    clearResponse >=> errorView
+    clearResponse >=> setStatusCode code >=> errorView

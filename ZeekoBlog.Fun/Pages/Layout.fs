@@ -23,9 +23,9 @@ let favicon icon =
            _type "image/png" ]
 
 let favicons =
-    [ 192; 160; 96; 32; 16 ]
+    [ 16; 32; 96; 160; 192 ]
     |> List.map
-        ( (fun d -> sprintf "/assets/favicon-%dx%d" d d) 
+        ( (fun d -> sprintf "/assets/favicon-%dx%d.png" d d) 
             >> favicon
         )
 
