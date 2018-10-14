@@ -31,7 +31,7 @@ let friendLinks =
       "https://www.jijiwuming.cn", "jijiwuming"
     ]
     |> List.map
-        ( fun (link, text) -> a [ _class "site-item"; _href link; _target "_blank" ] [ rawText text ])
+        ( fun (link, text) -> a [ _class "side-item"; _href link; _target "_blank" ] [ rawText text ])
  
 let sidebar =
     [ sideGroup

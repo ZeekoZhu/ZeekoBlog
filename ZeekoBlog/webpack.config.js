@@ -82,17 +82,24 @@ module.exports = {
         rules: rules
     },
     resolve: {
-        extensions: ['.ts', '.css', '.styl']
+        extensions: ['.ts', '.css']
     },
     optimization: {
         splitChunks: {
             cacheGroups: {
-                common: {
-                    test: /\.js$/,
-                    name: 'common',
+                styles: {
+                    name: 'theme',
+                    test: /\.css$/,
                     chunks: 'all',
                     enforce: true
-                }
+                },
+                commons: {
+                    test: /\.(ts|js)$/,
+                    name: 'commons',
+                    chunks: 'initial',
+                    minChunks: 2,
+                    minSize: 0
+                },
             }
         },
         minimizer: [new TerserPlugin()]
