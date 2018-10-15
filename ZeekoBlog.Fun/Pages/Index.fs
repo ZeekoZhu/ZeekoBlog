@@ -27,7 +27,7 @@ let scripts =
 
 let friendLinks =
     [ "https://rocka.me", "Rocket1184"
-      "http://blog.neatline.cn", "Neatline"
+      "https://jolyne.club", "Neatline"
       "https://www.jijiwuming.cn", "jijiwuming"
     ]
     |> List.map
