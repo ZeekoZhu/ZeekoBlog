@@ -1,57 +1,45 @@
-@import './utils.styl';
-
-sidebar-part() {
+@import '../utils.less';
+.sidebar-part() {
     position: sticky;
     top: 0;
-
-    .side-title > h3 {
+    .side-title>h3 {
         margin-bottom: 0.3rem;
     }
-
     .side-body {
         margin-top: 0.3rem;
         display: flex;
         flex-flow: column nowrap;
-
         .side-item {
             padding: 0.5rem 0 0.5rem 0.3rem;
-            hover-block();
+            .hover-block();
         }
     }
-
     /* TOC 列表 */
     .toc-list {
         list-style: none;
         padding: 0;
         font-size: 90%;
-
         li {
             margin: 0.8rem 0;
         }
     }
-
     .toc-H3 {
         padding-left: 1.6rem;
     }
-
     .toc-H4 {
         padding-left: 3.2rem;
     }
-
     .toc-H5 {
         padding-left: 4.8rem;
     }
-
     /* TOC 列表 end */
     .side-card {
         margin-left: 4.8rem;
     }
-
-    @media screen and ({on}: tablet) {
+    @media screen and (max-width: @tablet) {
         .toc-list li {
             margin: 3.2rem 0;
         }
-
         .side-card {
             margin-left: 0;
         }

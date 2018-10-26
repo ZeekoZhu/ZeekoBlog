@@ -10,7 +10,7 @@ let isProd = (process.env.ASPNETCORE_ENVIRONMENT && process.env.ASPNETCORE_ENVIR
 let entries = {
     'zeeko': './wwwroot/ts/Zeeko.ts',
     'article': './wwwroot/ts/ArticleModule.ts',
-    'theme': './wwwroot/css/theme.styl'
+    'theme': './wwwroot/css/theme.less'
 }
 function createEntries() {
     let result = {};
@@ -30,7 +30,7 @@ let rules = [
         exclude: /node_modules/
     },
     {
-        test: /\.styl$/,
+        test: /\.less$/,
         use: [
             {
                 loader: MiniCssExtractPlugin.loader
@@ -52,10 +52,7 @@ let rules = [
                 }
             },
             {
-                loader: 'stylus-loader',
-                options: {
-                    preferPathResolver: 'webpack'
-                }
+                loader: 'less-loader'
             }
         ]
     }

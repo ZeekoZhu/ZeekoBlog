@@ -13,6 +13,11 @@ type ArticleModel =
     }
 
 let view (model: ArticleModel) =
+    let articleStyleClass =
+        match model.Article.DocType with
+        | ArticleDocType.Markdown -> "md"
+        | ArticleDocType.AsciiDoc -> "adoc"
+        | _ -> ""
     let layoutModel: LayoutModel =
         { Title = model.Article.Title }
     let sidebar =
@@ -46,7 +51,7 @@ $('input[type=checkbox][disabled]').replaceWith('<b class="mdl2" aria-hidden="tr
               div []
                   [ span [ _class "weak" ] [ rawText (model.Article.Created.ToString("yyyy/MM/dd")) ] ]
               div [ _class "divide wide-divide" ] []
-              article [ _class "content process_math" ]
+              article [ articleStyleClass |> sprintf "content %s process_math" |> _class ]
                   [ rawText model.Article.RenderedContent
                   ]
             ]

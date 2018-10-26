@@ -1,0 +1,14 @@
+@import '../text.md.less';
+@import '../text.adoc.less';
+.article-part() {
+    .content {
+        font-size: 1.6rem;
+        padding-top: 1rem;
+        &.adoc {
+            .asciidoc();
+        }
+        &.md {
+            .md();
+        }
+    }
+}

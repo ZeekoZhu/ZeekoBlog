@@ -1,7 +1,13 @@
-@import './utils.styl';
-
-code-part() {
-    *:not(pre) > code {
+@import '../variables.less';
+.code-part() {
+    pre,
+    code {
+        font-family: @codeFont;
+    }
+    pre>code {
+        color: white;
+    }
+    *:not(pre)>code {
         font-size: 0.86667em;
         padding: 1px 5px 1px 5px;
         white-space: nowrap;
@@ -10,23 +16,20 @@ code-part() {
         -webkit-border-radius: 3px;
         border-radius: 3px;
         text-shadow: none;
-    }
-    code {
-        font-family: codeFont;
+        text-rendering: optimizeSpeed;
         font-weight: normal;
         color: #666666;
         word-wrap: break-word;
     }
-
-    pre, pre > code {
+    pre:not(".highlight"),
+    pre:not(".highlight")>code {
         line-height: 1.6;
-        color: white;
-        font-family: codeFont;
+        color: @black;
         font-weight: normal;
         position: relative;
+        text-rendering: optimizeSpeed
     }
-
-    pre > code.hljs[class*=language]:hover:before {
+    pre>code.hljs[class*=language]:hover:before {
         text-transform: uppercase;
         font-size: 0.9em;
         color: #999;
@@ -34,5 +37,9 @@ code-part() {
         top: 0.4em;
         right: 0.4em;
         content: attr(data-language);
+    }
+    pre.highlight {
+        background: rgb(30, 30, 30);
+        color: white;
     }
 }
