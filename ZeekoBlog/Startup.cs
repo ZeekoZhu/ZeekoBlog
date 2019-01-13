@@ -97,13 +97,13 @@ namespace ZeekoBlog
             Mapper.Initialize(mapperCfg =>
             {
                 mapperCfg.CreateMap<Article, ArticleListDto>()
-                    .ForSourceMember(a => a.BlogUser, opt => opt.Ignore())
-                    .ForSourceMember(a => a.Content, opt => opt.Ignore());
+                    .ForSourceMember(a => a.BlogUser, opt => opt.DoNotValidate())
+                    .ForSourceMember(a => a.Content, opt => opt.DoNotValidate());
 
                 mapperCfg.CreateMap<ArticlePostDto, Article>();
 
                 mapperCfg.CreateMap<Article, ArticleDetailDto>()
-                    .ForSourceMember(a => a.BlogUser, opt => opt.Ignore());
+                    .ForSourceMember(a => a.BlogUser, opt => opt.DoNotValidate());
             });
         }
 
@@ -113,7 +113,6 @@ namespace ZeekoBlog
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {
