@@ -1,4 +1,21 @@
 .md() {
+    blockquote {
+        margin: 0 1em 1.25em 1.5em;
+        padding: 0;
+        border: 0;
+        font-style: italic;
+    }
+    blockquote:before {
+        content: "\201c";
+        font-style: italic;
+        float: left;
+        font-size: 2.75em;
+        font-weight: bold;
+        line-height: .6em;
+        margin-left: -.6em;
+        color: @secondarycolor;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, .1)
+    }
     pre {
         margin: 1rem 0;
         position: relative;
