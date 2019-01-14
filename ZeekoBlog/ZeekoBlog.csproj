@@ -22,7 +22,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.0.0" />
-    <PackageReference Include="EasyCaching.InMemory" Version="0.3.0" />
+    <PackageReference Include="EasyCaching.InMemory" Version="0.4.5.2" />
     <PackageReference Include="Giraffe" Version="3.5.0" />
     <PackageReference Include="Markdig">
       <Version>0.15.7</Version>
@@ -35,7 +35,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design">
       <Version>2.2.1</Version>
     </PackageReference>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
     <PackageReference Include="ZeekoUtilsPack.AspNetCore">
       <Version>3.1.1</Version>
     </PackageReference>
@@ -58,9 +58,6 @@
     <ProjectReference Include="..\ZeekoBlog.Markdown\ZeekoBlog.Markdown.csproj" />
     <ProjectReference Include="..\ZeekoBlog.Fun\ZeekoBlog.Fun.fsproj" />
     <ProjectReference Include="..\ZeekoBlog.Application\ZeekoBlog.Application.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Filters\" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptTarget>ES2016</TypeScriptTarget>
