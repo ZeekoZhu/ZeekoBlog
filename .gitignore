@@ -273,3 +273,6 @@ ZeekoBlog/wwwroot/dist
 packages/
 .paket/
 .fake/
+
+# macOS
+.DS_Store

@@ -29,3 +29,13 @@ let sideGroup title content =
         div [ _class "divide" ] []
         div [ _class "side-body" ] content
     ]
+
+let gtag = [
+    script [ _src "https://www.googletagmanager.com/gtag/js?id=UA-133364348-1"; _async ] []
+    script [] [ rawText """
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-133364348-1');
+""" ]
+]

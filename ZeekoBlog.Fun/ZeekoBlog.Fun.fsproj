@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyName>ZeekoBlog.Fun</AssemblyName>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -15,6 +15,7 @@
     <Compile Include="Pages/Index.fs" />
     <Compile Include="Pages/Article.fs" />
     <Compile Include="Pages/Error.fs" />
+    <Compile Include="Pages\Toys\Friends.fs" />
     <Compile Include="Handlers/Index.fs" />
     <Compile Include="Handlers/Article.fs" />
     <Compile Include="Handlers/Error.fs" />
