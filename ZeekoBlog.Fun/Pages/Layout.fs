@@ -33,12 +33,13 @@ let favicons =
 let view (data: LayoutModel) (slots: LayoutSlot) =
         html []
             [ head []
-                   ( gtag @
+                   (
                     [ meta [ _charset "utf-8" ]
                       meta [ _lang "zh" ]
                       meta [ _name "viewport"
                              _content "width=device-width, initial-scale=1.0" ]
                       title []  [ rawText (sprintf "%s - 网上冲浪指南" data.Title) ]
+                      yandexTag
                       linkStyle "https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css"
                       linkStyle "/dist/theme.css"
                       script [ _src "/dist/commons.js" ] []
@@ -47,7 +48,8 @@ let view (data: LayoutModel) (slots: LayoutSlot) =
                     @ slots.Styles
                    )
               body []
-                   ([ div [ _class "layout" ]
+                   ([ yandexNoScript
+                      div [ _class "layout" ]
                           [ div [ _class "module" ] slots.Body 
                             div [ _class "side-container" ] slots.Sidebar
                           ]

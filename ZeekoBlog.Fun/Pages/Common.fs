@@ -39,3 +39,22 @@ gtag('js', new Date());
 gtag('config', 'UA-133364348-1');
 """ ]
 ]
+
+let yandexTag = script [] [ rawText """
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+ym(52117861, "init", {
+     id:52117861,
+     clickmap:true,
+     trackLinks:true,
+     accurateTrackBounce:true
+});
+""" ]
+
+let yandexNoScript = noscript [] [
+    div [] [
+        img [ _src "https://mc.yandex.ru/watch/52117861"; _style "position:absolute; left:-9999px;"; _alt "" ]
+    ]
+]
