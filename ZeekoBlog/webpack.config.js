@@ -38,7 +38,6 @@ let rules = [
             {
                 loader: 'css-loader',
                 options: {
-                    minimize: true,
                     import: true,
                     sourceMap: !isProd
                 }
@@ -103,4 +102,4 @@ module.exports = {
     },
     devtool: isProd ? '' : 'inline-source-map',
     mode: isProd ? 'production' : 'development'
-}
+};
