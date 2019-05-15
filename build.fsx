@@ -2,8 +2,6 @@
 open Fake.Core
 open Fake.DotNet
 open Fake.IO
-open Fake.IO.FileSystemOperators
-open Fake.IO.Globbing.Operators
 open Fake.JavaScript
 
 let yarnInstall workDir =
@@ -60,6 +58,8 @@ Target.create "publish" (fun _ ->
 )
 
 open Fake.Core.TargetOperators
+open Fake.MyFakeTools
+Target.useTriggerCI ()
 
 Target.create "restore" ignore
 
@@ -74,4 +74,4 @@ Target.create "restore" ignore
 
 
 // start build
-Target.runOrDefault "publish"
+Target.runOrDefaultWithArguments "publish"
