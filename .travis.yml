@@ -4,6 +4,9 @@ mono: none
 dist: xenial
 dotnet: 2.2.105
 
+before_install: 
+  - dotnet tool install -g paket
+
 env:
   - FAKE_DETAILED_ERRORS=true
 
