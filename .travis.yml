@@ -4,6 +4,12 @@ mono: none
 dist: xenial
 dotnet: 2.2.105
 
+cache:
+  directories:
+    - $HOME/.cache/yarn
+    - $HOME/.nuget
+    - $HOME/.local/share/NuGet
+    
 before_install: 
   - dotnet tool install -g paket
 
