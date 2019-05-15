@@ -11,7 +11,7 @@ cache:
     - $HOME/.local/share/NuGet
     
 before_install: 
-  - export $HOME/.dotnet/tools:$PATH
+  - export PATH="$HOME/.dotnet/tools":$PATH
   - dotnet tool install -g paket
 
 env:
