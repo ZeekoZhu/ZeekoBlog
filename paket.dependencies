@@ -1,7 +1,29 @@
+storage: none
+version 5.203.2
+source https://api.nuget.org/v3/index.json
+source https://www.myget.org/F/zeekoget/api/v3/index.json
+
+nuget AutoMapper
+nuget EasyCaching.InMemory
+nuget Fizzler.Systems.HtmlAgilityPack
+nuget FluentAssertions
+nuget Giraffe
+nuget Markdig
+nuget Microsoft.ApplicationInsights.AspNetCore
+nuget Microsoft.AspNetCore.App
+nuget Microsoft.VisualStudio.Web.CodeGeneration.Design
+clitool Microsoft.VisualStudio.Web.CodeGeneration.Tools
+nuget Npgsql.EntityFrameworkCore.PostgreSQL
+nuget xunit
+nuget xunit.runner.visualstudio
+nuget Z.EntityFramework.Plus.EFCore
+nuget ZeekoUtilsPack.AspNetCore 3.2.0
+nuget ZeekoUtilsPack.BCLExt 1.2.0
 // [ FAKE GROUP ]
 group Build
+    storage: none
     source https://api.nuget.org/v3/index.json
+    source https://www.myget.org/F/zeekoget/api/v3/index.json
     nuget Fake.DotNet.Cli
-    nuget Fake.IO.FileSystem
-    nuget Fake.Core.Target
     nuget Fake.JavaScript.Yarn
+    nuget MyFakeTools 0.0.13

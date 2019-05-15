@@ -2,6 +2,7 @@ using System;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using AutoMapper;
+using EasyCaching.Core;
 using EasyCaching.InMemory;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -69,7 +70,10 @@ namespace ZeekoBlog
                     options.Cookie.Path = "/";
                 }
             });
-            services.AddDefaultInMemoryCache();
+            services.AddEasyCaching(options =>
+            {
+                options.UseInMemory();
+            });
             services.AddScoped<ArticleService>();
             services.AddScoped<AccountService>();
             services.AddNodeServices();

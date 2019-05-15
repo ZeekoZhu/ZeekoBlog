@@ -1,0 +1,5 @@
+Fizzler.Systems.HtmlAgilityPack
+FluentAssertions
+Microsoft.Extensions.DependencyInjection
+xunit
+xunit.runner.visualstudio

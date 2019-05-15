@@ -1,13 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
     <ProjectReference Include="..\ZeekoBlog.Asciidoc\ZeekoBlog.AsciiDoc.csproj" />
     <ProjectReference Include="..\ZeekoBlog.Core\ZeekoBlog.Core.csproj" />
     <ProjectReference Include="..\ZeekoBlog.Markdown\ZeekoBlog.Markdown.csproj" />
   </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

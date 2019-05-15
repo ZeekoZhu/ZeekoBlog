@@ -1,19 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="EasyCaching.Core" Version="0.5.1" />
-    <PackageReference Include="Markdig" Version="0.15.7" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
-    <PackageReference Include="ZeekoUtilsPack.BCLExt" Version="1.2.0" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ZeekoBlog.CodeHighlight\ZeekoBlog.CodeHighlight.csproj" />
     <ProjectReference Include="..\ZeekoBlog.Core\ZeekoBlog.Core.csproj" />
   </ItemGroup>
-
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

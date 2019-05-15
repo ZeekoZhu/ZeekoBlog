@@ -29,8 +29,7 @@ Target.create "restore:yarn" (fun _ ->
 )
 
 Target.create "restore:dotnet" (fun _ ->
-    !! "**/*.*proj"
-    |> Seq.iter (DotNet.restore (fun o -> { o with ConfigFile = Some "./Nuget.Config" }))
+    Shell.Exec ("paket", "restore") |> ignore
 )
 
 Target.create "build:node" (fun _ ->

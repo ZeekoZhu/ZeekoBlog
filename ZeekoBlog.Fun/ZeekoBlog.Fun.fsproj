@@ -1,4 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyName>ZeekoBlog.Fun</AssemblyName>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -15,17 +16,12 @@
     <Compile Include="Pages/Index.fs" />
     <Compile Include="Pages/Article.fs" />
     <Compile Include="Pages/Error.fs" />
-    <Compile Include="Pages\Toys\Friends.fs" />
+    <Compile Include="Pages/Toys/Friends.fs" />
     <Compile Include="Handlers/Index.fs" />
     <Compile Include="Handlers/Article.fs" />
     <Compile Include="Handlers/Error.fs" />
     <Compile Include="App.fs" />
     <Compile Include="Export.fs" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
-    <PackageReference Include="Giraffe" Version="3.6.0" />
-  </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
