@@ -1,8 +1,63 @@
+open Fake.MyFakeTools
+
 #load ".fake/build.fsx/intellisense.fsx"
 open Fake.Core
 open Fake.DotNet
 open Fake.IO
 open Fake.JavaScript
+open Fake.MyFakeTools
+
+module Docker =
+    open System.IO
+    let login () =
+        let dockerPwd = Environment.environVar "DOCKER_PASSWORD"
+        let dockerUsr = Environment.environVar "DOCKER_USERNAME"
+        let input = StreamRef.Empty
+        
+        let proc =
+            CreateProcess.fromRawCommand
+                "docker" [ "login"; "-u"; dockerUsr; "--password-stdin" ]
+            |> CreateProcess.withStandardInput (CreatePipe input)
+            |> Utils.showOutput
+            |> Proc.start
+        use inputWriter = new StreamWriter(input.Value)
+        inputWriter.WriteLine dockerPwd
+        inputWriter.Close()
+        proc.Wait()
+
+module Cli =
+    open CommandLine
+    type DockerPublishOptions =
+        { [<Option('t')>] Tag: string
+          [<Option('n')>] ImageName: string
+          [<Option('l')>] Latest: bool
+          [<Option("suffix")>] Suffix: string
+        }
+
+    let handleDockerPublish (opt: DockerPublishOptions) =
+        Docker.login ()
+        let localImg = sprintf "%s:tmp" opt.ImageName
+        let version = SemVer.parse opt.Tag
+        let major = string version.Major
+        let minor = major + "." + string version.Minor
+        let patch = minor + "." + string version.Patch
+        seq {
+            yield major
+            yield minor
+            yield patch
+            if opt.Latest then yield "latest"
+        }
+        |> Seq.map (fun t ->
+             let tag = opt.ImageName + ":" + t
+             if String.isNullOrEmpty opt.Suffix then tag
+             else tag + "-" + opt.Suffix
+           )
+        |> Seq.iter (fun t ->
+            Trace.tracefn "Pushing %s" t
+            Utils.dockerCmd "tag" [ localImg; t ]
+            Utils.dockerCmd "push" [ t ]
+           )
+        
 
 let yarnInstall workDir =
     Trace.trace (sprintf "Yarn restoring: %s" workDir)
@@ -58,8 +113,11 @@ Target.create "publish" (fun _ ->
 )
 
 open Fake.Core.TargetOperators
-open Fake.MyFakeTools
+
 Target.useTriggerCI ()
+
+Target.create "docker:publish"
+    ( fun p -> Utils.handleCli p.Context.Arguments Cli.handleDockerPublish)
 
 Target.create "restore" ignore
 

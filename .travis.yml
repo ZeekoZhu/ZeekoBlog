@@ -1,14 +1,14 @@
 sudo: required
+language: csharp
+mono: none
+dist: xenial
+dotnet: 2.2
+
+env:
+  - FAKE_DETAILED_ERRORS=true
 
 services:
   - docker
-
-# install pwsh
-before_install:
-  - curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-  - sudo curl -o /etc/apt/sources.list.d/microsoft.list https://packages.microsoft.com/config/ubuntu/14.04/prod.list
-  - sudo apt-get update -q
-  - sudo apt-get install -y powershell
 
 jobs:
   include:
@@ -17,6 +17,6 @@ jobs:
       script: docker build -t hkccr.ccs.tencentyun.com/zeeko/blog-server:tmp --build-arg APPENV=Production .
       deploy:
         - provider: script
-          script: pwsh Publish.ps1 $TRAVIS_TAG hkccr.ccs.tencentyun.com/zeeko/blog-server -IsLatest
+          script: ./fake.sh -t $TRAVIS_TAG -n hkccr.ccs.tencentyun.com/zeeko/blog-server -l
           on:
             tags: true
