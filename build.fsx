@@ -25,6 +25,9 @@ module Docker =
         inputWriter.Close()
         proc.Wait()
 
+    let build () =
+        Utils.dockerCmd "build" ["-t"; "hkccr.ccs.tencentyun.com/zeeko/blog-server:tmp"; "--build-arg"; "APPENV=Production"; "."]
+
 module Cli =
     open CommandLine
     type DockerPublishOptions =
@@ -105,7 +108,7 @@ Target.create "publish" (fun _ ->
     DotNet.publish
         (fun o ->
             { o with
-                OutputPath = Some "/app";
+                OutputPath = Some "./publish";
                 Configuration = DotNet.BuildConfiguration.Release
             } |> withWorkDir "./ZeekoBlog"
         )
@@ -119,6 +122,9 @@ Target.useTriggerCI ()
 Target.create "docker:publish"
     ( fun p -> Utils.handleCli p.Context.Arguments Cli.handleDockerPublish)
 
+Target.create "docker:build"
+    ( fun _ -> Docker.build ())
+
 Target.create "restore" ignore
 
 "restore:yarn" ==> "restore"
@@ -129,6 +135,11 @@ Target.create "restore" ignore
     ==> "build:dotnet"
     ==> "test"
     ==> "publish"
+
+"publish"
+    ==> "docker:build"
+    ==> "docker:publish"
+
 
 
 // start build

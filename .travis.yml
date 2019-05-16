@@ -2,13 +2,18 @@ sudo: required
 language: csharp
 mono: none
 dist: xenial
-dotnet: 2.2.105
+dotnet: 2.2.204
+
+before_install: 
+  - export PATH=$PATH:$HOME/.dotnet/tools
+  - dotnet tool install -g paket
 
 cache:
   directories:
     - $HOME/.cache/yarn
     - $HOME/.nuget
     - $HOME/.local/share/NuGet
+    - $HOME/.dotnet/tools
 
 env:
   - FAKE_DETAILED_ERRORS=true
@@ -20,7 +25,7 @@ jobs:
   include:
     - stage: build
       if: tag =~ ^\d+\.\d+\.\d+-[a-zA-Z0-9.]+$
-      script: docker build -t hkccr.ccs.tencentyun.com/zeeko/blog-server:tmp --build-arg APPENV=Production .
+      script: ./fake.sh build -t docker:build
       deploy:
         - provider: script
           script: ./fake.sh build -t docker:publish $TRAVIS_TAG -n hkccr.ccs.tencentyun.com/zeeko/blog-server -l
