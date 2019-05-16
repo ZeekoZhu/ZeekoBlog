@@ -23,6 +23,6 @@ jobs:
       script: docker build -t hkccr.ccs.tencentyun.com/zeeko/blog-server:tmp --build-arg APPENV=Production .
       deploy:
         - provider: script
-          script: ./fake.sh build -t $TRAVIS_TAG -n hkccr.ccs.tencentyun.com/zeeko/blog-server -l
+          script: ./fake.sh build -t docker:publish $TRAVIS_TAG -n hkccr.ccs.tencentyun.com/zeeko/blog-server -l
           on:
             tags: true
