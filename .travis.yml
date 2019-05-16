@@ -9,10 +9,6 @@ cache:
     - $HOME/.cache/yarn
     - $HOME/.nuget
     - $HOME/.local/share/NuGet
-    
-before_install: 
-  - export PATH="$HOME/.dotnet/tools":$PATH
-  - dotnet tool install -g paket
 
 env:
   - FAKE_DETAILED_ERRORS=true
