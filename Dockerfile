@@ -2,6 +2,7 @@ FROM zeekozhu/aspnetcore-build-yarn:2.2 AS builder
 WORKDIR /source
 COPY . .
 ENV PATH=${PATH}:/root/.dotnet/tools
+RUN dotnet tool install -g paket
 ENV ASPNETCORE_ENVIRONMENT $APPENV
 RUN ./fake.sh build
 FROM zeekozhu/aspnetcore-node:2.2-alpine
