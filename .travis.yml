@@ -13,7 +13,6 @@ cache:
     - $HOME/.cache/yarn
     - $HOME/.nuget
     - $HOME/.local/share/NuGet
-    - $HOME/.dotnet/tools
 
 env:
   - FAKE_DETAILED_ERRORS=true
