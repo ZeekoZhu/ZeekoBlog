@@ -11,7 +11,8 @@ before_install:
 cache:
   directories:
     - $HOME/.cache/yarn
-    - $HOME/.local/share/NuGet
+    - $HOME/.local/share/NuGet/Cache
+    - $HOME/.nuget/packages
 
 env:
   - FAKE_DETAILED_ERRORS=true
