@@ -27,6 +27,6 @@ jobs:
       script: ./fake.sh build -t docker:build
       deploy:
         - provider: script
-          script: ./fake.sh build -t docker:publish $TRAVIS_TAG -n hkccr.ccs.tencentyun.com/zeeko/blog-server -l
+          script: ./fake.sh build -t docker:publish -- -t $TRAVIS_TAG -n hkccr.ccs.tencentyun.com/zeeko/blog-server -l
           on:
             tags: true
