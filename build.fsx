@@ -136,9 +136,7 @@ Target.create "restore" ignore
     ==> "test"
     ==> "publish"
 
-"publish"
-    ==> "docker:build"
-    ==> "docker:publish"
+"docker:build" ==> "docker:publish"
 
 
 
