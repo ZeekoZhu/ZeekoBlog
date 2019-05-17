@@ -16,7 +16,7 @@ module Docker =
         
         let proc =
             CreateProcess.fromRawCommand
-                "docker" [ "login"; "-u"; dockerUsr; "--password-stdin" ]
+                "docker" [ "login"; "-u"; dockerUsr; "--password-stdin"; "hkccr.ccs.tencentyun.com/zeeko" ]
             |> CreateProcess.withStandardInput (CreatePipe input)
             |> Utils.showOutput
             |> Proc.startRawSync
