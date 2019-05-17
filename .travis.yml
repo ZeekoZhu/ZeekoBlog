@@ -24,7 +24,7 @@ jobs:
   include:
     - stage: build
       if: tag =~ ^\d+\.\d+\.\d+-[a-zA-Z0-9.]+$
-      script: ./fake.sh build -t docker:build
+      script: ./fake.sh build -t publish
       deploy:
         - provider: script
           script: ./fake.sh build -t docker:publish -- -t $TRAVIS_TAG -n hkccr.ccs.tencentyun.com/zeeko/blog-server -l
