@@ -19,11 +19,11 @@ module Docker =
                 "docker" [ "login"; "-u"; dockerUsr; "--password-stdin" ]
             |> CreateProcess.withStandardInput (CreatePipe input)
             |> Utils.showOutput
-            |> Proc.start
+            |> Proc.startRawSync
         use inputWriter = new StreamWriter(input.Value)
         inputWriter.WriteLine dockerPwd
         inputWriter.Close()
-        proc.Wait()
+        proc.Result.Wait()
 
     let build () =
         Utils.dockerCmd "build" ["-t"; "hkccr.ccs.tencentyun.com/zeeko/blog-server:tmp"; "--build-arg"; "APPENV=Production"; "."]

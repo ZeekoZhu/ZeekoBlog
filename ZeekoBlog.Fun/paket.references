@@ -1,4 +1,2 @@
-Microsoft.Extensions.Logging.Console
-Microsoft.Extensions.Logging.Debug
 Microsoft.Extensions.DependencyInjection
 Giraffe
