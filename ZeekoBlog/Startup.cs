@@ -1,7 +1,6 @@
 using System;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using AutoMapper;
 using EasyCaching.Core;
 using EasyCaching.InMemory;
 using Microsoft.AspNetCore.Builder;
@@ -16,7 +15,6 @@ using ZeekoBlog.CodeHighlight;
 using ZeekoBlog.Core.Models;
 using ZeekoBlog.Application.Services;
 using ZeekoBlog.AsciiDoc;
-using ZeekoBlog.DTOs;
 using ZeekoBlog.Fun;
 using ZeekoBlog.Markdown;
 using ZeekoBlog.Markdown.Plugins;
@@ -24,7 +22,6 @@ using ZeekoBlog.Markdown.Plugins.CodeLangDetectionPlugin;
 using ZeekoBlog.Markdown.Plugins.HLJSPlugin;
 using ZeekoBlog.Markdown.Plugins.TOCItemsPlugin;
 using ZeekoUtilsPack.AspNetCore.Jwt;
-using Npgsql.Logging;
 
 namespace ZeekoBlog
 {
@@ -93,22 +90,21 @@ namespace ZeekoBlog
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
                 {
-                    // todo: add EazyJwtFitler
                     options.Conventions.AddPageRoute("/Article", "a/{id}");
                     options.Conventions.AuthorizeFolder("/Zeeko");
                     options.Conventions.AllowAnonymousToPage("/Zeeko/Login");
                 });
-            Mapper.Initialize(mapperCfg =>
-            {
-                mapperCfg.CreateMap<Article, ArticleListDto>()
-                    .ForSourceMember(a => a.BlogUser, opt => opt.DoNotValidate())
-                    .ForSourceMember(a => a.Content, opt => opt.DoNotValidate());
-
-                mapperCfg.CreateMap<ArticlePostDto, Article>();
-
-                mapperCfg.CreateMap<Article, ArticleDetailDto>()
-                    .ForSourceMember(a => a.BlogUser, opt => opt.DoNotValidate());
-            });
+//            Mapper.Initialize(mapperCfg =>
+//            {
+//                mapperCfg.CreateMap<Article, ArticleListDto>()
+//                    .ForSourceMember(a => a.BlogUser, opt => opt.DoNotValidate())
+//                    .ForSourceMember(a => a.Content, opt => opt.DoNotValidate());
+//
+//                mapperCfg.CreateMap<ArticlePostDto, Article>();
+//
+//                mapperCfg.CreateMap<Article, ArticleDetailDto>()
+//                    .ForSourceMember(a => a.BlogUser, opt => opt.DoNotValidate());
+//            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

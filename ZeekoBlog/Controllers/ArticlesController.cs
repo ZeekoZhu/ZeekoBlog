@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ZeekoBlog.Core.Models;
@@ -37,7 +36,7 @@ namespace ZeekoBlog.Controllers
         public IEnumerable<ArticleListDto> GetArticles()
         {
             var userId = User.GetId();
-            return _context.Articles.Where(x => x.BlogUser.Id == userId).ProjectTo<ArticleListDto>();
+            return _context.Articles.Where(x => x.BlogUser.Id == userId).ProjectToType<ArticleListDto>();
         }
 
         // GET: /api/Articles/5
@@ -54,7 +53,7 @@ namespace ZeekoBlog.Controllers
                 return BadRequest(ModelState);
             }
 
-            var article = await _context.Articles.ProjectTo<ArticleDetailDto>().SingleOrDefaultAsync(m => m.Id == id);
+            var article = await _context.Articles.ProjectToType<ArticleDetailDto>().SingleOrDefaultAsync(m => m.Id == id);
 
             if (article == null)
             {
@@ -80,7 +79,7 @@ namespace ZeekoBlog.Controllers
                 return BadRequest(ModelState);
             }
 
-            var article = Mapper.Map<Article>(dto);
+            var article = dto.Adapt<Article>();
             article.Id = id;
 
             var result = await _articleSvc.UpdateAsync(article, User.GetId());
@@ -108,7 +107,7 @@ namespace ZeekoBlog.Controllers
                 return BadRequest(ModelState);
             }
 
-            var article = Mapper.Map<Article>(dto);
+            var article = dto.Adapt<Article>();
             article.LastEdited = DateTime.UtcNow;
 
             await _articleSvc.AddAsync(article, User.GetId());

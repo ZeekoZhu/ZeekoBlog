@@ -4,7 +4,7 @@ source https://api.nuget.org/v3/index.json
 source https://www.myget.org/F/zeekoget/api/v3/index.json
 
 framework: netstandard2.0, netcoreapp2.2
-nuget AutoMapper
+nuget mapster
 nuget EasyCaching.InMemory
 nuget Fizzler.Systems.HtmlAgilityPack
 nuget FluentAssertions
