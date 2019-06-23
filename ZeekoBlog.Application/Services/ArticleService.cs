@@ -35,7 +35,7 @@ namespace ZeekoBlog.Application.Services
                 .Skip(index * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
-            var totalCount = await _context.Articles.CountAsync();
+            var totalCount = await _context.ValidArticles.CountAsync();
             return (results, totalCount / pageSize + (totalCount % pageSize > 0 ? 1 : 0));
         }
 
