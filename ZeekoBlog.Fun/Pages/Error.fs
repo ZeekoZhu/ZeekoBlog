@@ -28,6 +28,8 @@ let view (model: ErrorModel) =
     let layoutSlot: LayoutSlot =
         { Scripts = []
           Styles = []
+          Header = []
+          ModuleName = "error-module"
           Body = [ viewBody ]
           Sidebar = []
         }

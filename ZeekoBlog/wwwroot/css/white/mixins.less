@@ -1,0 +1,33 @@
+@import "variables";
+.link() {
+    color: @color-link-new;
+    text-decoration: none;
+    &:hover {
+        color: @color-link-hover;
+    }
+
+    &:visited {
+        color: @color-link-visited;
+    }
+}
+
+.link-block(@line-height) {
+    color: @color-font-1;
+    display: block;
+    position: relative;
+    line-height: @line-height;
+    text-decoration: underline;
+    &:hover {
+        background: @color-bg-1;
+    }
+
+    &:hover:before {
+        content: ' ';
+        display: block;
+        background: @color-bg-1;
+        position: absolute;
+        width: 1.4rem;
+        height: unit(@line-height, em);
+        left: -1.4rem;
+    }
+}

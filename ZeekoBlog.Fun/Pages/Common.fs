@@ -1,6 +1,8 @@
 module internal Common
 
 open Giraffe.GiraffeViewEngine
+open ZeekoBlog.Core.Models
+
 let mathJaxScript = [
     script [ _src "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js" ] []
     script [] [
@@ -58,3 +60,12 @@ let yandexNoScript = noscript [] [
         img [ _src "https://mc.yandex.ru/watch/52117861"; _style "position:absolute; left:-9999px;"; _alt "" ]
     ]
 ]
+
+let renderedClass (article: ArticleDocType) x =
+    let className =
+        match article with
+        | ArticleDocType.Raw -> "adoc"
+        | ArticleDocType.AsciiDoc -> "adoc"
+        | ArticleDocType.Markdown -> "md"
+        | _ -> "adoc"
+    sprintf "%s rendered %s" x className

@@ -39,40 +39,47 @@ let sidebar =
         friendLinks
     ]
 
+let header =
+    [ h1 [] [ rawText "网上冲浪指南" ]
+    ]
+
 module Index =
     let view model =
+        let articleList =
+            model.Articles
+            |> List.groupBy (fun x -> sprintf "%d / %02d" x.Created.Year x.Created.Month)
+            |> List.map
+                ( fun (key, articles) ->
+                    seq {
+                        yield span [ _class "date section" ] [ rawText key ]
+                        for article in articles do
+                            yield div [ _class "article-item" ]
+                                      [ span [ _class "title" ]
+                                             [ a [ _href (sprintf "a/%d" article.Id) ] [ rawText article.Title ] ]
+                                        div [ _class ("summary process_math" |> renderedClass article.DocType) ] [ rawText article.RenderedSummary ]
+                                      ]
+                    }
+                )
+            |> List.collect List.ofSeq
 
         let viewBody =
             div [ _class "index" ]
-                [ h1 []
-                     [ rawText "网上冲浪指南 "
-                       code [] [ rawText " |> λ" ]
-                     ]
-                  div [ _class "divide wide-divide" ] []
+                [
                   div [ _class "articles" ]
-                      ( model.Articles
-                          |> List.map
-                            ( fun article ->
-                              div [ _class "article-short" ]
-                                [ h2 []
-                                     [ a [ _href (sprintf "/a/%d" article.Id) ] [ rawText article.Title ]
-                                     ]
-                                  span [ _class "weak" ] [ rawText (article.Created.ToString("yyyy/MM/dd")) ]
-                                  div [ _class "weak summary process_math" ] [ rawText article.RenderedSummary ]
-                                ]
-                            )
-                      )
-                  div [ _class "pager" ]
-                      [ span [ _class "current" ] [ rawText (model.CurrentIndex |> string) ]
-                        a [ _class (hideWhen (model.CurrentIndex = 1) |> sprintf "prev mdl2 %s")
+                      articleList
+                  div [ _class "pagination" ]
+                      [ a [ _class (hideWhen (model.CurrentIndex = 1) |> sprintf "prev %s")
                             _href (model.CurrentIndex - 1 |> sprintf "/?p=%d")
-                          ] []
-                        a [ _class (hideWhen (model.CurrentIndex = model.TotalPages) |> sprintf "next mdl2 %s")
+                          ] [ rawText "上一页" ]
+                        span [ _class "current" ] [ rawText (model.CurrentIndex |> string) ]
+                        a [ _class (hideWhen (model.CurrentIndex = model.TotalPages) |> sprintf "next %s")
                             _href (model.CurrentIndex + 1 |> sprintf "/?p=%d")
-                          ] []
+                          ] [ rawText "下一页" ]
                       ]
                 ]
         { Scripts = scripts
+          Header = header 
+          ModuleName = "index-module"
           Styles = [ emptyText ]
           Body = [ viewBody ]
           Sidebar = sidebar

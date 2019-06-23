@@ -6,6 +6,9 @@ open GiraffeViewEngine
 open LayoutPage
 open Common
 
+let header =
+    [ a [ _href "/" ] [ rawText "目录：网上冲浪指南" ] ]
+
 type ArticleModel =
     { Article: Article
       Languages: string list
@@ -13,11 +16,6 @@ type ArticleModel =
     }
 
 let view (model: ArticleModel) =
-    let articleStyleClass =
-        match model.Article.DocType with
-        | ArticleDocType.Markdown -> "md"
-        | ArticleDocType.AsciiDoc -> "adoc"
-        | _ -> ""
     let layoutModel: LayoutModel =
         { Title = model.Article.Title }
     let sidebar =
@@ -46,12 +44,11 @@ $('input[type=checkbox][disabled]').replaceWith('<b class="mdl2" aria-hidden="tr
         @ mathJaxScript
     // view
     let viewBody =
-        div [ _class "article" ]
+        div []
             [ h1 [ _class "title" ] [ rawText model.Article.Title ]
               div []
                   [ span [ _class "weak" ] [ rawText (model.Article.Created.ToString("yyyy/MM/dd")) ] ]
-              div [ _class "divide wide-divide" ] []
-              article [ articleStyleClass |> sprintf "content %s process_math" |> _class ]
+              article [ "process_math" |> renderedClass model.Article.DocType |> _class ]
                   [ rawText model.Article.RenderedContent
                   ]
             ]
@@ -60,6 +57,8 @@ $('input[type=checkbox][disabled]').replaceWith('<b class="mdl2" aria-hidden="tr
       Styles = [ link [ _href "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs2015.min.css"; _rel "stylesheet"]
                  link [ _href "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"; _rel "stylesheet" ]
                ]
+      Header = header
+      ModuleName = "article-module"
       Body = [ viewBody ]
       Sidebar = [ sidebar ]
     }

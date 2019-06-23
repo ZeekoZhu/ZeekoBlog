@@ -1,0 +1,50 @@
+@import "variables";
+.article-module.layout {
+    grid-template-rows: 5rem auto 160px;
+}
+.article-module {
+    .header {
+        display: block;
+        margin-left: @length-module-left;
+        a {
+            text-decoration: underline;
+            font-weight: bold;
+        }
+    }
+    .title {
+        font-size: 4.4rem;
+        font-weight: normal;
+    }
+
+    article {
+        margin-top: 3rem;
+        margin-bottom: 8rem;
+    }
+   
+    .toc-list {
+        list-style: none;
+        font-size: 80%;
+        margin: 0;
+        padding: 0;
+        overflow: visible;
+        white-space: nowrap;
+
+        li {
+            display: block;
+            margin-bottom: 1rem;
+        }
+    }
+
+    .toc-H3 {
+        padding-left: 1.6rem;
+    }
+
+    .toc-H4 {
+        padding-left: 3.2rem;
+    }
+
+    .toc-H5 {
+        padding-left: 4.8rem;
+    }
+}
+

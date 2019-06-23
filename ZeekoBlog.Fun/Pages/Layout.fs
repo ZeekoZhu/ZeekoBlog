@@ -3,16 +3,17 @@ module LayoutPage
 open Common
 open Giraffe
 open GiraffeViewEngine
-open System
 
 type LayoutModel =
     { Title: string }
 
 type LayoutSlot =
     { Styles: XmlNode list
+      Header: XmlNode list
       Body: XmlNode list
       Sidebar: XmlNode list
       Scripts: XmlNode list
+      ModuleName: string
     }
 
 let linkStyle (href: string) =
@@ -41,7 +42,7 @@ let view (data: LayoutModel) (slots: LayoutSlot) =
                       title []  [ rawText (sprintf "%s - 网上冲浪指南" data.Title) ]
                       yandexTag
                       linkStyle "https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css"
-                      linkStyle "/dist/theme.css"
+                      linkStyle "/dist/white.css"
                       script [ _src "/dist/commons.js" ] []
                     ]
                     @ favicons
@@ -49,16 +50,16 @@ let view (data: LayoutModel) (slots: LayoutSlot) =
                    )
               body []
                    ([ yandexNoScript
-                      div [ _class "layout" ]
-                          [ div [ _class "module" ] slots.Body 
+                      div [ _class ("layout " + slots.ModuleName) ]
+                          [
+                            div [ _class "header" ] slots.Header
+                            div [ _class "module" ] slots.Body 
                             div [ _class "side-container" ] slots.Sidebar
+                            div [ _class "footer" ]
+                                [ span [ _class "copyright" ] [ rawText "本网站所展示的文章由 Zeeko Zhu 采用知识共享署名-相同方式共享 4.0 国际许可协议进行许可" ]
+                                  span [ _class "powered" ] [ rawText "Zeeko's blog, Powered by ASP.NET Core 🐳" ]
+                                ]
                           ]
-                      div [ _class "footer" ]
-                          [ span [ _class "copyright" ] [ rawText (sprintf "&copy; %d Zeeko" DateTime.Now.Year) ]
-                            span [ _class "powered" ] [ rawText "Powered by ASP.NET Core 🐳" ]
-                          ]
-                      div [ _class "action-btn" ]
-                          [ b [ _class "mdl2" ] [ rawText "&#xE700;" ] ]
                       script [ _src "/lib/zepto.min.js" ] []
                     ]
                     @ slots.Scripts

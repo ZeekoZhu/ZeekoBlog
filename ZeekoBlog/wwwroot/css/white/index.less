@@ -1,0 +1,76 @@
+@import "variables";
+@import "mixins";
+
+.index-module {
+    .header {
+        padding-left: @length-module-left;
+        padding-right: @length-module-left;
+        display: flex;
+        background: @color-bg-1;
+
+        h1 {
+            margin-top: 200px;
+            font-size: 6.4rem;
+            font-weight: bold;
+        }
+    }
+
+    .article-item {
+        .title {
+            display: block;
+            padding-top: 2.4rem;
+        }
+
+        .title a {
+            .link-block(1.8);
+            font-size: 2.2rem;
+        }
+
+        .summary {
+            font-size: 1.6rem;
+            color: #666;
+            line-height: 1.8;
+
+            p {
+                margin-top: .8rem;
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .articles {
+        margin-bottom: 50px;
+    }
+
+    .pagination {
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+        margin-bottom: 100px;
+
+        .prev, .next, .current {
+            display: flex;
+            width: 7rem;
+            height: 2.8rem;
+            flex-flow: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .current {
+            background: @color-bg-2;
+            color: white;
+        }
+
+        .prev, .next {
+            background: @color-bg-1;
+            color: @color-font-2;
+        }
+
+        .hide {
+            display: none;
+        }
+    }
+
+}
+
