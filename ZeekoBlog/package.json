@@ -5,21 +5,21 @@
     "devDependencies": {
         "@types/zepto": "^1.0.29",
         "autoprefixer": "^9.4.7",
-        "css-loader": "^2.1.0",
+        "css-loader": "^3.0.0",
         "less": "^3.9.0",
-        "less-loader": "^4.1.0",
-        "mini-css-extract-plugin": "^0.5.0",
+        "less-loader": "^5.0.0",
+        "mini-css-extract-plugin": "^0.7.0",
         "optimize-css-assets-webpack-plugin": "^5.0.1",
         "postcss-loader": "^3.0.0",
         "terser-webpack-plugin": "^1.2.2",
-        "ts-loader": "^5.3.3",
+        "ts-loader": "^6.0.4",
         "typescript": "^3.3.3",
         "webpack": "^4.29.4",
         "webpack-cli": "^3.2.3"
     },
     "dependencies": {
         "gridlex": "^2.4.1",
-        "minireset.css": "0.0.4",
+        "minireset.css": "0.0.5",
         "zepto": "^1.2.0"
     },
     "scripts": {

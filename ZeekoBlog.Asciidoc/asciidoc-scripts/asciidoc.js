@@ -2,7 +2,7 @@ const Asciidoctor = require('asciidoctor.js');
 const asciidoctor = Asciidoctor();
 const cheerio = require('cheerio');
 const distinct = require('lodash.uniq');
-const highlightJsExt = require('asciidoctor-highlight.js')
+const highlightJsExt = require('asciidoctor-highlight.js');
 
 const registry = asciidoctor.Extensions.create();
 highlightJsExt.register(registry);
@@ -115,7 +115,6 @@ function render(callback, source, bypass) {
             tableOfContents: toc
         });
         callback(null, rendered);
-        return;
     } catch (e) {
         callback(e, renderedOf({
             source, languages: [], value: source

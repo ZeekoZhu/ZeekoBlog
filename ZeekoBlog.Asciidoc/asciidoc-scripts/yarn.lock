@@ -11,7 +11,8 @@
 
 "@types/highlight.js@^9.12.3":
   version "9.12.3"
-  resolved "http://registry.npm.taobao.org/@types/highlight.js/download/@types/highlight.js-9.12.3.tgz#b672cfaac25cbbc634a0fd92c515f66faa18dbca"
+  resolved "https://registry.npm.taobao.org/@types/highlight.js/download/@types/highlight.js-9.12.3.tgz#b672cfaac25cbbc634a0fd92c515f66faa18dbca"
+  integrity sha1-tnLPqsJcu8Y0oP2SxRX2b6oY28o=
 
 "@types/lodash.uniq@^4.5.4":
   version "4.5.6"
@@ -30,10 +31,10 @@
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.0.10.tgz#51babf9c7deadd5343620055fc8aff7995c8b031"
   integrity sha1-Ubq/nH3q3VNDYgBV/Ir/eZXIsDE=
 
-asciidoctor-highlight.js@^0.1.1:
-  version "0.1.2"
-  resolved "https://registry.npm.taobao.org/asciidoctor-highlight.js/download/asciidoctor-highlight.js-0.1.2.tgz#f28f176ac57d7c1d1095d2cdbb68b1cf17ff22f8"
-  integrity sha1-8o8XasV9fB0QldLNu2ixzxf/Ivg=
+asciidoctor-highlight.js@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npm.taobao.org/asciidoctor-highlight.js/download/asciidoctor-highlight.js-0.2.0.tgz#50fbe198019c44538cf1a07b62b039ab4737a040"
+  integrity sha1-UPvhmAGcRFOM8aB7YrA5q0c3oEA=
   dependencies:
     highlight.js "^9.0.0"
 
@@ -178,7 +179,8 @@ inherits@2, inherits@^2.0.1, inherits@^2.0.3:
 
 lodash.uniq@^4.5.0:
   version "4.5.0"
-  resolved "http://registry.npm.taobao.org/lodash.uniq/download/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
+  resolved "https://registry.npm.taobao.org/lodash.uniq/download/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
+  integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
 lodash@^4.15.0:
   version "4.17.11"
