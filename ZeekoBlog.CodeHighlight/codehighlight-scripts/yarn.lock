@@ -3,5 +3,6 @@
 
 
 highlight.js@^9.12.0:
-  version "9.12.0"
-  resolved "http://registry.npm.taobao.org/highlight.js/download/highlight.js-9.12.0.tgz#e6d9dbe57cbefe60751f02af336195870c90c01e"
+  version "9.15.8"
+  resolved "https://registry.npm.taobao.org/highlight.js/download/highlight.js-9.15.8.tgz#f344fda123f36f1a65490e932cf90569e4999971"
+  integrity sha1-80T9oSPzbxplSQ6TLPkFaeSZmXE=
