@@ -37,6 +37,19 @@
     <ProjectReference Include="..\ZeekoBlog.Fun\ZeekoBlog.Fun.fsproj" />
     <ProjectReference Include="..\ZeekoBlog.Application\ZeekoBlog.Application.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTOs" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Zeeko\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Zeeko\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Zeeko\Login.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Zeeko\_Layout.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Demo\Yame.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\_Layout.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\_ViewStart.cshtml" />
+  </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptTarget>ES2016</TypeScriptTarget>
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>

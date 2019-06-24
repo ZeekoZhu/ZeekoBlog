@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ZeekoBlog.Application.DTO;
 using ZeekoBlog.Core.Models;
 using ZeekoBlog.Application.Services;
-using ZeekoBlog.DTOs;
 using ZeekoBlog.Extensions;
 using ZeekoUtilsPack.AspNetCore.Jwt;
 
@@ -115,7 +115,14 @@ namespace ZeekoBlog.Controllers
             return CreatedAtAction("GetArticle", new { id = article.Id }, article);
         }
 
-        public async Task<IActionResult> PostArticle([FromRoute] int id)
+        /// <summary>
+        /// 重新渲染指定文章
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPut("render/{id}")]
+        [EasyJwtAuthorize]
+        public async Task<IActionResult> Rerender([FromRoute] int id)
         {
             var result = await _articleSvc.RerenderAsync(id, User.GetId());
             if (result.Success)

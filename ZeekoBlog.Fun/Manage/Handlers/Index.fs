@@ -1,14 +1,15 @@
-module IndexHandler
-open Microsoft.AspNetCore.Http
+module ZeekoBlog.Fun.Manage.Handlers.IndexHandler
 open Giraffe
 open ZeekoBlog.Application.Services
-open Utils.TryParse
+open ZeekoBlog.Fun.Manage.Pages
 open FSharp.Control.Tasks.V2
-open IndexPage
+open Utils.TryParse
+open ZeekoBlog.Fun.Manage.Pages.Index
 open System.Linq
 
-let handler (user: string): HttpHandler =
-    fun (next: HttpFunc) (ctx: HttpContext) ->
+
+let handler user : HttpHandler =
+    fun next ctx ->
         let articleSvc = ctx.GetService<ArticleService> ()
         let accountSvc = ctx.GetService<AccountService>()
         let page =
@@ -26,9 +27,10 @@ let handler (user: string): HttpHandler =
             let! pagedList = articleSvc.GetPaged(page - 1, 20, blogUserId);
             let articles = pagedList.List
             let totalPages = pagedList.TotalPage
-            let model =
+            let model: IndexModel =
                 { CurrentIndex = page
                   TotalPages = totalPages
                   Articles = List.ofSeq (articles.AsEnumerable()) }
             return! htmlView (Index.view model) next ctx
         }
+

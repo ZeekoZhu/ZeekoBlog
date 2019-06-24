@@ -62,7 +62,7 @@ namespace ZeekoBlog
                 EnableCookie = true,
                 CookieOptions = options =>
                 {
-                    options.LoginPath = "/Zeeko/Login";
+                    options.LoginPath = "/sudo/login";
                     options.Cookie.Name = "tk";
                     options.Cookie.Path = "/";
                 }
@@ -87,24 +87,13 @@ namespace ZeekoBlog
             });
             services.AddMemoryCache();
             services.AddZeekoBlogFun();
-            services.AddMvc()
-                .AddRazorPagesOptions(options =>
-                {
-                    options.Conventions.AddPageRoute("/Article", "a/{id}");
-                    options.Conventions.AuthorizeFolder("/Zeeko");
-                    options.Conventions.AllowAnonymousToPage("/Zeeko/Login");
-                });
-//            Mapper.Initialize(mapperCfg =>
-//            {
-//                mapperCfg.CreateMap<Article, ArticleListDto>()
-//                    .ForSourceMember(a => a.BlogUser, opt => opt.DoNotValidate())
-//                    .ForSourceMember(a => a.Content, opt => opt.DoNotValidate());
-//
-//                mapperCfg.CreateMap<ArticlePostDto, Article>();
-//
-//                mapperCfg.CreateMap<Article, ArticleDetailDto>()
-//                    .ForSourceMember(a => a.BlogUser, opt => opt.DoNotValidate());
-//            });
+            services.AddMvc();
+//                .AddRazorPagesOptions(options =>
+//                {
+//                    options.Conventions.AddPageRoute("/Article", "a/{id}");
+//                    options.Conventions.AuthorizeFolder("/Zeeko");
+//                    options.Conventions.AllowAnonymousToPage("/Zeeko/Login");
+//                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

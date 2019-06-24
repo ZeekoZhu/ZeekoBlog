@@ -1,14 +1,14 @@
 module IndexPage
-open ZeekoBlog.Core.Models
 open Giraffe
 open GiraffeViewEngine
 open LayoutPage
 open Common
+open ZeekoBlog.Application.DTO
 
 
 
 type IndexModel =
-    { Articles: Article list
+    { Articles: ArticleListDto list
       CurrentIndex: int
       TotalPages: int }
 

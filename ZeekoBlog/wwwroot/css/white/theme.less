@@ -1,10 +1,10 @@
 @import "index";
 @import "article";
+@import "sudo";
 @import "rendered-content";
 
 :root {
     font-size: 62.5%;
-    height: 100%;
 }
 body {
     font-size: 16px;
@@ -48,6 +48,7 @@ a {
 }
 
 .layout {
+    min-height: 100vh;
     display: grid;
     grid-template-rows: 360px auto 160px;
     grid-template-columns: @length-module-left 50% 12.5% @length-module-left;

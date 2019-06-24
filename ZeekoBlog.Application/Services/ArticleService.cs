@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Z.EntityFramework.Plus;
+using Mapster;
+using ZeekoBlog.Application.DTO;
 using ZeekoBlog.AsciiDoc;
 using ZeekoBlog.Core;
 using ZeekoBlog.Core.Models;
@@ -27,7 +29,7 @@ namespace ZeekoBlog.Application.Services
             _asciiDocSvc = asciiDocSvc;
         }
 
-        public async Task<(List<Article> Articles, int TotalPages)> GetPaged(int index, int pageSize, int userId)
+        public async Task<PagedList<ArticleListDto>> GetPaged(int index, int pageSize, int userId)
         {
             var results = await _context.ValidArticles
                 .Where(a => a.BlogUser.Id == userId)
@@ -36,7 +38,12 @@ namespace ZeekoBlog.Application.Services
                 .Take(pageSize)
                 .ToListAsync();
             var totalCount = await _context.ValidArticles.CountAsync();
-            return (results, totalCount / pageSize + (totalCount % pageSize > 0 ? 1 : 0));
+            var list = new PagedList<ArticleListDto>
+            {
+                List = results.Adapt<List<ArticleListDto>>(),
+                TotalPage = totalCount / pageSize + (totalCount % pageSize > 0 ? 1 : 0)
+            };
+            return list;
         }
 
         public async Task<Article> GetById(int id)

@@ -2,14 +2,16 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using ZeekoBlog.Core.Models;
 
-namespace ZeekoBlog.DTOs
+namespace ZeekoBlog.Application.DTO
 {
     public class ArticleListDto
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Summary { get; set; }
+        public string RenderedSummary { get; set; }
+        public string RenderedContent { get; set; }
         public DateTime LastEdited { get; set; }
+        public DateTime Created { get; set; }
         public ArticleDocType DocType { get; set; }
     }
 
@@ -17,9 +19,12 @@ namespace ZeekoBlog.DTOs
     {
         public int Id { get; set; }
         public string Title { get; set; }
+        public string RenderedSummary { get; set; }
+        public string RenderedContent { get; set; }
         public string Summary { get; set; }
         public string Content { get; set; }
         public DateTime LastEdited { get; set; }
+        public DateTime Created { get; set; }
         public ArticleDocType DocType { get; set; }
     }
 

@@ -1,8 +1,20 @@
 module App
 open Giraffe
+open ZeekoBlog.Fun
 
 
 
+let sudoArea: HttpHandler =
+    subRouteCi "/sudo"
+        ( requiresAuthentication (ErrorHandler.authFailedHander)
+          >=>
+           ( choose
+               [ routex "/?" >=> (Manage.Handlers.IndexHandler.handler "zeeko")
+                 routeCif "/edit/%i" (Some >> Manage.Handlers.EditHandler.hander)
+                 routeCi "/edit" >=> (Manage.Handlers.EditHandler.hander None)
+               ]
+           )
+        )
 
 let webApp: HttpHandler =
     choose [
@@ -12,5 +24,7 @@ let webApp: HttpHandler =
                 routeCif "/u/%s" IndexHandler.handler
                 routeCif "/a/%i" ArticleHandler.handler
                 routeCif "/oops/%i" ErrorHandler.errorCodeHandler
+                routeCi "/sudo/login" >=> (Manage.Handlers.LoginHandler.handler)
+                sudoArea
             ]
     ]

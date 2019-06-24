@@ -7,10 +7,15 @@ let editModule = () => {
     let titleInput = $('#title');
     let contentInput = $('#content');
     let docType = $('#docType');
-    let id = $('#id').val();
-    let successTips = $('#save-success');
-    let errorTips = $('#save-error');
+    let id = $('#id').data('id');
+    let tip = $('#tip');
     let summaryInput = $('#summary');
+    const showTip = (str: string) => {
+        tip.text(str);
+        setTimeout(() => {
+            tip.text('');
+        }, 3000);
+    };
     saveBtn.click(() => {
         let newArticle:IArticlePostDto = {
             content: contentInput.val(),
@@ -20,7 +25,7 @@ let editModule = () => {
         };
         console.log(newArticle);
 
-        if (id) {
+        if (id > 0) {
             fetch(`/api/Articles/${id}`,
                 {
                     method: 'PUT',
@@ -31,13 +36,11 @@ let editModule = () => {
                     if (resp.status < 200 || resp.status >= 300) {
                         throw 'Http Error';
                     }
-                    successTips.show();
-                    setTimeout(() => successTips.hide(), 3000);
+                    showTip('保存成功');
                 })
                 .catch(err => {
                     console.log(err);
-                    errorTips.show();
-                    setTimeout(() => errorTips.hide(), 3000);
+                    showTip('保存失败');
                 });
         } else {
             fetch('/api/Articles',
@@ -50,23 +53,21 @@ let editModule = () => {
                     if (resp.status < 200 || resp.status >= 300) {
                         throw 'Http Error';
                     }
-                    successTips.show();
-                    setTimeout(() => successTips.hide(), 3000);
+                    showTip('保存成功');
                 })
                 .catch(err => {
                     console.log(err);
-                    errorTips.show();
-                    setTimeout(() => errorTips.hide(), 3000);
+                    showTip('保存失败');
                 });
         }
     });
-}
+};
 
 let listModule = () => {
-    $('.delete-art').click((e) => {
+    $('.deleteAct').click((e) => {
         e.preventDefault();
         let a = $(e.target);
-        let id = a.attr('art-id');
+        let id = a.data('id');
         fetch(`/api/Articles/${id}`,
             {
                 method: 'DELETE',
@@ -75,35 +76,54 @@ let listModule = () => {
             .then(resp => {
                 if (resp.status < 200 || resp.status >= 300) {
                     throw 'Http Error';
+                } else {
+                    window.location.reload();
                 }
-                $(`#a-${id}`).remove();
             });
     });
-}
+    $('.renderAct').click(async e => {
+        e.preventDefault();
+        let a = $(e.target);
+        let id = a.data('id');
+        fetch(`/api/Articles/render/${id}`,
+            {
+                method: 'put',
+                headers: appHeader
+            })
+            .then(resp => {
+                if (resp.status < 200 || resp.status >= 300) {
+                    throw 'Http Error';
+                } else {
+                    alert('操作成功');
+                }
+            });
+        
+    });
+};
 
 let loginModule = () => {
     let userNameInput = $('#userName');
     let pwdInput = $('#password');
-    $('#loginBtn').click(() => {
+    $('#loginBtn').click(async () => {
         let data = {
             userName: userNameInput.val(),
             password: pwdInput.val()
-        }
-        fetch('/api/token',
+        };
+        const resp = await fetch('/api/token',
             {
                 method: 'POST',
                 headers: appHeader,
                 body: JSON.stringify(data)
-            })
-            .then(resp => {
-                if (resp.status === 200) {
-                    let token = resp.headers.get('tk').substring(7);
-                    localStorage.setItem('tk', token);
-                    window.open('/api/Token/ToPage/?tk=' + token, '_self');
-                }
             });
+        if (resp.status === 200) {
+            window.location.reload();
+        } else {
+            const text = await resp.text();
+            const errors = JSON.parse(text);
+            alert(errors.UserName[0]);
+        }
     });
-}
+};
 
 PageModule.register('login',loginModule);
 PageModule.register('edit',editModule);
