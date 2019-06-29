@@ -2,10 +2,12 @@
 @import "article";
 @import "sudo";
 @import "rendered-content";
+@import "variables";
 
 :root {
     font-size: 62.5%;
 }
+
 body {
     font-size: 16px;
 }
@@ -50,9 +52,20 @@ a {
 .layout {
     min-height: 100vh;
     display: grid;
-    grid-template-rows: 360px auto 160px;
-    grid-template-columns: @length-module-left 50% 12.5% @length-module-left;
+    grid-template-rows: 260px auto 160px;
+    grid-template-columns: @length-module-left[desktop] 50% 12.5% @length-module-left[desktop];
     grid-template-areas: "header header header header" ". module side ." "footer footer footer footer";
+
+    .tablet({
+        grid-template-columns: @length-module-left[tablet] 60% 20% @length-module-left[tablet];
+    });
+
+    .mobile({
+        grid-template-rows: 160px auto auto 160px;
+        grid-template-columns: @length-module-left[mobile] 80% 0 @length-module-left[mobile];
+        //grid-template-columns: @length-module-left[tablet] 60% 20% @length-module-left[tablet];
+        grid-template-areas: "header header header header" ". side side ." ". module module ." "footer footer footer footer";
+    });
 
     .header {
         grid-area: header;
@@ -60,7 +73,10 @@ a {
 
     .footer {
         grid-area: footer;
-        padding-left: @length-module-left;
+        padding-left: @length-module-left[desktop];
+        .tablet({
+            padding-left: @length-module-left[tablet];
+        });
         background: @color-bg-1;
         color: @color-font-3;
     }
@@ -68,6 +84,9 @@ a {
     .module {
         grid-area: module;
         margin-right: 45px;
+        .mobile({
+            margin-right: 0;
+        });
     }
 
     .side-container {
@@ -76,6 +95,12 @@ a {
         height: calc(100vh - 360px);
         position: sticky;
         top: 0;
+        .mobile({
+            margin-left: 0;
+            height: unset;
+            position: relative;
+            top: unset;
+        });
 
         .side-card {
             .side-title h3 {
@@ -98,7 +123,9 @@ a {
     display: block;
     margin-top: 2rem;
 }
+
 .powered {
-    margin-top:1rem;
+    margin-top: 1rem;
     display: block;
 }
+

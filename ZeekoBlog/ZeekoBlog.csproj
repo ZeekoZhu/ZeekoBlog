@@ -49,6 +49,10 @@
     <_ContentIncludedByDefault Remove="Pages\_Layout.cshtml" />
     <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
     <_ContentIncludedByDefault Remove="Pages\_ViewStart.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\parts\article.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\parts\code.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\parts\index.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\parts\sidebar.less" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptTarget>ES2016</TypeScriptTarget>

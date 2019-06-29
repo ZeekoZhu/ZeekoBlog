@@ -108,7 +108,7 @@ Target.create "publish" (fun _ ->
     DotNet.publish
         (fun o ->
             { o with
-                OutputPath = Some "./publish";
+                OutputPath = Some "./artifacts";
                 Configuration = DotNet.BuildConfiguration.Release
             } |> withWorkDir "./ZeekoBlog"
         )

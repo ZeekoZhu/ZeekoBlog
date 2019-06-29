@@ -8,10 +8,14 @@
 @color-link-new: #0072c6;
 @color-link-visited: @color-font-1;
 
-@length-module-left: 18.75%;
+@length-module-left: {
+    desktop: 18.75%;
+    tablet: 10%;
+    mobile: 10%;
+}
 
-@length-tablet: 839px;
-@length-phone: 480px;
+@length-tablet: 768px;
+@length-mobile: 400px;
 @codeFont: "Sarasa Mono SC",
 Consolas,
 monaco,
@@ -30,3 +34,11 @@ SegoeUI,
 Helvetica,
 Arial,
 sans-serif;
+
+.tablet(@rules) {
+    @media screen and (max-width: @length-tablet) { @rules(); }
+}
+
+.mobile(@rules) {
+    @media screen and (max-width: @length-mobile) { @rules(); }
+}

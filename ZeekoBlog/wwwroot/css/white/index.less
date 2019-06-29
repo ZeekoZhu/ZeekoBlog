@@ -3,8 +3,12 @@
 
 .index-module {
     .header {
-        padding-left: @length-module-left;
-        padding-right: @length-module-left;
+        padding-left: @length-module-left[desktop];
+        padding-right: @length-module-left[desktop];
+        .tablet({
+            padding-left: @length-module-left[tablet];
+            padding-right: @length-module-left[tablet];
+        });
         display: flex;
         background: @color-bg-1;
 
@@ -12,6 +16,10 @@
             margin-top: 200px;
             font-size: 6.4rem;
             font-weight: bold;
+            .mobile({
+                margin-top: 50px;
+                font-size: 4.8rem;
+            })
         }
     }
 

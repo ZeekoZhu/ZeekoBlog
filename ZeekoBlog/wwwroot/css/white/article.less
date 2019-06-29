@@ -1,11 +1,22 @@
 @import "variables";
 .article-module.layout {
     grid-template-rows: 5rem auto 160px;
+    .mobile({
+        grid-template-rows: 5rem auto auto 160px;
+    });
 }
 .article-module {
+    .side-container {
+        .mobile({
+            display: none;
+        });
+    }
     .header {
         display: block;
-        margin-left: @length-module-left;
+        margin-left: @length-module-left[desktop];
+        .tablet({
+            margin-left: @length-module-left[tablet];
+        });
         margin-top: 1.6rem;
         a {
             text-decoration: underline;
