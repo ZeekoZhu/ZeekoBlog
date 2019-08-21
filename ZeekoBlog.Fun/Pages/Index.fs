@@ -29,10 +29,11 @@ let friendLinks =
     [ "https://rocka.me", "Rocket1184"
       "https://jolyne.club", "Neatline"
       "https://www.jijiwuming.cn", "jijiwuming"
+      "https://meowv.com", "阿星Plus"
     ]
     |> List.map
         ( fun (link, text) -> a [ _class "side-item"; _href link; _target "_blank" ] [ rawText text ])
- 
+
 let sidebar =
     [ sideGroup
         "友情链接"
@@ -78,7 +79,7 @@ module Index =
                       ]
                 ]
         { Scripts = scripts
-          Header = header 
+          Header = header
           ModuleName = "index-module"
           Styles = [ emptyText ]
           Body = [ viewBody ]
