@@ -61,7 +61,7 @@ namespace ZeekoBlog.Markdown
                     services.AddScoped(pluginType);
                 }
             }
-            services.AddScoped<MarkdownService>(provider =>
+            services.AddScoped(provider =>
             {
                 var mdSvc = new MarkdownService();
                 foreach (var pluginType in builder.PluginTypes)

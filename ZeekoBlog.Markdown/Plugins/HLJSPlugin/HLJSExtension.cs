@@ -2,7 +2,6 @@ using System;
 using Markdig;
 using Markdig.Renderers;
 using Markdig.Renderers.Html;
-using Markdig.Syntax;
 using ZeekoBlog.CodeHighlight;
 
 namespace ZeekoBlog.Markdown.Plugins.HLJSPlugin
