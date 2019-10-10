@@ -281,3 +281,6 @@ publish/
 # parcel-bundler
 .cache
 dist
+
+# vscode
+.ionide/
