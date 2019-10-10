@@ -22,16 +22,16 @@ highlightJsExt.register(registry);
  */
 const tocOf = (obj) => {
     return obj;
-}
+};
 
 /**
- * 
+ *
  * @param {IRenderedResult} obj
  * @returns {IRenderedResult}
  */
 const renderedOf = (obj) => {
     return obj;
-}
+};
 
 
 const convertOptions = {
@@ -43,12 +43,7 @@ const convertOptions = {
         'toc-title': '内容导航',
         toclevels: 5,
         linkattrs: '',
-        'caution-caption': '⚠️',
-        'important-caption': '‼️',
-        'note-caption': '💬',
-        'tip-caption': '💡',
-        'warning-caption': '🚨',
-        'source-highlighter': 'highlightjs-ext'
+        'source-highlighter': 'highlightjs-ext',
     },
     'extension_registry': registry,
 };
@@ -84,7 +79,7 @@ function extractToc(level1ul, $) {
         const name = anchor.text();
         const anchorName = anchor.attr('href').slice(1);
         return tocOf({
-            name, anchorName, level
+            name, anchorName, level,
         });
     });
     return tocList;
@@ -112,12 +107,12 @@ function render(callback, source, bypass) {
         const rendered = renderedOf({
             source, languages,
             value: result,
-            tableOfContents: toc
+            tableOfContents: toc,
         });
         callback(null, rendered);
     } catch (e) {
         callback(e, renderedOf({
-            source, languages: [], value: source
+            source, languages: [], value: source,
         }));
     }
 }

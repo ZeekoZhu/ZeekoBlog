@@ -16,10 +16,12 @@ namespace ZeekoBlog.AsciiDoc
         public string[] Languages { get; set; }
         public TOCItem[] TableOfContents { get; set; }
     }
+
     public class AsciiDocService
     {
         private readonly string[] _bypass;
         private readonly INodeServices _node;
+
         public AsciiDocService(INodeServices node, string[] bypass)
         {
             _node = node;
@@ -32,14 +34,17 @@ namespace ZeekoBlog.AsciiDoc
             try
             {
                 var scriptPath = Path.Combine(
-                            Path.GetDirectoryName(typeof(AsciiDocService).Assembly.Location) ?? throw new InvalidOperationException(),
-                            "asciidoc-scripts", "asciidoc");
+                    Path.GetDirectoryName(typeof(AsciiDocService).Assembly.Location) ??
+                    throw new InvalidOperationException(),
+                    "asciidoc-scripts",
+                    "asciidoc");
                 var result = await _node.InvokeAsync<AsciiDocRenderedResult>(scriptPath, source, _bypass);
                 result.TableOfContents = result.TableOfContents ?? new TOCItem[] { };
-                for (int i = 0; i < result.TableOfContents.Length; i++)
+                for (var i = 0; i < result.TableOfContents.Length; i++)
                 {
                     result.TableOfContents[i].Order = i;
                 }
+
                 return result;
             }
             catch
@@ -53,18 +58,18 @@ namespace ZeekoBlog.AsciiDoc
                 };
             }
         }
-
     }
 
     public static class AsciiDocServiceExt
     {
         public static IServiceCollection AddAsciiDoc(this IServiceCollection services, string[] bypass = null)
         {
-            services.AddSingleton(provider =>
-            {
-                var node = provider.GetService<INodeServices>();
-                return new AsciiDocService(node, bypass);
-            });
+            services.AddSingleton(
+                provider =>
+                {
+                    var node = provider.GetService<INodeServices>();
+                    return new AsciiDocService(node, bypass);
+                });
             return services;
         }
     }

@@ -44,6 +44,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fake", "Fake", "{CC76CA11-5
 		paket.dependencies = paket.dependencies
 	EndProjectSection
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ZeekoBlog.LiveReload", "ZeekoBlog.LiveReload\ZeekoBlog.LiveReload.fsproj", "{E66D2DA1-F587-45A7-98D1-EF1164CB16FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +84,10 @@ Global
 		{6B1F1E66-07E1-4E44-88E5-0912D7C4CB80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B1F1E66-07E1-4E44-88E5-0912D7C4CB80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B1F1E66-07E1-4E44-88E5-0912D7C4CB80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E66D2DA1-F587-45A7-98D1-EF1164CB16FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E66D2DA1-F587-45A7-98D1-EF1164CB16FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E66D2DA1-F587-45A7-98D1-EF1164CB16FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E66D2DA1-F587-45A7-98D1-EF1164CB16FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

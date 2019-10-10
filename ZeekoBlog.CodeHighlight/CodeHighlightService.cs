@@ -13,6 +13,7 @@ namespace ZeekoBlog.CodeHighlight
         public string Result { get; set; }
         public string Language { get; set; }
     }
+
     public class CodeHighlightService
     {
         private readonly INodeServices _node;
@@ -24,6 +25,7 @@ namespace ZeekoBlog.CodeHighlight
             _bypass = bypass ?? new string[] { };
             _bypass = _bypass.Select(x => x.ToLowerInvariant()).ToArray();
         }
+
         public async Task<HighlightResult> HighlightAsync(string source, string lang = null)
         {
             if (_bypass.Contains(lang))
@@ -35,11 +37,14 @@ namespace ZeekoBlog.CodeHighlight
                     Language = lang
                 };
             }
+
             try
             {
                 var scriptPath = Path.Combine(
-                    Path.GetDirectoryName(typeof(CodeHighlightService).Assembly.Location) ?? throw new InvalidOperationException(),
-                    "codehighlight-scripts", "code-highlight");
+                    Path.GetDirectoryName(typeof(CodeHighlightService).Assembly.Location) ??
+                    throw new InvalidOperationException(),
+                    "codehighlight-scripts",
+                    "code-highlight");
                 var result = await _node.InvokeAsync<HighlightResult>(scriptPath, source, lang);
                 result.IsSuccess = true;
                 result.Result = result.Result.Trim();
@@ -61,11 +66,12 @@ namespace ZeekoBlog.CodeHighlight
     {
         public static IServiceCollection AddCodeHighlight(this IServiceCollection services, string[] bypass = null)
         {
-            services.AddSingleton(provider =>
-            {
-                var node = provider.GetService<INodeServices>();
-                return new CodeHighlightService(node, bypass);
-            });
+            services.AddSingleton(
+                provider =>
+                {
+                    var node = provider.GetService<INodeServices>();
+                    return new CodeHighlightService(node, bypass);
+                });
             return services;
         }
     }
