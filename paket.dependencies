@@ -1,9 +1,9 @@
 storage: none
-version 5.206.0
+version 5.223.0
 source https://api.nuget.org/v3/index.json
 source https://www.myget.org/F/zeekoget/api/v3/index.json
 
-framework: netstandard2.0, netcoreapp2.2
+framework: netstandard2.1, netcoreapp3.0
 nuget mapster
 nuget EasyCaching.InMemory
 nuget Fizzler.Systems.HtmlAgilityPack
@@ -11,7 +11,6 @@ nuget FluentAssertions
 nuget Giraffe
 nuget Markdig
 nuget Microsoft.ApplicationInsights.AspNetCore
-nuget Microsoft.AspNetCore.App
 nuget Microsoft.AspNetCore.NodeServices
 nuget Microsoft.VisualStudio.Web.CodeGeneration.Design
 clitool Microsoft.VisualStudio.Web.CodeGeneration.Tools
@@ -24,7 +23,7 @@ nuget ZeekoUtilsPack.BCLExt 1.2.0
 // [ FAKE GROUP ]
 group Build
     storage: none
-    framework: netstandard2.0
+    framework: netstandard2.1
     source https://api.nuget.org/v3/index.json
     source https://www.myget.org/F/zeekoget/api/v3/index.json
     nuget Fake.DotNet.Cli
