@@ -6,7 +6,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZeekoBlog.Core\ZeekoBlog.Core.csproj" />
-    <ProjectReference Include="..\ZeekoBlog.Markdown\ZeekoBlog.Markdown.csproj" />
     <ProjectReference Include="..\ZeekoBlog.Application\ZeekoBlog.Application.csproj" />
   </ItemGroup>
   <ItemGroup>

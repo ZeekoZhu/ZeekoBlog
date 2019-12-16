@@ -1,9 +1,6 @@
 mapster
 EasyCaching.InMemory
 Giraffe
-Markdig
 Microsoft.ApplicationInsights.AspNetCore
-Microsoft.VisualStudio.Web.CodeGeneration.Design
 Npgsql.EntityFrameworkCore.PostgreSQL
 ZeekoUtilsPack.AspNetCore
-Microsoft.VisualStudio.Web.CodeGeneration.Tools

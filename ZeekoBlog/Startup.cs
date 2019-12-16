@@ -73,27 +73,9 @@ namespace ZeekoBlog
             });
             services.AddScoped<ArticleService>();
             services.AddScoped<AccountService>();
-            services.AddNodeServices();
-            services.AddAsciiDoc();
-            services.AddCodeHighlight();
-            services.AddMarkdownService(builder =>
-            {
-                builder
-                    .Add<HLJSPlugin>()
-                    .Add<HTMLRendererPlugin>()
-                    .Add<SyntaxParserPlugin>()
-                    .Add<CodeLangDetectionPlugin>()
-                    .Add<TOCItemsPlugin>();
-            });
             services.AddMemoryCache();
             services.AddZeekoBlogFun();
             services.AddMvc();
-//                .AddRazorPagesOptions(options =>
-//                {
-//                    options.Conventions.AddPageRoute("/Article", "a/{id}");
-//                    options.Conventions.AuthorizeFolder("/Zeeko");
-//                    options.Conventions.AllowAnonymousToPage("/Zeeko/Login");
-//                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

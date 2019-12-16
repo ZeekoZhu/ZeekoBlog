@@ -1,9 +1,0 @@
-﻿{
-    "profiles": {
-        "LiveReload": {
-            "commandName": "Project",
-            "applicationUrl": "http://*:8080",
-            "workingDirectory": "/home/zeeko/Desktop"
-        }
-    }
-}
