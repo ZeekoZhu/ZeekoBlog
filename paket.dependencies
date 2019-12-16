@@ -10,7 +10,6 @@ nuget Fizzler.Systems.HtmlAgilityPack
 nuget FluentAssertions
 nuget Giraffe
 nuget Microsoft.ApplicationInsights.AspNetCore
-nuget Microsoft.AspNetCore.NodeServices
 nuget Npgsql.EntityFrameworkCore.PostgreSQL
 nuget xunit
 nuget xunit.runner.visualstudio

@@ -6,6 +6,7 @@
   <ItemGroup>
     <Compile Include="HttpRequestMessage.fs" />
     <Content Include="paket.reference" />
+    <Compile Include="TextMaidClient.fs" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
