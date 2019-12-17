@@ -1,7 +1,9 @@
 module internal Utils
 
+open System
+
 module TryParse =
-    let tryParseWith tryParseFunc =
+    let tryParseWith (tryParseFunc: string -> (bool * 'a)) =
         tryParseFunc >> function
             | true, v    -> Some v
             | false, _   -> None

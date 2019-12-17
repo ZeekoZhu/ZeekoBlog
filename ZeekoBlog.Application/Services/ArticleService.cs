@@ -6,12 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Z.EntityFramework.Plus;
 using Mapster;
 using ZeekoBlog.Application.DTO;
-using ZeekoBlog.AsciiDoc;
 using ZeekoBlog.Core;
 using ZeekoBlog.Core.Models;
-using ZeekoBlog.Markdown;
-using ZeekoBlog.Markdown.Plugins.CodeLangDetectionPlugin;
-using ZeekoBlog.Markdown.Plugins.TOCItemsPlugin;
 using TOCItem = ZeekoBlog.Core.Models.TOCItem;
 
 namespace ZeekoBlog.Application.Services
@@ -19,14 +15,12 @@ namespace ZeekoBlog.Application.Services
     public class ArticleService
     {
         private readonly BlogContext _context;
-        private readonly MarkdownService _mdSvc;
-        private readonly AsciiDocService _asciiDocSvc;
+        private readonly IArticleRenderer _renderer;
 
-        public ArticleService(BlogContext context, MarkdownService mdSvc, AsciiDocService asciiDocSvc)
+        public ArticleService(BlogContext context, IArticleRenderer renderer)
         {
             _context = context;
-            _mdSvc = mdSvc;
-            _asciiDocSvc = asciiDocSvc;
+            _renderer = renderer;
         }
 
         public async Task<PagedList<ArticleListDto>> GetPaged(int index, int pageSize, int userId)
@@ -72,7 +66,7 @@ namespace ZeekoBlog.Application.Services
             article.Created = DateTime.UtcNow;
             article.LastEdited = DateTime.UtcNow;
             article.BlogUser = user;
-            await RenderArticle(article);
+            await _renderer.RenderAsync(article);
             _context.Articles.Add(article);
             await _context.SaveChangesAsync();
             article.BlogUser = null;
@@ -93,7 +87,7 @@ namespace ZeekoBlog.Application.Services
                 .DeleteAsync();
 
             article.LastEdited = DateTime.UtcNow;
-            await RenderArticle(article);
+            await _renderer.RenderAsync(article);
             await _context.SaveChangesAsync();
             return new BooleanResult<Article>(true, article);
         }
@@ -112,7 +106,7 @@ namespace ZeekoBlog.Application.Services
                 await _context.Set<TOCItem>()
                     .Where(i => i.ArticleId == target.Id)
                     .DeleteAsync();
-                await RenderArticle(target);
+                await _renderer.RenderAsync(target);
                 await _context.SaveChangesAsync();
                 return new BooleanResult<Article>(true, target);
             }
@@ -120,34 +114,34 @@ namespace ZeekoBlog.Application.Services
             return new BooleanResult<Article>(false, "Article not found");
         }
 
-        private async Task RenderArticle(Article article)
-        {
-            switch (article.DocType)
-            {
-                case ArticleDocType.AsciiDoc:
-                    var summaryResult = await _asciiDocSvc.Process(article.Summary);
-                    var contentResult = await _asciiDocSvc.Process(article.Content);
-                    article.RenderedSummary = summaryResult.Value;
-                    article.RenderedContent = contentResult.Value;
-                    article.Languages = string.Join(",", contentResult.Languages);
-                    article.TOCList = contentResult.TableOfContents.ToList();
-                    break;
-                case ArticleDocType.Markdown:
-                    var summary = await _mdSvc.Process(article.Summary);
-                    article.RenderedSummary = summary.Html;
-                    var content = await _mdSvc.Process(article.Content);
-                    article.RenderedContent = content.Html;
-                    var (_, languages) = content.Storage.TryGet<List<string>>(CodeLangDetectionPlugin.ID);
-                    article.Languages = string.Join(",", languages);
-                    (_, article.TOCList) = content.Storage.TryGet<List<TOCItem>>(TOCItemsPlugin.ID);
-                    break;
-                case ArticleDocType.Raw:
-                    article.RenderedSummary = article.Summary;
-                    article.RenderedContent = article.Content;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
+        // private async Task RenderArticle(Article article)
+        // {
+        //     switch (article.DocType)
+        //     {
+        //         case ArticleDocType.AsciiDoc:
+        //             var summaryResult = await _asciiDocSvc.Process(article.Summary);
+        //             var contentResult = await _asciiDocSvc.Process(article.Content);
+        //             article.RenderedSummary = summaryResult.Value;
+        //             article.RenderedContent = contentResult.Value;
+        //             article.Languages = string.Join(",", contentResult.Languages);
+        //             article.TOCList = contentResult.TableOfContents.ToList();
+        //             break;
+        //         case ArticleDocType.Markdown:
+        //             var summary = await _mdSvc.Process(article.Summary);
+        //             article.RenderedSummary = summary.Html;
+        //             var content = await _mdSvc.Process(article.Content);
+        //             article.RenderedContent = content.Html;
+        //             var (_, languages) = content.Storage.TryGet<List<string>>(CodeLangDetectionPlugin.ID);
+        //             article.Languages = string.Join(",", languages);
+        //             (_, article.TOCList) = content.Storage.TryGet<List<TOCItem>>(TOCItemsPlugin.ID);
+        //             break;
+        //         case ArticleDocType.Raw:
+        //             article.RenderedSummary = article.Summary;
+        //             article.RenderedContent = article.Content;
+        //             break;
+        //         default:
+        //             throw new ArgumentOutOfRangeException();
+        //     }
+        // }
     }
 }

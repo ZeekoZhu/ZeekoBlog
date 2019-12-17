@@ -1,11 +1,11 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ZeekoBlog.Application.Services;
-using ZeekoUtilsPack.AspNetCore.Jwt;
 
 namespace ZeekoBlog.Controllers
 {
@@ -13,12 +13,10 @@ namespace ZeekoBlog.Controllers
     [Produces("application/json")]
     public class TokenController : Controller
     {
-        private readonly EasyJwt _jwt;
         private readonly AccountService _accountSvc;
 
-        public TokenController(EasyJwt jwt, AccountService accountSvc)
+        public TokenController(AccountService accountSvc)
         {
-            _jwt = jwt;
             _accountSvc = accountSvc;
         }
 
@@ -28,7 +26,7 @@ namespace ZeekoBlog.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [EasyJwtAuthorize]
+        [Authorize]
         public IActionResult Get()
         {
             return Ok("");
@@ -41,13 +39,13 @@ namespace ZeekoBlog.Controllers
         /// <param name="user"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]LoginModel user)
+        public async Task<IActionResult> Post([FromBody] LoginModel user)
         {
             if (ModelState.IsValid == false)
             {
                 return BadRequest(ModelState);
             }
-            DateTime expire = DateTime.Now.AddDays(7);
+
             var loggedInUser = await _accountSvc.GetUserAsync(user.UserName, user.Password);
             if (loggedInUser == null)
             {
@@ -57,18 +55,19 @@ namespace ZeekoBlog.Controllers
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, loggedInUser.Id.ToString(),ClaimValueTypes.Integer),
-                new Claim(ClaimTypes.Name, loggedInUser.UserName,ClaimValueTypes.String),
-                new Claim("DisplayName", loggedInUser.DisplayName,ClaimValueTypes.String),
+                new Claim(ClaimTypes.NameIdentifier, loggedInUser.Id.ToString(), ClaimValueTypes.Integer),
+                new Claim(ClaimTypes.Name, loggedInUser.UserName, ClaimValueTypes.String),
+                new Claim("DisplayName", loggedInUser.DisplayName, ClaimValueTypes.String),
             };
-            var token = _jwt.GenerateToken(loggedInUser.UserName, claims, expire);
-            var (principal, authProp) = _jwt.GenerateAuthTicket(loggedInUser.UserName, claims, expire);
-            await HttpContext.SignInAsync(principal, authProp);
-            return Ok(new { Token = token });
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(identity));
+            return Ok();
         }
 
         [HttpGet("ToPage")]
-        public IActionResult ToPage([Required][FromQuery] string tk)
+        public IActionResult ToPage([Required] [FromQuery] string tk)
         {
             HttpContext.Response.Cookies.Append("tk", tk);
             return RedirectToPage("/Zeeko/Index");
@@ -79,6 +78,7 @@ namespace ZeekoBlog.Controllers
     {
         [Required]
         public string UserName { get; set; }
+
         [Required]
         public string Password { get; set; }
     }

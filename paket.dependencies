@@ -3,7 +3,6 @@ version 5.223.0
 source https://api.nuget.org/v3/index.json
 source https://www.myget.org/F/zeekoget/api/v3/index.json
 
-framework: netstandard2.1, netcoreapp3.1
 nuget mapster
 nuget EasyCaching.InMemory
 nuget Fizzler.Systems.HtmlAgilityPack
@@ -14,13 +13,12 @@ nuget Npgsql.EntityFrameworkCore.PostgreSQL
 nuget xunit
 nuget xunit.runner.visualstudio
 nuget Z.EntityFramework.Plus.EFCore
-nuget Oryx
-nuget ZeekoUtilsPack.AspNetCore
 nuget ZeekoUtilsPack.BCLExt
+nuget FSharpx.Extras
+nuget FsToolkit.ErrorHandling
 // [ FAKE GROUP ]
 group Build
     storage: none
-    framework: netstandard2.1
     source https://api.nuget.org/v3/index.json
     source https://www.myget.org/F/zeekoget/api/v3/index.json
     nuget Fake.DotNet.Cli

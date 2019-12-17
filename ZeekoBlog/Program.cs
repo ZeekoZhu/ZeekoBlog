@@ -48,9 +48,7 @@ namespace ZeekoBlog
 
         public static IWebHost BuildWebHost(string[] args)
         {
-            var aiKey = Environment.GetEnvironmentVariable("AI_KEY");
             return WebHost.CreateDefaultBuilder(args)
-                .UseApplicationInsights(aiKey)
                 .UseStartup<Startup>()
                 .Build();
         }

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ZeekoBlog.Application.DTO;
 using ZeekoBlog.Core.Models;
 using ZeekoBlog.Application.Services;
 using ZeekoBlog.Extensions;
-using ZeekoUtilsPack.AspNetCore.Jwt;
 
 namespace ZeekoBlog.Controllers
 {
@@ -71,7 +71,7 @@ namespace ZeekoBlog.Controllers
         /// <param name="dto">数据</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        [EasyJwtAuthorize]
+        [Authorize]
         public async Task<IActionResult> PutArticle([FromRoute] int id, [FromBody] ArticlePostDto dto)
         {
             if (!ModelState.IsValid)
@@ -99,7 +99,7 @@ namespace ZeekoBlog.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
-        [EasyJwtAuthorize]
+        [Authorize]
         public async Task<IActionResult> PostArticle([FromBody] ArticlePostDto dto)
         {
             if (!ModelState.IsValid)
@@ -121,7 +121,7 @@ namespace ZeekoBlog.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("render/{id}")]
-        [EasyJwtAuthorize]
+        [Authorize]
         public async Task<IActionResult> Rerender([FromRoute] int id)
         {
             var result = await _articleSvc.RerenderAsync(id, User.GetId());
@@ -141,7 +141,7 @@ namespace ZeekoBlog.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        [EasyJwtAuthorize]
+        [Authorize]
         public async Task<IActionResult> DeleteArticle([FromRoute] int id)
         {
             if (!ModelState.IsValid)

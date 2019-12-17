@@ -1,2 +1,4 @@
-Utf8Json
 FSharp.Core
+newtonsoft.json
+FSharpx.Extras
+FsToolkit.ErrorHandling

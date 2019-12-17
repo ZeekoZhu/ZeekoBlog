@@ -3,4 +3,3 @@ EasyCaching.InMemory
 Giraffe
 Microsoft.ApplicationInsights.AspNetCore
 Npgsql.EntityFrameworkCore.PostgreSQL
-ZeekoUtilsPack.AspNetCore

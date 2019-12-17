@@ -5,8 +5,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="HttpRequestMessage.fs" />
-    <Content Include="paket.reference" />
     <Compile Include="TextMaidClient.fs" />
+    <Content Include="paket.references" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

@@ -44,6 +44,17 @@
     <_ContentIncludedByDefault Remove="wwwroot\css\parts\code.less" />
     <_ContentIncludedByDefault Remove="wwwroot\css\parts\index.less" />
     <_ContentIncludedByDefault Remove="wwwroot\css\parts\sidebar.less" />
+    <_ContentIncludedByDefault Remove="artifacts\web.config" />
+    <_ContentIncludedByDefault Remove="artifacts\ZeekoBlog.dll.config" />
+    <_ContentIncludedByDefault Remove="artifacts\appsettings.Development.json" />
+    <_ContentIncludedByDefault Remove="artifacts\appsettings.json" />
+    <_ContentIncludedByDefault Remove="artifacts\asciidoc-scripts\package.json" />
+    <_ContentIncludedByDefault Remove="artifacts\codehighlight-scripts\package.json" />
+    <_ContentIncludedByDefault Remove="artifacts\Connected Services\Application Insights\ConnectedService.json" />
+    <_ContentIncludedByDefault Remove="artifacts\package.json" />
+    <_ContentIncludedByDefault Remove="artifacts\tsconfig.json" />
+    <_ContentIncludedByDefault Remove="artifacts\ZeekoBlog.deps.json" />
+    <_ContentIncludedByDefault Remove="artifacts\ZeekoBlog.runtimeconfig.json" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

@@ -1,8 +1,7 @@
 using System;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using EasyCaching.Core;
-using EasyCaching.InMemory;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,11 +9,11 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.WebEncoders;
 using ZeekoBlog.Core.Models;
 using ZeekoBlog.Application.Services;
 using ZeekoBlog.Fun;
-using ZeekoUtilsPack.AspNetCore.Jwt;
 
 namespace ZeekoBlog
 {
@@ -32,6 +31,8 @@ namespace ZeekoBlog
         {
             services.Configure<WebEncoderOptions>(options =>
                 options.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.BasicLatin, UnicodeRanges.CjkUnifiedIdeographs));
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
 
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddDbContextPool<BlogContext>(options =>
@@ -48,22 +49,12 @@ namespace ZeekoBlog
 
                 options.UseNpgsql(connectionString, b => b.MigrationsAssembly("ZeekoBlog"));
             });
-            services.AddEasyJwt(new EasySymmetricOptions("zeeko's blog")
-            {
-                Audience = "blog",
-                Issuer = "blog",
-                EnableCookie = true,
-                CookieOptions = options =>
-                {
-                    options.LoginPath = "/sudo/login";
-                    options.Cookie.Name = "tk";
-                    options.Cookie.Path = "/";
-                }
-            });
             services.AddEasyCaching(options =>
             {
                 options.UseInMemory();
             });
+            var aiKey = Environment.GetEnvironmentVariable("AI_KEY");
+            services.AddApplicationInsightsTelemetry(aiKey);
             services.AddScoped<ArticleService>();
             services.AddScoped<AccountService>();
             services.AddMemoryCache();
@@ -72,7 +63,7 @@ namespace ZeekoBlog
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -82,21 +73,17 @@ namespace ZeekoBlog
             {
                 app.UseExceptionHandler("/Error");
             }
-            var cookiePolicyOptions = new CookiePolicyOptions
-            {
-                MinimumSameSitePolicy = SameSiteMode.Strict,
-            };
-            app.UseAuthentication();
-            app.UseCookiePolicy(cookiePolicyOptions);
-            app.UseStatusCodePagesWithReExecute("/oops/{0}");
             app.UseStaticFiles();
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseStatusCodePagesWithReExecute("/oops/{0}");
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
             app.UseZeekoBlogFun();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-            });
         }
     }
 }
