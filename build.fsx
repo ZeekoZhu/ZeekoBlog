@@ -13,7 +13,7 @@ module Docker =
         let dockerPwd = Environment.environVar "DOCKER_PASSWORD"
         let dockerUsr = Environment.environVar "DOCKER_USERNAME"
         let input = StreamRef.Empty
-        
+
         let proc =
             CreateProcess.fromRawCommand
                 "docker" [ "login"; "-u"; dockerUsr; "--password-stdin"; "hkccr.ccs.tencentyun.com/zeeko" ]
@@ -60,7 +60,7 @@ module Cli =
             Utils.dockerCmd "tag" [ localImg; t ]
             Utils.dockerCmd "push" [ t ]
            )
-        
+
 
 let yarnInstall workDir =
     Trace.trace (sprintf "Yarn restoring: %s" workDir)
@@ -80,8 +80,6 @@ Target.create "Default" (fun _ ->
 
 Target.create "restore:yarn" (fun _ ->
     yarnInstall "./ZeekoBlog"
-    yarnInstall "./ZeekoBlog.CodeHighlight/codehighlight-scripts"
-    yarnInstall "./ZeekoBlog.Asciidoc/asciidoc-scripts"
 )
 
 Target.create "restore:dotnet" (fun _ ->
