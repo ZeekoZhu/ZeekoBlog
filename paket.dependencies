@@ -1,13 +1,14 @@
 storage: none
-version 5.223.0
+version 5.226.0
 source https://api.nuget.org/v3/index.json
 source https://www.myget.org/F/zeekoget/api/v3/index.json
+framework: auto-detect
 
 nuget mapster
 nuget EasyCaching.InMemory
-nuget Fizzler.Systems.HtmlAgilityPack
 nuget FluentAssertions
 nuget Giraffe
+nuget TaskBuilder.fs ~> 2.2 prerelease
 nuget Microsoft.ApplicationInsights.AspNetCore
 nuget Npgsql.EntityFrameworkCore.PostgreSQL
 nuget xunit
@@ -21,6 +22,7 @@ group Build
     storage: none
     source https://api.nuget.org/v3/index.json
     source https://www.myget.org/F/zeekoget/api/v3/index.json
+    framework: netstandard2.0
     nuget Fake.DotNet.Cli
     nuget Fake.JavaScript.Yarn
-    nuget MyFakeTools 0.0.15
+    nuget MyFakeTools 0.0.16
