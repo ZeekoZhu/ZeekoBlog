@@ -10,7 +10,7 @@ module Builder =
     /// Set request url
     let url uri: Operator =
         fun req ->
-            req.RequestUri <- Uri uri
+            req.RequestUri <- Uri (uri, UriKind.Relative)
             req
 
     /// Set request url
@@ -28,7 +28,7 @@ module Builder =
         method HttpMethod.Get >> url u
 
     let post u: Operator =
-        method HttpMethod.Get >> url u
+        method HttpMethod.Post >> url u
 
     let body content: Operator =
         fun req ->

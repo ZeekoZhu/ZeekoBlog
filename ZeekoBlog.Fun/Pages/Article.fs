@@ -41,7 +41,6 @@ $('input[type=checkbox][disabled][checked]').replaceWith('<b class="mdl2" aria-h
 $('input[type=checkbox][disabled]').replaceWith('<b class="mdl2" aria-hidden="true" style="font-size: .8rem;">&#xF16B;</b>');"""
                  ]
         ]
-        @ mathJaxScript
     // view
     let viewBody =
         div []
@@ -56,7 +55,7 @@ $('input[type=checkbox][disabled]').replaceWith('<b class="mdl2" aria-hidden="tr
     { Scripts = scripts
       Styles = [ link [ _href "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs2015.min.css"; _rel "stylesheet"]
                  link [ _href "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"; _rel "stylesheet" ]
-               ]
+               ] @ katexResource
       Header = header
       ModuleName = "article-module"
       Body = [ viewBody ]

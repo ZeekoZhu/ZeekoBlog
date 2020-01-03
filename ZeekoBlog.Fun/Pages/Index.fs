@@ -20,7 +20,7 @@ let layoutData =
     { Title = "首页" }
 
 let scripts =
-    mathJaxScript @
+    katexResource @
         [ script [] [ rawText "window.__pageModule = 'article-list'" ]
           script [ _src "/dist/article.js" ] []
         ]

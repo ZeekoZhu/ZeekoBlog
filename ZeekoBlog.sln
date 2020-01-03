@@ -17,9 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.travis.yml = .travis.yml
 		Dockerfile = Dockerfile
 		Nuget.Config = Nuget.Config
-		Publish.ps1 = Publish.ps1
 		README.MD = README.MD
-		Trigger-CI.ps1 = Trigger-CI.ps1
 	EndProjectSection
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ZeekoBlog.Fun", "ZeekoBlog.Fun\ZeekoBlog.Fun.fsproj", "{1D57F311-2187-4098-B115-4ABFC729DAD5}"

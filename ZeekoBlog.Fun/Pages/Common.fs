@@ -3,24 +3,8 @@ module internal Common
 open Giraffe.GiraffeViewEngine
 open ZeekoBlog.Core.Models
 
-let mathJaxScript = [
-    script [ _src "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js" ] []
-    script [] [
-                rawText 
-                    """
-MathJax.Hub.Config({
-    showProcessingMessages: false,
-    messageStyle: 'none',
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true,
-        processClass: 'process_math'
-    },
-    'HTML-CSS': { availableFonts: ['TeX'] }
-});""" ]
+let katexResource = [
+    link [ _rel "stylesheet"; _href "https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" ]
 ]
 
 let sideGroup title content =

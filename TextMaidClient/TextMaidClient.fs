@@ -1,5 +1,6 @@
 namespace ZeekoBlog
 
+open System
 open FSharpx
 open System.Threading.Tasks
 open HttpRequestMessage
@@ -8,6 +9,14 @@ open Newtonsoft.Json.Serialization
 module TextMaid =
     open Newtonsoft.Json
     open System.Net.Http
+    type ToStringConverter() =
+        inherit JsonConverter() with
+        override __.CanConvert obj = true
+        override __.WriteJson (writer, value, serializer) =
+            writer.WriteValue(value.ToString())
+        override __.CanRead with get() = false
+        override __.ReadJson (_, _, _, _) =
+            raise (NotImplementedException())
     let jsonSetting =
         let settings = JsonSerializerSettings()
         settings.ContractResolver <- CamelCasePropertyNamesContractResolver()
@@ -28,6 +37,8 @@ module TextMaid =
         { Name: string; Level: int; Id: string }
     type RenderedDocument =
         { Doc: TextDoc; Toc: TocItem list; Language: string list }
+
+    [<JsonConverter(typeof<ToStringConverter>)>]
     type TextType =
         | Markdown
         | AsciiDoc
@@ -54,4 +65,6 @@ module TextMaid =
             }
             |> client.SendAsync
             |> Task.bind decodeRespAsync<RenderedDocument>
+
+        member __.RenderText x = renderText x
 
