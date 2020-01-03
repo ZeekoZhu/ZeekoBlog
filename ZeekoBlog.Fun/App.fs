@@ -1,6 +1,7 @@
 module App
 open Giraffe
 open ZeekoBlog.Fun
+open ZeekoBlog
 
 
 

@@ -26,9 +26,12 @@ let handler (user: string): HttpHandler =
             let! pagedList = articleSvc.GetPaged(page - 1, 20, blogUserId);
             let articles = pagedList.List
             let totalPages = pagedList.TotalPage
-            let model =
-                { CurrentIndex = page
-                  TotalPages = totalPages
-                  Articles = List.ofSeq (articles.AsEnumerable()) }
-            return! htmlView (Index.view model) next ctx
+            if page > totalPages then
+                return! ZeekoBlog.ErrorHandler.errorCodeHandler 404 next ctx
+            else
+                let model =
+                    { CurrentIndex = page
+                      TotalPages = totalPages
+                      Articles = List.ofSeq (articles.AsEnumerable()) }
+                return! htmlView (Index.view model) next ctx
         }

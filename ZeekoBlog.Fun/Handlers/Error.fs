@@ -1,4 +1,4 @@
-module ErrorHandler
+module ZeekoBlog.ErrorHandler
 
 open Giraffe
 open Microsoft.Extensions.Logging

@@ -2,6 +2,7 @@ namespace ZeekoBlog.Fun
 open Microsoft.Extensions.DependencyInjection
 open Giraffe;
 open Microsoft.AspNetCore.Builder
+open ZeekoBlog
 open App
 
 [<System.Runtime.CompilerServices.Extension>]

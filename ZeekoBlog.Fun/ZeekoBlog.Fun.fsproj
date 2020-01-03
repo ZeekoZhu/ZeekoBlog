@@ -16,9 +16,9 @@
     <Compile Include="Pages/Article.fs" />
     <Compile Include="Pages/Error.fs" />
     <Compile Include="Pages/Toys/Friends.fs" />
+    <Compile Include="Handlers\Error.fs" />
     <Compile Include="Handlers/Index.fs" />
     <Compile Include="Handlers/Article.fs" />
-    <Compile Include="Handlers/Error.fs" />
     <Compile Include="Manage\Pages\Index.fs" />
     <Compile Include="Manage\Pages\Login.fs" />
     <Compile Include="Manage\Pages\Edit.fs" />
