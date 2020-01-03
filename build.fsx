@@ -93,13 +93,13 @@ Target.create "build:node" (fun _ ->
 Target.create "build:dotnet" (fun _ ->
     [
         "./ZeekoBlog/ZeekoBlog.csproj"
-        "./Tests/Tests.csproj"
     ]
     |> Seq.iter (DotNet.build id)
 )
 
 Target.create "test" (fun _ ->
-    DotNet.test id "./Tests/Tests.csproj"
+//    DotNet.test id "./Tests/Tests.csproj"
+    ()
 )
 
 Target.create "publish" (fun _ ->
