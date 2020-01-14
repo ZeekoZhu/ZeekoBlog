@@ -30,6 +30,7 @@ let friendLinks =
       "https://jolyne.club", "Neatline"
       "https://www.jijiwuming.cn", "jijiwuming"
       "https://meowv.com", "阿星Plus"
+      "https://codeporter.dev", "Tim's Blog"
     ]
     |> List.map
         ( fun (link, text) -> a [ _class "side-item"; _href link; _target "_blank" ] [ rawText text ])
