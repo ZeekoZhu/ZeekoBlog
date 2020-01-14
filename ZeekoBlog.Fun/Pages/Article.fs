@@ -19,7 +19,8 @@ let view (model: ArticleModel) =
     let layoutModel: LayoutModel =
         { Title = model.Article.Title }
     let sidebar =
-        sideGroup "内容导航"
+        if model.TOCList |> List.isEmpty then []
+        else [ sideGroup "内容导航"
                   [ ul [ _class "toc-list" ]
                        ( model.TOCList
                          |> List.ofSeq
@@ -59,6 +60,6 @@ $('input[type=checkbox][disabled]').replaceWith('<b class="mdl2" aria-hidden="tr
       Header = header
       ModuleName = "article-module"
       Body = [ viewBody ]
-      Sidebar = [ sidebar ]
+      Sidebar = sidebar
     }
     |> LayoutPage.view layoutModel
