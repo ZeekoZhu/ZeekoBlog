@@ -33,6 +33,10 @@ let view (model: ArticleModel) =
                             )
                        )
                   ]
+             ]
+    let pageUrl = "https://gianthard.rocks/a/" + model.Article.Id.ToString()
+    let pageId = "zeeko-blog/a/" + model.Article.Id.ToString()
+    let title = model.Article.Title
     let scripts =
         [ script [] [rawText "window.__pageModule = 'article-ro'"]
           script [ _src "/dist/article.js" ] []
@@ -41,6 +45,20 @@ let view (model: ArticleModel) =
 $('input[type=checkbox][disabled][checked]').replaceWith('<b class="mdl2" aria-hidden="true" style="font-size: .8rem;">&#xF16C;</b>')
 $('input[type=checkbox][disabled]').replaceWith('<b class="mdl2" aria-hidden="true" style="font-size: .8rem;">&#xF16B;</b>');"""
                  ]
+          script []
+                 [ rawText (sprintf """
+var disqus_config = function () {
+this.page.title = '%s'
+this.page.url = '%s';  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '%s'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://zeeko-blog.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+""" title pageUrl pageId) ]
         ]
     // view
     let viewBody =
@@ -51,6 +69,7 @@ $('input[type=checkbox][disabled]').replaceWith('<b class="mdl2" aria-hidden="tr
               article [ "process_math" |> renderedClass model.Article.DocType |> _class ]
                   [ rawText model.Article.RenderedContent
                   ]
+              div [ _id "disqus_thread" ] []
             ]
 
     { Scripts = scripts
