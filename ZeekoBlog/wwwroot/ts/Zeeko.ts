@@ -1,6 +1,6 @@
-import {Article, IArticlePostDto} from './Article';
+import { IArticlePostDto } from './Article';
 import { appHeader } from './Utils';
-import {PageModule} from './PageModule';
+import { PageModule } from './PageModule';
 
 let editModule = () => {
     let saveBtn = $('#save');
@@ -17,11 +17,11 @@ let editModule = () => {
         }, 3000);
     };
     saveBtn.click(() => {
-        let newArticle:IArticlePostDto = {
+        let newArticle: IArticlePostDto = {
             content: contentInput.val(),
             title: titleInput.val(),
             summary: summaryInput.val(),
-            docType: +docType.val()
+            docType: +docType.val(),
         };
         console.log(newArticle);
 
@@ -30,7 +30,7 @@ let editModule = () => {
                 {
                     method: 'PUT',
                     body: JSON.stringify(newArticle),
-                    headers: appHeader
+                    headers: appHeader,
                 })
                 .then(resp => {
                     if (resp.status < 200 || resp.status >= 300) {
@@ -47,7 +47,7 @@ let editModule = () => {
                 {
                     method: 'POST',
                     body: JSON.stringify(newArticle),
-                    headers: appHeader
+                    headers: appHeader,
                 })
                 .then(resp => {
                     if (resp.status < 200 || resp.status >= 300) {
@@ -71,7 +71,7 @@ let listModule = () => {
         fetch(`/api/Articles/${id}`,
             {
                 method: 'DELETE',
-                headers: appHeader
+                headers: appHeader,
             })
             .then(resp => {
                 if (resp.status < 200 || resp.status >= 300) {
@@ -88,7 +88,7 @@ let listModule = () => {
         fetch(`/api/Articles/render/${id}`,
             {
                 method: 'put',
-                headers: appHeader
+                headers: appHeader,
             })
             .then(resp => {
                 if (resp.status < 200 || resp.status >= 300) {
@@ -97,7 +97,7 @@ let listModule = () => {
                     alert('操作成功');
                 }
             });
-        
+
     });
 };
 
@@ -107,13 +107,13 @@ let loginModule = () => {
     $('#loginBtn').click(async () => {
         let data = {
             userName: userNameInput.val(),
-            password: pwdInput.val()
+            password: pwdInput.val(),
         };
         const resp = await fetch('/api/token',
             {
                 method: 'POST',
                 headers: appHeader,
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
             });
         if (resp.status === 200) {
             window.location.reload();
@@ -125,13 +125,12 @@ let loginModule = () => {
     });
 };
 
-PageModule.register('login',loginModule);
-PageModule.register('edit',editModule);
+PageModule.register('login', loginModule);
+PageModule.register('edit', editModule);
 PageModule.register('list', listModule);
 
-
 $(document).ready(() => {
-    appHeader.append("authorization", `Bearer ${localStorage.getItem('tk')}`);
+    appHeader.append('authorization', `Bearer ${localStorage.getItem('tk')}`);
     let pageModule = (window as any).__pageModule;
     if (pageModule) {
         PageModule.active(pageModule);

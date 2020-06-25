@@ -15,9 +15,7 @@
     <Content Remove="wwwroot\ts\Utils.ts" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="wwwroot\ts\ArticleModule.ts" />
     <TypeScriptCompile Include="wwwroot\ts\PageModule.ts" />
-    <TypeScriptCompile Include="wwwroot\ts\MobileSidebar.ts" />
     <TypeScriptCompile Include="wwwroot\ts\Utils.ts" />
   </ItemGroup>
   <ItemGroup>
