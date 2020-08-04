@@ -39,7 +39,6 @@ let view (model: ArticleModel) =
     let title = model.Article.Title
     let scripts =
         [ script [] [rawText "window.__pageModule = 'article-ro'"]
-          script [ _src "/dist/article.js" ] []
           script []
                  [ rawText """
 $('input[type=checkbox][disabled][checked]').replaceWith('<b class="mdl2" aria-hidden="true" style="font-size: .8rem;">&#xF16C;</b>')

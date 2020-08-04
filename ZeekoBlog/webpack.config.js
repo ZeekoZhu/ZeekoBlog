@@ -9,7 +9,6 @@ let isProd = (process.env.ASPNETCORE_ENVIRONMENT && process.env.ASPNETCORE_ENVIR
 
 let entries = {
     'zeeko': './wwwroot/ts/Zeeko.ts',
-    'article': './wwwroot/ts/ArticleModule.ts',
     'white': './wwwroot/css/white/theme.less'
 };
 function createEntries() {

@@ -20,10 +20,7 @@ let layoutData =
     { Title = "首页" }
 
 let scripts =
-    katexResource @
-        [ script [] [ rawText "window.__pageModule = 'article-list'" ]
-          script [ _src "/dist/article.js" ] []
-        ]
+    katexResource
 
 let friendLinks =
     [ "https://rocka.me", "Rocket1184"

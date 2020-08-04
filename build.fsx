@@ -62,12 +62,12 @@ module Cli =
            )
 
 
-let yarnInstall workDir =
-    Trace.trace (sprintf "Yarn restoring: %s" workDir)
-    Yarn.install (fun o -> { o with WorkingDirectory = workDir })
+let npmInstall workDir =
+    Trace.trace (sprintf "Npm restoring: %s" workDir)
+    Npm.install (fun o -> { o with WorkingDirectory = workDir })
 
-let yarnExec workDir command =
-    Yarn.exec command (fun o -> { o with WorkingDirectory=workDir })
+let npmExec workDir command =
+    Npm.exec command (fun o -> { o with WorkingDirectory=workDir })
 
 // Define general properties across various commands (with arguments)
 let inline withWorkDir wd =
@@ -78,8 +78,8 @@ Target.create "Default" (fun _ ->
   Trace.trace "Hello World from FAKE"
 )
 
-Target.create "restore:yarn" (fun _ ->
-    yarnInstall "./ZeekoBlog"
+Target.create "restore:npm" (fun _ ->
+    npmInstall "./ZeekoBlog"
 )
 
 Target.create "restore:dotnet" (fun _ ->
@@ -87,7 +87,7 @@ Target.create "restore:dotnet" (fun _ ->
 )
 
 Target.create "build:node" (fun _ ->
-    yarnExec "./ZeekoBlog" "run build"
+    npmExec "./ZeekoBlog" "run build"
 )
 
 Target.create "build:dotnet" (fun _ ->
@@ -125,7 +125,7 @@ Target.create "docker:build"
 
 Target.create "restore" ignore
 
-"restore:yarn" ==> "restore"
+"restore:npm" ==> "restore"
 "restore:dotnet" ==> "restore"
 
 "restore"
