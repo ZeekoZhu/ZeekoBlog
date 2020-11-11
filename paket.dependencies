@@ -1,20 +1,19 @@
 storage: none
-version 5.226.0
+version 5.251.0
 source https://api.nuget.org/v3/index.json
 source https://www.myget.org/F/zeekoget/api/v3/index.json
-framework: auto-detect
+framework: net5.0
 
 nuget mapster
 nuget EasyCaching.InMemory
 nuget FluentAssertions
 nuget Giraffe
-nuget TaskBuilder.fs ~> 2.2 prerelease
+nuget Ply
 nuget Microsoft.ApplicationInsights.AspNetCore
 nuget Npgsql.EntityFrameworkCore.PostgreSQL
 nuget xunit
 nuget xunit.runner.visualstudio
 nuget Z.EntityFramework.Plus.EFCore
-nuget ZeekoUtilsPack.BCLExt
 nuget FSharpx.Extras
 nuget FsToolkit.ErrorHandling
 // [ FAKE GROUP ]
@@ -24,5 +23,6 @@ group Build
     source https://www.myget.org/F/zeekoget/api/v3/index.json
     framework: netstandard2.0
     nuget Fake.DotNet.Cli
+    nuget Fake.Core
     nuget MyFakeTools 0.0.16
-nuget Fake.JavaScript.Npm
+    nuget Fake.JavaScript.Npm

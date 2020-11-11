@@ -2,7 +2,7 @@ module ZeekoBlog.Fun.Manage.Handlers.LoginHandler
 open Giraffe
 open ZeekoBlog.Fun.Manage.Pages
 open Microsoft.AspNetCore.Authentication
-open FSharp.Control.Tasks.V2
+open FSharp.Control.Tasks
 
 let handler : HttpHandler =
     fun next ctx ->

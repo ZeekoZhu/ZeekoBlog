@@ -1,11 +1,10 @@
-open Fake.MyFakeTools
-
 #load ".fake/build.fsx/intellisense.fsx"
+
+open Fake.MyFakeTools
 open Fake.Core
 open Fake.DotNet
 open Fake.IO
 open Fake.JavaScript
-open Fake.MyFakeTools
 
 module Docker =
     open System.IO

@@ -2,7 +2,7 @@ module ZeekoBlog.Fun.Manage.Handlers.IndexHandler
 open Giraffe
 open ZeekoBlog.Application.Services
 open ZeekoBlog.Fun.Manage.Pages
-open FSharp.Control.Tasks.V2
+open FSharp.Control.Tasks
 open Utils.TryParse
 open ZeekoBlog.Fun.Manage.Pages.Index
 open System.Linq

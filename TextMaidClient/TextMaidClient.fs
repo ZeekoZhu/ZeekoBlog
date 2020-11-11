@@ -4,6 +4,7 @@ open System
 open FSharpx
 open System.Threading.Tasks
 open HttpRequestMessage
+open FSharp.Control.Tasks
 open Newtonsoft.Json.Serialization
 
 module TextMaid =
@@ -25,7 +26,7 @@ module TextMaid =
         JsonConvert.SerializeObject(obj, jsonSetting)
     let decodeRespAsync<'a> (resp: HttpResponseMessage) =
         if resp.IsSuccessStatusCode then
-            Task.task {
+            task {
                 let! content = resp.Content.ReadAsStringAsync()
                 return JsonConvert.DeserializeObject<'a>(content) |> Some
             }

@@ -2,11 +2,12 @@ sudo: required
 language: csharp
 mono: none
 dist: xenial
-dotnet: 3.1.100
+dotnet: 5.0.100
 
-before_install: 
+before_install:
   - export PATH=$PATH:$HOME/.dotnet/tools
   - dotnet tool install -g paket
+  - dotnet tool restore
 
 cache:
   directories:
@@ -24,10 +25,10 @@ jobs:
   include:
     - stage: build
       if: tag =~ ^\d+\.\d+\.\d+-[a-zA-Z0-9.]+$
-      script: ./fake.sh build -t publish
+      script: dotnet fake build -t publish
       deploy:
         - provider: script
           skip_cleanup: true
-          script: ./fake.sh build -t docker:publish -- -t $TRAVIS_TAG -n hkccr.ccs.tencentyun.com/zeeko/blog-server -l
+          script: dotnet fake build -t docker:publish -- -t $TRAVIS_TAG -n hkccr.ccs.tencentyun.com/zeeko/blog-server -l
           on:
             tags: true

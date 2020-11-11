@@ -2,7 +2,7 @@ module ArticleHandler
 open Microsoft.AspNetCore.Http
 open Giraffe
 open ZeekoBlog.Application.Services
-open FSharp.Control.Tasks.V2
+open FSharp.Control.Tasks
 open ArticlePage
 
 let handler (id: int): HttpHandler =

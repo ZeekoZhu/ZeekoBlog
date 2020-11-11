@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyName>ZeekoBlog.Fun</AssemblyName>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZeekoBlog.Core\ZeekoBlog.Core.csproj" />
@@ -27,6 +27,7 @@
     <Compile Include="Manage\Handlers\Edit.fs" />
     <Compile Include="App.fs" />
     <Compile Include="Export.fs" />
+    <Content Include="paket.references" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

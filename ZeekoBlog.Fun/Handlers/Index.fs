@@ -3,7 +3,7 @@ open Microsoft.AspNetCore.Http
 open Giraffe
 open ZeekoBlog.Application.Services
 open Utils.TryParse
-open FSharp.Control.Tasks.V2
+open FSharp.Control.Tasks
 open IndexPage
 open System.Linq
 

@@ -1,6 +1,6 @@
 module ZeekoBlog.Fun.Manage.Handlers.EditHandler
 open Giraffe
-open FSharp.Control.Tasks.V2
+open FSharp.Control.Tasks
 open ZeekoBlog.Application.Services
 open ZeekoBlog.Fun.Manage.Pages
 
