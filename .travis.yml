@@ -1,6 +1,6 @@
-sudo: required
 language: csharp
 mono: none
+os: linux
 dist: xenial
 dotnet: 5.0.100
 
@@ -28,7 +28,7 @@ jobs:
       script: dotnet fake build -t publish
       deploy:
         - provider: script
-          skip_cleanup: true
+          cleanup: true
           script: dotnet fake build -t docker:publish -- -t $TRAVIS_TAG -n hkccr.ccs.tencentyun.com/zeeko/blog-server -l
           on:
             tags: true
