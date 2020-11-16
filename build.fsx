@@ -20,7 +20,7 @@ module GitHubActions =
         |> String.concat ","
     let setupEnv () =
         let githubEnv = Environment.environVar "GITHUB_ENV"
-        Trace.tracefn "DOCKER_TAGS=%s" githubEnv
+        Trace.tracefn "DOCKER_TAGS=%s" (getTag())
         File.append githubEnv [ sprintf "DOCKER_TAGS=%s" (getTag()) ]
 
 let npmInstall workDir =

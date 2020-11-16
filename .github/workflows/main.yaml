@@ -33,7 +33,7 @@ jobs:
 
       - name: Build
         run: dotnet fake build -t publish
-      
+
       - name: Docker Login
         uses: docker/login-action@v1.6.0
         with:
@@ -46,4 +46,4 @@ jobs:
       - name: Build and push Docker images
         uses: docker/build-push-action@v2.1.0
         with:
-          tags: $DOCKER_TAGS
+          tags: ${{env.DOCKER_TAGS}}
