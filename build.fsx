@@ -41,10 +41,6 @@ Target.create "restore:npm" (fun _ ->
     npmInstall "./ZeekoBlog"
 )
 
-Target.create "restore:dotnet" (fun _ ->
-    Shell.Exec ("paket", "restore") |> ignore
-)
-
 Target.create "build:node" (fun _ ->
     npmExec "./ZeekoBlog" "run build"
 )
@@ -79,7 +75,6 @@ Target.useTriggerCI ()
 Target.create "restore" ignore
 
 "restore:npm" ==> "restore"
-"restore:dotnet" ==> "restore"
 
 "restore"
     ==> "build:node"
