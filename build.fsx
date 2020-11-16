@@ -11,7 +11,7 @@ BuildServer.install [ GitHubActions.Installer ]
 
 module GitHubActions =
     let getTag () =
-        let tag = (Environment.environVar "GITHUB_REF").Substring(0, 10)
+        let tag = (Environment.environVar "GITHUB_REF").Substring(10)
         seq {
             tag
             "latest"
