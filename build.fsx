@@ -13,9 +13,10 @@ module GitHubActions =
     let getTag () =
         let tag = (Environment.environVar "GITHUB_REF").Substring(0, 10)
         seq {
-            sprintf "hkccr.ccs.tencentyun.com/zeeko/blog-server:%s" tag
-            "hkccr.ccs.tencentyun.com/zeeko/blog-server:latest"
+            tag
+            "latest"
         }
+        |> Seq.map (sprintf "blog-server/%s")
         |> String.concat ","
     let setupEnv () =
         let githubEnv = Environment.environVar "GITHUB_ENV"
