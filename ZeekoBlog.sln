@@ -29,8 +29,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fake", "Fake", "{CC76CA11-5CCD-4423-AF9C-C56A3859EC60}"
 	ProjectSection(SolutionItems) = preProject
 		build.fsx = build.fsx
-		fake.cmd = fake.cmd
-		fake.sh = fake.sh
 		paket.dependencies = paket.dependencies
 	EndProjectSection
 EndProject

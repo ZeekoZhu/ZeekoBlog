@@ -5,61 +5,21 @@ open Fake.Core
 open Fake.DotNet
 open Fake.IO
 open Fake.JavaScript
+open Fake.BuildServer
 
-module Docker =
-    open System.IO
-    let login () =
-        let dockerPwd = Environment.environVar "DOCKER_PASSWORD"
-        let dockerUsr = Environment.environVar "DOCKER_USERNAME"
-        let input = StreamRef.Empty
+BuildServer.install [ GitHubActions.Installer ]
 
-        let proc =
-            CreateProcess.fromRawCommand
-                "docker" [ "login"; "-u"; dockerUsr; "--password-stdin"; "hkccr.ccs.tencentyun.com/zeeko" ]
-            |> CreateProcess.withStandardInput (CreatePipe input)
-            |> Utils.showOutput
-            |> Proc.startRawSync
-        use inputWriter = new StreamWriter(input.Value)
-        inputWriter.WriteLine dockerPwd
-        inputWriter.Close()
-        proc.Result.Wait()
-
-    let build () =
-        Utils.dockerCmd "build" ["-t"; "hkccr.ccs.tencentyun.com/zeeko/blog-server:tmp"; "--build-arg"; "APPENV=Production"; "."]
-
-module Cli =
-    open CommandLine
-    type DockerPublishOptions =
-        { [<Option('t')>] Tag: string
-          [<Option('n')>] ImageName: string
-          [<Option('l')>] Latest: bool
-          [<Option("suffix")>] Suffix: string
-        }
-
-    let handleDockerPublish (opt: DockerPublishOptions) =
-        Docker.login ()
-        let localImg = sprintf "%s:tmp" opt.ImageName
-        let version = SemVer.parse opt.Tag
-        let major = string version.Major
-        let minor = major + "." + string version.Minor
-        let patch = minor + "." + string version.Patch
+module GitHubActions =
+    let getTag () =
+        let tag = (Environment.environVar "GITHUB_REF").Substring(0, 10)
         seq {
-            yield major
-            yield minor
-            yield patch
-            if opt.Latest then yield "latest"
+            sprintf "hkccr.ccs.tencentyun.com/zeeko/blog-server:%s" tag
+            "hkccr.ccs.tencentyun.com/zeeko/blog-server:latest"
         }
-        |> Seq.map (fun t ->
-             let tag = opt.ImageName + ":" + t
-             if String.isNullOrEmpty opt.Suffix then tag
-             else tag + "-" + opt.Suffix
-           )
-        |> Seq.iter (fun t ->
-            Trace.tracefn "Pushing %s" t
-            Utils.dockerCmd "tag" [ localImg; t ]
-            Utils.dockerCmd "push" [ t ]
-           )
-
+        |> String.concat ","
+    let setupEnv () =
+        let githubEnv = Environment.environVar "GITHUB_ENV"
+        File.append githubEnv [ sprintf "DOCKER_TAGS=%s" (getTag()) ]
 
 let npmInstall workDir =
     Trace.trace (sprintf "Npm restoring: %s" workDir)
@@ -116,12 +76,6 @@ open Fake.Core.TargetOperators
 
 Target.useTriggerCI ()
 
-Target.create "docker:publish"
-    ( fun p -> Utils.handleCli p.Context.Arguments Cli.handleDockerPublish)
-
-Target.create "docker:build"
-    ( fun _ -> Docker.build ())
-
 Target.create "restore" ignore
 
 "restore:npm" ==> "restore"
@@ -133,9 +87,9 @@ Target.create "restore" ignore
     ==> "test"
     ==> "publish"
 
-"docker:build" ==> "docker:publish"
-
-
+Target.create "github-actions" (fun _ ->
+        GitHubActions.setupEnv()
+    )
 
 // start build
 Target.runOrDefaultWithArguments "publish"
