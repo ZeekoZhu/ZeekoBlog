@@ -9,7 +9,7 @@ let isProd = (process.env.ASPNETCORE_ENVIRONMENT && process.env.ASPNETCORE_ENVIR
 
 let entries = {
     'zeeko': './wwwroot/ts/Zeeko.ts',
-    'white': './wwwroot/css/white/theme.less'
+    'style': './wwwroot/css/styles.css'
 };
 function createEntries() {
     let result = {};
@@ -29,7 +29,7 @@ let rules = [
         exclude: /node_modules/
     },
     {
-        test: /\.less$/,
+        test: /\.css$/,
         use: [
             {
                 loader: MiniCssExtractPlugin.loader
@@ -43,14 +43,6 @@ let rules = [
             },
             {
                 loader: 'postcss-loader',
-                options: {
-                    plugins: [
-                        require('autoprefixer')
-                    ]
-                }
-            },
-            {
-                loader: 'less-loader'
             }
         ]
     }

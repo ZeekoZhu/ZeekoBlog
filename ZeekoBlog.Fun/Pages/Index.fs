@@ -39,7 +39,10 @@ let sidebar =
     ]
 
 let header =
-    [ h1 [] [ rawText "网上冲浪指南" ]
+    [
+      div [ _class "h-80" ] [
+          h1 [ _class "text-6xl font-bold absolute bottom-16" ] [ rawText "网上冲浪指南" ]
+      ]
     ]
 
 module Index =
@@ -50,12 +53,12 @@ module Index =
             |> List.map
                 ( fun (key, articles) ->
                     seq {
-                        yield span [ _class "date section" ] [ rawText key ]
+                        yield span [ _class "z-section" ] [ rawText key ]
                         for article in articles do
-                            yield div [ _class "article-item" ]
-                                      [ span [ _class "title" ]
+                            yield div [ _class "mt-6" ]
+                                      [ span [ _class "text-xl underline" ]
                                              [ a [ _href (sprintf "a/%d" article.Id) ] [ rawText article.Title ] ]
-                                        div [ _class ("summary process_math" |> renderedClass article.DocType) ] [ rawText article.RenderedSummary ]
+                                        div [ _class ("mt-2 process_math" |> renderedClass article.DocType) ] [ rawText article.RenderedSummary ]
                                       ]
                     }
                 )
@@ -66,12 +69,12 @@ module Index =
                 [
                   div [ _class "articles" ]
                       articleList
-                  div [ _class "pagination" ]
-                      [ a [ _class (hideWhen (model.CurrentIndex = 1) |> sprintf "prev %s")
+                  div [ _class "w-full flex justify-center mt-12" ]
+                      [ a [ _class (hideWhen (model.CurrentIndex = 1) |> sprintf "prev paging-btn %s")
                             _href (model.CurrentIndex - 1 |> sprintf "/?p=%d")
                           ] [ rawText "上一页" ]
-                        span [ _class "current" ] [ rawText (model.CurrentIndex |> string) ]
-                        a [ _class (hideWhen (model.CurrentIndex = model.TotalPages) |> sprintf "next %s")
+                        span [ _class "paging black" ] [ rawText (model.CurrentIndex |> string) ]
+                        a [ _class (hideWhen (model.CurrentIndex = model.TotalPages) |> sprintf "next paging-btn %s")
                             _href (model.CurrentIndex + 1 |> sprintf "/?p=%d")
                           ] [ rawText "下一页" ]
                       ]
@@ -83,4 +86,4 @@ module Index =
           Body = [ viewBody ]
           Sidebar = sidebar
         }
-        |> LayoutPage.view layoutData
+        |> view layoutData

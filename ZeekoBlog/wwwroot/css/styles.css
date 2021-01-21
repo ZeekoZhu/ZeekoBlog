@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .z-container {
+        @apply xl:max-w-screen-xl lg:pr-32 lg:pl-32 mx-auto;
+    }
+
+    .z-section {
+        @apply w-full font-bold text-xl flex items-center mt-10 relative;
+    }
+
+    .z-section::before {
+        content: '';
+        display: block;
+        width: .25em;
+        height: 1.25em;
+        background: #666;
+        left: -1rem;
+        position: absolute;
+    }
+
+    .z-side-items {
+        width: 200px;
+        @apply ml-16;
+    }
+
+    .paging-btn {
+        @apply w-16 text-center h-7 flex justify-center items-center;
+        @apply text-gray-900 bg-gray-100;
+    }
+
+    .paging-btn.black {
+        @apply text-white bg-z-gray;
+    }
+}
+
+@layer utilities {
+    .heimu {
+        color: #252525;
+        text-shadow: none;
+        background-color: #252525;
+        transition: color .13s linear;
+        @apply hover:text-white
+    }
+}
+
+.rendered {
+    @apply text-z-gray;
+}
+
