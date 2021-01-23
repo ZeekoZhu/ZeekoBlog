@@ -8,12 +8,11 @@ let katexResource = [
 ]
 
 let sideGroup title content =
-    div [ _class "side-card" ] [
-        div [ _class "side-title" ] [
+    [
+        div [ _class "z-section" ] [
             h3 [] [ rawText title ]
         ]
-        div [ _class "divide" ] []
-        div [ _class "side-body" ] content
+        div [ _class "flex flex-col flex-nowrap space-y-0.5 mt-3" ] content
     ]
 
 let gtag = [

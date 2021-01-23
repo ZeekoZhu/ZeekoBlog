@@ -49,7 +49,7 @@ let view (data: LayoutModel) (slots: LayoutSlot) =
                    div [ _class "module" ] slots.Body
                    div [ _class "z-side-items" ] slots.Sidebar
                ]
-               div [ _class "z-container font-mono text-sm mt-20" ] [
+               div [ _class "z-container font-mono text-sm mt-20 mb-10" ] [
                    div [] [
                        p [] [
                            rawText "本网站所展示的文章由 Zeeko Zhu 采用知识共享署名-相同方式共享 4.0 国际许可协议进行许可"

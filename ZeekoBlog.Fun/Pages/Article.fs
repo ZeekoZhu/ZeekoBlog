@@ -20,7 +20,7 @@ let view (model: ArticleModel) =
         { Title = model.Article.Title }
     let sidebar =
         if model.TOCList |> List.isEmpty then []
-        else [ sideGroup "内容导航"
+        else sideGroup "内容导航"
                   [ ul [ _class "toc-list" ]
                        ( model.TOCList
                          |> List.ofSeq
@@ -33,7 +33,6 @@ let view (model: ArticleModel) =
                             )
                        )
                   ]
-             ]
     let pageUrl = "https://gianthard.rocks/a/" + model.Article.Id.ToString()
     let pageId = "zeeko-blog/a/" + model.Article.Id.ToString()
     let title = model.Article.Title

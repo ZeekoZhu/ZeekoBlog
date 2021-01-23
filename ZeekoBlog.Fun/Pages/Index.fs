@@ -14,7 +14,7 @@ type IndexModel =
 
 
 let hideWhen condition =
-    if condition then "hide" else ""
+    if condition then "hidden" else ""
 
 let layoutData =
     { Title = "首页" }
@@ -30,13 +30,9 @@ let friendLinks =
       "https://codeporter.dev", "Tim's Blog"
     ]
     |> List.map
-        ( fun (link, text) -> a [ _class "side-item"; _href link; _target "_blank" ] [ rawText text ])
+        ( fun (link, text) -> a [ _class "underline"; _href link; _target "_blank" ] [ rawText text ])
 
-let sidebar =
-    [ sideGroup
-        "友情链接"
-        friendLinks
-    ]
+let sidebar = sideGroup "友情链接" friendLinks
 
 let header =
     [
@@ -73,7 +69,7 @@ module Index =
                       [ a [ _class (hideWhen (model.CurrentIndex = 1) |> sprintf "prev paging-btn %s")
                             _href (model.CurrentIndex - 1 |> sprintf "/?p=%d")
                           ] [ rawText "上一页" ]
-                        span [ _class "paging black" ] [ rawText (model.CurrentIndex |> string) ]
+                        span [ _class "paging-btn black" ] [ rawText (model.CurrentIndex |> string) ]
                         a [ _class (hideWhen (model.CurrentIndex = model.TotalPages) |> sprintf "next paging-btn %s")
                             _href (model.CurrentIndex + 1 |> sprintf "/?p=%d")
                           ] [ rawText "下一页" ]
