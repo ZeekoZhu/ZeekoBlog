@@ -53,6 +53,11 @@
     <_ContentIncludedByDefault Remove="artifacts\tsconfig.json" />
     <_ContentIncludedByDefault Remove="artifacts\ZeekoBlog.deps.json" />
     <_ContentIncludedByDefault Remove="artifacts\ZeekoBlog.runtimeconfig.json" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\article\rendered-content.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\article\sudo.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\article\text.adoc.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\article\text.md.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\article\variables.css" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

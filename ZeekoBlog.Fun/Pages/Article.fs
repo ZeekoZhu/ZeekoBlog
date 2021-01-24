@@ -7,7 +7,7 @@ open LayoutPage
 open Common
 
 let header =
-    [ a [ _href "/" ] [ rawText "目录：网上冲浪指南" ] ]
+    [ a [ _class "font-bold mt-4 inline-block" ; _href "/" ] [ rawText "目录：网上冲浪指南" ] ]
 
 type ArticleModel =
     { Article: Article
@@ -20,20 +20,19 @@ let view (model: ArticleModel) =
         { Title = model.Article.Title }
     let sidebar =
         if model.TOCList |> List.isEmpty then []
-        else [ sideGroup "内容导航"
-                  [ ul [ _class "toc-list" ]
+        else sideGroup "内容导航"
+                  [ ul [ _class "toc-list text-sm space-y-1.5" ]
                        ( model.TOCList
                          |> List.ofSeq
                          |> List.map
                             ( fun item ->
                                 li [ _class (sprintf "toc-H%d" item.Level) ]
-                                   [ a [ _href (sprintf "#%s" item.AnchorName) ]
+                                   [ a [ _class "link" ; _href (sprintf "#%s" item.AnchorName) ]
                                        [ rawText item.Name ]
                                    ]
                             )
                        )
                   ]
-             ]
     let pageUrl = "https://gianthard.rocks/a/" + model.Article.Id.ToString()
     let pageId = "zeeko-blog/a/" + model.Article.Id.ToString()
     let title = model.Article.Title
@@ -62,10 +61,10 @@ s.setAttribute('data-timestamp', +new Date());
     // view
     let viewBody =
         div []
-            [ h1 [ _class "title" ] [ rawText model.Article.Title ]
+            [ h1 [ _class "text-4xl mt-10 mb-8" ] [ rawText model.Article.Title ]
               div []
-                  [ span [ _class "weak" ] [ rawText (model.Article.Created.ToString("yyyy/MM/dd")) ] ]
-              article [ "process_math" |> renderedClass model.Article.DocType |> _class ]
+                  [ span [] [ rawText (model.Article.Created.ToString("yyyy/MM/dd")) ] ]
+              article [ "mt-7 process_math" |> renderedClass model.Article.DocType |> _class ]
                   [ rawText model.Article.RenderedContent
                   ]
               div [ _id "disqus_thread" ] []
