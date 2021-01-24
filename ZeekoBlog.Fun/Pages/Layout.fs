@@ -28,7 +28,7 @@ let favicons =
          >> favicon)
 
 let view (data: LayoutModel) (slots: LayoutSlot) =
-    html [] [
+    html [ _lang "zh" ] [
         head
             []
             ([ meta [ _charset "utf-8" ]
@@ -39,7 +39,8 @@ let view (data: LayoutModel) (slots: LayoutSlot) =
                    rawText (sprintf "%s - 网上冲浪指南" data.Title)
                ]
                yandexTag
-               linkStyle "/dist/theme.css" ]
+               linkStyle "/dist/theme.css"
+               linkStyle "/dist/article.css" ]
              @ favicons @ slots.Styles)
         body
             []

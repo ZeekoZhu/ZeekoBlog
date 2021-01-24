@@ -23,7 +23,9 @@
 
     .z-side-items {
         width: 200px;
-        @apply ml-16;
+        @apply ml-16 sticky top-4;
+        height: max-content;
+        flex-shrink: 0;
     }
 
     .paging-btn {
@@ -34,6 +36,31 @@
     .paging-btn.black {
         @apply text-white bg-z-gray;
     }
+
+    .toc-list {
+        list-style: none;
+        font-size: 80%;
+        margin: 0;
+        padding: 0;
+        overflow: visible;
+        white-space: nowrap;
+    }
+
+    .toc-list li {
+        display: block;
+    }
+
+    .toc-list .toc-H3 {
+        margin-left: 1rem;
+    }
+
+    .toc-list .toc-H4 {
+        margin-left: 2rem;
+    }
+
+    .toc-list .toc-H5 {
+        margin-left: 3rem;
+    }
 }
 
 @layer utilities {
@@ -43,6 +70,22 @@
         background-color: #252525;
         transition: color .13s linear;
         @apply hover:text-white
+    }
+
+    @layer utilities {
+        .link {
+            color: #0072c6;
+            border-color: #0072c6;
+            @apply border-b;
+            transition: all 0.1s;
+        }
+
+        .link:hover {
+            color: #004185;
+            border-color: #004185;
+            border-bottom-width: 3px;
+            margin-bottom: -2px;
+        }
     }
 }
 
