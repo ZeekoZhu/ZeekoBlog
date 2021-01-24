@@ -1,10 +1,10 @@
 /// <binding BeforeBuild='Run - Development' />
 'use strict'
-const TerserPlugin = require('terser-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-let isProd = (process.env.ASPNETCORE_ENVIRONMENT && process.env.ASPNETCORE_ENVIRONMENT.toLowerCase() === 'production') || (process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() === 'production')
+let isProd = (process.env.ASPNETCORE_ENVIRONMENT && process.env.ASPNETCORE_ENVIRONMENT.toLowerCase() === 'production')
+    || (process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() === 'production')
 
 
 let entries = {
@@ -62,11 +62,6 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: '[name].css',
         }),
-        new OptimizeCssAssetsPlugin({
-            cssProcessorOptions: {
-                map: isProd ? undefined : { inline: true },
-            },
-        }),
     ],
     output: {
         path: __dirname + '/wwwroot/dist', //打包后的文件存放的地方
@@ -79,25 +74,11 @@ module.exports = {
         extensions: ['.ts', '.css'],
     },
     optimization: {
-        splitChunks: {
-            cacheGroups: {
-                styles: {
-                    name: 'theme',
-                    test: /\.css$/,
-                    chunks: 'all',
-                    enforce: true,
-                },
-                commons: {
-                    test: /\.(ts|js)$/,
-                    name: 'commons',
-                    chunks: 'initial',
-                    minChunks: 2,
-                    minSize: 0,
-                },
-            },
-        },
-        minimizer: [new TerserPlugin()],
+        minimize: isProd,
+        minimizer: [
+            new CssMinimizerPlugin()
+        ]
     },
-    devtool: isProd ? '' : 'inline-source-map',
+    devtool: isProd ? false : 'inline-source-map',
     mode: isProd ? 'production' : 'development',
 }
