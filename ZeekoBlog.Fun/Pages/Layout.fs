@@ -46,7 +46,7 @@ let view (data: LayoutModel) (slots: LayoutSlot) =
             []
             ([ yandexNoScript
                div [ _class "z-container relative" ] slots.Header
-               div [ _class "z-container flex flex-row flex-nowrap" ] [
+               div [ _class "z-container flex sm:flex-row flex-col flex-nowrap" ] [
                    div [ _class "module" ] slots.Body
                    div [ _class "z-side-items" ] slots.Sidebar
                ]

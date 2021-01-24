@@ -36,8 +36,8 @@ let sidebar = sideGroup "友情链接" friendLinks
 
 let header =
     [
-      div [ _class "h-80" ] [
-          h1 [ _class "text-6xl font-bold absolute bottom-16" ] [ rawText "网上冲浪指南" ]
+      div [ _class "sm:h-80 h-40" ] [
+          h1 [ _class "text-6xl font-bold absolute sm:bottom-16 bottom-0" ] [ rawText "网上冲浪指南" ]
       ]
     ]
 

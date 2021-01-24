@@ -4,7 +4,7 @@
 
 @layer components {
     .z-container {
-        @apply xl:max-w-screen-xl lg:pr-32 lg:pl-32 mx-auto;
+        @apply xl:max-w-screen-xl lg:pr-32 lg:pl-32 lg:mx-auto ml-8 mr-8;
     }
 
     .z-section {
