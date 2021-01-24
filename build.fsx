@@ -88,5 +88,8 @@ Target.create "github-actions" (fun _ ->
         GitHubActions.setupEnv()
     )
 
+Environment.setEnvironVar "NODE_ENV" "production"
+Environment.setEnvironVar "ASPNETCORE_ENVIRONMENT" "production"
+
 // start build
 Target.runOrDefaultWithArguments "publish"
