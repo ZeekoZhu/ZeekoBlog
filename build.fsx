@@ -44,9 +44,9 @@ Target.create "restore:npm" (fun _ ->
 )
 
 Target.create "build:node" (fun _ ->
-    let installed = Shell.testDir "./ZeekoBlog/node_modules"
-    Trace.tracefn "Is node_modules existing? %A" installed
-    npmExec "./ZeekoBlog" "run build"
+    Shell.pushd "./ZeekoBlog"
+    if Shell.Exec ("./node_modules/.bin/webpack") <> 0 then failwith "npm build failed"
+    Shell.popd ()
 )
 
 Target.create "build:dotnet" (fun _ ->
