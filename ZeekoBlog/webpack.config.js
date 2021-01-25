@@ -1,4 +1,5 @@
-'use strict'
+const paths = require('module')._resolveLookupPaths('css-minimizer-webpack-plugin')
+console.log(paths)
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 let isProd = (process.env.ASPNETCORE_ENVIRONMENT && process.env.ASPNETCORE_ENVIRONMENT.toLowerCase() === 'production')

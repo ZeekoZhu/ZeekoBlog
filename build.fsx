@@ -44,6 +44,8 @@ Target.create "restore:npm" (fun _ ->
 )
 
 Target.create "build:node" (fun _ ->
+    let installed = Shell.testDir "./ZeekoBlog/node_modules"
+    Trace.tracefn "Is node_modules existing? %A" installed
     npmExec "./ZeekoBlog" "run build"
 )
 
