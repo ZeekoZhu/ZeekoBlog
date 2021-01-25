@@ -46,8 +46,10 @@ Target.create "restore:npm" (fun _ ->
 
 Target.create "build:node" (fun _ ->
     Shell.pushd "./ZeekoBlog"
-    let webpack = "./node_modules/.bin/webpack"
-    Path.GetFullPath webpack |> Trace.tracefn "webpack cli path: %A"
+    let webpack = "./node_modules/.bin/webpack" |> Path.getFullName
+    webpack |> Trace.tracefn "webpack cli path: %A"
+    Shell.Exec "ls -al node_modules/.bin" |> ignore
+    Shell.Exec "ls -al node_modules/" |> ignore
     if Shell.Exec webpack <> 0 then failwith "npm build failed"
     Shell.popd ()
 )
