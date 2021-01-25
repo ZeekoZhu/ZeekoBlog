@@ -1,3 +1,4 @@
+open System.IO
 #load ".fake/build.fsx/intellisense.fsx"
 
 open Fake.MyFakeTools
@@ -45,7 +46,9 @@ Target.create "restore:npm" (fun _ ->
 
 Target.create "build:node" (fun _ ->
     Shell.pushd "./ZeekoBlog"
-    if Shell.Exec ("./node_modules/.bin/webpack") <> 0 then failwith "npm build failed"
+    let webpack = "./node_modules/.bin/webpack"
+    Path.GetFullPath webpack |> Trace.tracefn "webpack cli path: %A"
+    if Shell.Exec webpack <> 0 then failwith "npm build failed"
     Shell.popd ()
 )
 
