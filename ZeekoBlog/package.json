@@ -23,7 +23,7 @@
         "zepto": "^1.2.0"
     },
     "scripts": {
-        "build": "npx webpack",
-        "watch": "npx webpack --watch"
+        "build": "./node_modules/.bin/webpack",
+        "watch": "webpack --watch"
     }
 }
