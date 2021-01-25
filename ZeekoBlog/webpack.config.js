@@ -1,6 +1,5 @@
 'use strict'
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 let isProd = (process.env.ASPNETCORE_ENVIRONMENT && process.env.ASPNETCORE_ENVIRONMENT.toLowerCase() === 'production')
     || (process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() === 'production')
@@ -25,8 +24,11 @@ function createEntries() {
 
 const cssLoaders = [
     {
-        loader: MiniCssExtractPlugin.loader,
-    },
+        loader: 'file-loader',
+        options: {
+            name: '[name].[ext]'
+        }
+    }, 'extract-loader',
     {
         loader: 'css-loader',
         options: {
@@ -57,11 +59,6 @@ let rules = [
 
 module.exports = {
     entry: createEntries(),
-    plugins: [
-        new MiniCssExtractPlugin({
-            filename: '[name].css',
-        }),
-    ],
     output: {
         path: __dirname + '/wwwroot/dist', //打包后的文件存放的地方
         filename: '[name].js', //打包后输出文件的文件名
@@ -75,8 +72,8 @@ module.exports = {
     optimization: {
         minimize: isProd,
         minimizer: [
-            new CssMinimizerPlugin()
-        ]
+            new CssMinimizerPlugin(),
+        ],
     },
     devtool: isProd ? false : 'inline-source-map',
     mode: isProd ? 'production' : 'development',
