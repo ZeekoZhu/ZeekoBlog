@@ -44,9 +44,7 @@ Target.create "restore:npm" (fun _ ->
 )
 
 Target.create "build:node" (fun _ ->
-    Shell.pushd "./ZeekoBlog"
-    Shell.Exec ("npm", "run build", null) |> ignore
-    Shell.popd ()
+    npmExec "./ZeekoBlog" "run build"
 )
 
 Target.create "build:dotnet" (fun _ ->
