@@ -48,3 +48,4 @@ jobs:
         with:
           tags: ${{env.DOCKER_TAGS}}
           context: ${{github.workspace}}
+          push: true
