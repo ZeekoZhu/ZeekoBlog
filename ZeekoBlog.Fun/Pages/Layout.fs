@@ -39,8 +39,8 @@ let view (data: LayoutModel) (slots: LayoutSlot) =
                    rawText (sprintf "%s - 网上冲浪指南" data.Title)
                ]
                yandexTag
-               linkStyle "/dist/theme.css"
-               linkStyle "/dist/article.css" ]
+               linkStyle "/dist/styles.css"
+               linkStyle "/dist/rendered-content.css" ]
              @ favicons @ slots.Styles)
         body
             []
