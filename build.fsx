@@ -17,7 +17,7 @@ module GitHubActions =
             tag
             "latest"
         }
-        |> Seq.map (sprintf "blog-server/%s")
+        |> Seq.map (sprintf "hkccr.ccs.tencentyun.com/zeeko/blog-server:%s")
         |> String.concat ","
     let setupEnv () =
         let githubEnv = Environment.environVar "GITHUB_ENV"
