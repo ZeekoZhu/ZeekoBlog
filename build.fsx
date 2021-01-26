@@ -41,7 +41,11 @@ Target.create "Default" (fun _ ->
 )
 
 Target.create "restore:npm" (fun _ ->
-    npmInstall "./ZeekoBlog"
+    Shell.pushd "./ZeekoBlog"
+    if Shell.Exec ("npm", "install") <> 0 then failwith "npm install failed"
+    Shell.Exec ("ls"," -al node_modules/.bin") |> ignore
+    Shell.Exec ("ls"," -al node_modules/") |> ignore
+    Shell.popd ()
 )
 
 Target.create "build:node" (fun _ ->
