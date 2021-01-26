@@ -41,23 +41,13 @@ Target.create "Default" (fun _ ->
 )
 
 Target.create "restore:npm" (fun _ ->
-    Shell.pushd "./ZeekoBlog"
-    if Shell.Exec ("npm", "install") <> 0 then failwith "npm install failed"
-    Shell.Exec ("npm","-v") |> ignore
-    Shell.Exec ("node","-v") |> ignore
-    Shell.Exec ("ls"," -al node_modules/.bin") |> ignore
-    Shell.Exec ("ls"," -al node_modules/") |> ignore
-    Shell.popd ()
+    npmInstall "./ZeekoBlog"
 )
 
 Target.create "build:node" (fun _ ->
-    Shell.pushd "./ZeekoBlog"
-    let webpack = "./node_modules/.bin/webpack" |> Path.getFullName
-    webpack |> Trace.tracefn "webpack cli path: %A"
-    Shell.Exec ("ls"," -al node_modules/.bin") |> ignore
-    Shell.Exec ("ls"," -al node_modules/") |> ignore
-    if Shell.Exec webpack <> 0 then failwith "npm build failed"
-    Shell.popd ()
+    Environment.setEnvironVar "NODE_ENV" "production"
+    npmExec "./ZeekoBlog" "run build:prod"
+    Environment.clearEnvironVar "NODE_ENV"
 )
 
 Target.create "build:dotnet" (fun _ ->
@@ -101,7 +91,6 @@ Target.create "github-actions" (fun _ ->
         GitHubActions.setupEnv()
     )
 
-Environment.setEnvironVar "NODE_ENV" "production"
 Environment.setEnvironVar "ASPNETCORE_ENVIRONMENT" "production"
 
 // start build

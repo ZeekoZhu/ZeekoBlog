@@ -24,6 +24,7 @@
     },
     "scripts": {
         "build": "webpack",
+        "build:prod": "webpack --mode production",
         "watch": "webpack --watch"
     }
 }

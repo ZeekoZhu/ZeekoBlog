@@ -1,10 +1,4 @@
-const paths = require('module')._resolveLookupPaths('css-minimizer-webpack-plugin')
-console.log(paths)
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-
-let isProd = (process.env.ASPNETCORE_ENVIRONMENT && process.env.ASPNETCORE_ENVIRONMENT.toLowerCase() === 'production')
-    || (process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() === 'production')
-
 
 let entries = {
     'zeeko': './wwwroot/ts/Zeeko.ts',
@@ -23,12 +17,12 @@ function createEntries() {
     return result
 }
 
-const cssLoaders = [
+const cssLoaders = isProd => [
     {
         loader: 'file-loader',
         options: {
-            name: '[name].[ext]'
-        }
+            name: '[name].[ext]',
+        },
     }, 'extract-loader',
     {
         loader: 'css-loader',
@@ -41,7 +35,7 @@ const cssLoaders = [
         loader: 'postcss-loader',
     },
 ]
-let rules = [
+let rules = isProd => [
     {
         test: /\.ts$/,
         loader: 'ts-loader',
@@ -49,33 +43,35 @@ let rules = [
     },
     {
         test: /\.css$/,
-        use: cssLoaders,
+        use: cssLoaders(isProd),
     },
     {
         test: /\.less$/,
-        use: [...cssLoaders, { loader: 'less-loader' }],
+        use: [...cssLoaders(isProd), { loader: 'less-loader' }],
     },
 ]
 
 
-module.exports = {
-    entry: createEntries(),
-    output: {
-        path: __dirname + '/wwwroot/dist', //打包后的文件存放的地方
-        filename: '[name].js', //打包后输出文件的文件名
-    },
-    module: {
-        rules: rules,
-    },
-    resolve: {
-        extensions: ['.ts', '.css'],
-    },
-    optimization: {
-        minimize: isProd,
-        minimizer: [
-            new CssMinimizerPlugin(),
-        ],
-    },
-    devtool: isProd ? false : 'inline-source-map',
-    mode: isProd ? 'production' : 'development',
+module.exports = env => {
+    const isProd = env.production
+    return {
+        entry: createEntries(),
+        output: {
+            path: __dirname + '/wwwroot/dist', //打包后的文件存放的地方
+            filename: '[name].js', //打包后输出文件的文件名
+        },
+        module: {
+            rules: rules(isProd),
+        },
+        resolve: {
+            extensions: ['.ts', '.css'],
+        },
+        optimization: {
+            minimize: isProd,
+            minimizer: [
+                new CssMinimizerPlugin(),
+            ],
+        },
+        devtool: isProd ? false : 'inline-source-map',
+    }
 }
