@@ -23,7 +23,7 @@
 
     .z-side-items {
         width: 200px;
-        @apply ml-16 sticky top-4;
+        @apply md:ml-16 sticky top-4;
         height: max-content;
         flex-shrink: 0;
     }
