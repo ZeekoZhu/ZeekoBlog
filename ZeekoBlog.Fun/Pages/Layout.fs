@@ -43,11 +43,11 @@ let view (data: LayoutModel) (slots: LayoutSlot) =
                linkStyle "/dist/rendered-content.css" ]
              @ favicons @ slots.Styles)
         body
-            []
+            [ _class "flex flex-col h-screen" ]
             ([ yandexNoScript
                div [ _class "z-container relative" ] slots.Header
-               div [ _class "z-container flex sm:flex-row flex-col flex-nowrap" ] [
-                   div [ _class "module" ] slots.Body
+               div [ _class "z-container flex-grow flex sm:flex-row flex-col flex-nowrap" ] [
+                   div [ _class "module min-w-0" ] slots.Body
                    div [ _class "z-side-items" ] slots.Sidebar
                ]
                div [ _class "z-container font-mono text-sm mt-20 mb-10" ] [
