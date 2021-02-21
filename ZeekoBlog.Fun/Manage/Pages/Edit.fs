@@ -69,10 +69,11 @@ let view (model: EditModel) =
                   ]
             ]
     { Scripts = scripts
-      Header = header 
+      Header = header
       ModuleName = "edit-module"
       Styles = [ emptyText ]
       Body = [ viewBody ]
       Sidebar = []
+      Meta = []
     }
     |> LayoutPage.view layoutData

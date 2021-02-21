@@ -43,10 +43,11 @@ let view (model: IndexModel) =
                   )
             ]
     { Scripts = scripts
-      Header = header 
+      Header = header
       ModuleName = "sudo-module"
       Styles = [ emptyText ]
       Body = [ viewBody ]
       Sidebar = []
+      Meta = []
     }
     |> LayoutPage.view layoutData

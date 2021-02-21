@@ -49,5 +49,6 @@ let view =
       ModuleName = "login-module"
       Styles = [ emptyText ]
       Body = [ viewBody ]
+      Meta = []
       Sidebar = [] }
     |> LayoutPage.view layoutData

@@ -81,5 +81,6 @@ module Index =
           Styles = [ emptyText ]
           Body = [ viewBody ]
           Sidebar = sidebar
+          Meta = []
         }
         |> view layoutData

@@ -15,9 +15,20 @@ type ArticleModel =
       TOCList: TOCItem list
     }
 
+let og prop value =
+    meta [ attr "property" ("og:" + prop); attr "content" value ]
+
 let view (model: ArticleModel) =
     let layoutModel: LayoutModel =
         { Title = model.Article.Title }
+    let pageUrl = "https://gianthard.rocks/a/" + model.Article.Id.ToString()
+    let meta = [
+        og "title" model.Article.Title
+        og "type" "article"
+        og "url" pageUrl
+        og "description" model.Article.Summary
+        og "site_name" "网上冲浪指南"
+    ]
     let sidebar =
         if model.TOCList |> List.isEmpty then []
         else sideGroup "内容导航"
@@ -33,7 +44,6 @@ let view (model: ArticleModel) =
                             )
                        )
                   ]
-    let pageUrl = "https://gianthard.rocks/a/" + model.Article.Id.ToString()
     let pageId = "zeeko-blog/a/" + model.Article.Id.ToString()
     let title = model.Article.Title
     let scripts =
@@ -78,5 +88,6 @@ s.setAttribute('data-timestamp', +new Date());
       ModuleName = "article-module"
       Body = [ viewBody ]
       Sidebar = sidebar
+      Meta = meta
     }
-    |> LayoutPage.view layoutModel
+    |> view layoutModel

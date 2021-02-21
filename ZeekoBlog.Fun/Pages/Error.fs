@@ -32,5 +32,6 @@ let view (model: ErrorModel) =
           ModuleName = "error-module"
           Body = [ viewBody ]
           Sidebar = []
+          Meta = []
         }
     layoutSlot |> LayoutPage.view layoutModel

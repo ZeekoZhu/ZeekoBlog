@@ -9,6 +9,7 @@ type LayoutModel = { Title: string }
 type LayoutSlot =
     { Styles: XmlNode list
       Header: XmlNode list
+      Meta: XmlNode list
       Body: XmlNode list
       Sidebar: XmlNode list
       Scripts: XmlNode list
@@ -35,13 +36,15 @@ let view (data: LayoutModel) (slots: LayoutSlot) =
                meta [ _lang "zh" ]
                meta [ _name "viewport"
                       _content "width=device-width, initial-scale=1.0" ]
+               yield! slots.Meta
                title [] [
                    rawText (sprintf "%s - 网上冲浪指南" data.Title)
                ]
                yandexTag
                linkStyle "/dist/styles.css"
-               linkStyle "/dist/rendered-content.css" ]
-             @ favicons @ slots.Styles)
+               linkStyle "/dist/rendered-content.css"
+               yield! favicons
+               yield! slots.Styles ])
         body
             [ _class "flex flex-col h-screen" ]
             ([ yandexNoScript
@@ -60,6 +63,6 @@ let view (data: LayoutModel) (slots: LayoutSlot) =
                        ]
                    ]
                ]
-               script [ _src "/lib/zepto.min.js" ] [] ]
-             @ slots.Scripts)
+               script [ _src "/lib/zepto.min.js" ] []
+               yield! slots.Scripts ])
     ]
