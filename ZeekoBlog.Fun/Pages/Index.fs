@@ -1,4 +1,5 @@
 module IndexPage
+
 open Giraffe
 open GiraffeViewEngine
 open LayoutPage
@@ -13,74 +14,96 @@ type IndexModel =
       TotalPages: int }
 
 
-let hideWhen condition =
-    if condition then "hidden" else ""
+let hideWhen condition = if condition then "hidden" else ""
 
-let layoutData =
-    { Title = "首页" }
+let layoutData = { Title = "首页" }
 
-let scripts =
-    katexResource
+let scripts = katexResource
 
 let friendLinks =
     [ "https://rocka.me", "Rocket1184"
       "https://jolyne.club", "Neatline"
       "https://www.jijiwuming.cn", "jijiwuming"
       "https://meowv.com", "阿星Plus"
-      "https://codeporter.dev", "Tim's Blog"
-    ]
-    |> List.map
-        ( fun (link, text) -> a [ _class "underline"; _href link; _target "_blank" ] [ rawText text ])
+      "https://codeporter.dev", "Tim's Blog" ]
+    |> List.map (fun (link, text) ->
+        a [ _class "underline"
+            _href link
+            _target "_blank" ] [
+            rawText text
+        ])
 
-let sidebar = sideGroup "友情链接" friendLinks
+let sidebar =
+    sideGroup "友情链接" friendLinks
+    @ sideGroup
+        "订阅"
+          [ a [ _class "underline"; _href "/feed" ] [
+              rawText "Atom Feed"
+            ] ]
 
 let header =
-    [
-      div [ _class "sm:h-80 h-40" ] [
-          h1 [ _class "text-6xl font-bold absolute sm:bottom-16 bottom-0" ] [ rawText "网上冲浪指南" ]
-      ]
-    ]
+    [ div [ _class "sm:h-80 h-40" ] [
+        h1 [ _class "text-6xl font-bold absolute sm:bottom-16 bottom-0" ] [
+            rawText "网上冲浪指南"
+        ]
+      ] ]
 
 module Index =
     let view model =
         let articleList =
             model.Articles
             |> List.groupBy (fun x -> sprintf "%d / %02d" x.Created.Year x.Created.Month)
-            |> List.map
-                ( fun (key, articles) ->
-                    seq {
-                        yield span [ _class "z-section" ] [ rawText key ]
-                        for article in articles do
-                            yield div [ _class "mt-6" ]
-                                      [ span [ _class "text-xl underline" ]
-                                             [ a [ _href (sprintf "a/%d" article.Id) ] [ rawText article.Title ] ]
-                                        div [ _class ("mt-2 process_math" |> renderedClass article.DocType) ] [ rawText article.RenderedSummary ]
-                                      ]
-                    }
-                )
+            |> List.map (fun (key, articles) ->
+                seq {
+                    yield
+                        span [ _class "z-section" ] [
+                            rawText key
+                        ]
+
+                    for article in articles do
+                        yield
+                            div [ _class "mt-6" ] [
+                                span [ _class "text-xl underline" ] [
+                                    a [ _href (sprintf "a/%d" article.Id) ] [
+                                        rawText article.Title
+                                    ]
+                                ]
+                                div [ _class
+                                          ("mt-2 process_math"
+                                           |> renderedClass article.DocType) ] [
+                                    rawText article.RenderedSummary
+                                ]
+                            ]
+                })
             |> List.collect List.ofSeq
 
         let viewBody =
-            div [ _class "index" ]
-                [
-                  div [ _class "articles" ]
-                      articleList
-                  div [ _class "w-full flex justify-center mt-12" ]
-                      [ a [ _class (hideWhen (model.CurrentIndex = 1) |> sprintf "prev paging-btn %s")
-                            _href (model.CurrentIndex - 1 |> sprintf "/?p=%d")
-                          ] [ rawText "上一页" ]
-                        span [ _class "paging-btn black" ] [ rawText (model.CurrentIndex |> string) ]
-                        a [ _class (hideWhen (model.CurrentIndex = model.TotalPages) |> sprintf "next paging-btn %s")
-                            _href (model.CurrentIndex + 1 |> sprintf "/?p=%d")
-                          ] [ rawText "下一页" ]
-                      ]
+            div [ _class "index" ] [
+                div [ _class "articles" ] articleList
+                div [ _class "w-full flex justify-center mt-12" ] [
+                    a [ _class
+                            (hideWhen (model.CurrentIndex = 1)
+                             |> sprintf "prev paging-btn %s")
+                        _href (model.CurrentIndex - 1 |> sprintf "/?p=%d") ] [
+                        rawText "上一页"
+                    ]
+                    span [ _class "paging-btn black" ] [
+                        rawText (model.CurrentIndex |> string)
+                    ]
+                    a [ _class
+                            (hideWhen (model.CurrentIndex = model.TotalPages)
+                             |> sprintf "next paging-btn %s")
+                        _href (model.CurrentIndex + 1 |> sprintf "/?p=%d") ] [
+                        rawText "下一页"
+                    ]
                 ]
+            ]
+
         { Scripts = scripts
           Header = header
           ModuleName = "index-module"
           Styles = [ emptyText ]
           Body = [ viewBody ]
           Sidebar = sidebar
-          Meta = []
-        }
+          Meta = [] }
         |> view layoutData
