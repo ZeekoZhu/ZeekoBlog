@@ -16,6 +16,7 @@ let generateFeedEntry (article: Article) =
     let url =
         Constants.blogPath "/a/" + article.Id.ToString()
     let entry = SyndicationItem()
+    entry.Id <- url
     entry.Title <- TextSyndicationContent(article.Title)
     entry.Content <- TextSyndicationContent.CreateHtmlContent(article.RenderedContent)
     entry.Links.Add(SyndicationLink(Uri(url)))
