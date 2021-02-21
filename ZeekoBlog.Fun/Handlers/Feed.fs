@@ -19,9 +19,9 @@ let generateFeedEntry (article: Article) =
     entry.Title <- TextSyndicationContent(article.Title)
     entry.Content <- TextSyndicationContent.CreateHtmlContent(article.RenderedContent)
     entry.Links.Add(SyndicationLink(Uri(url)))
-    entry.LastUpdatedTime <- DateTimeOffset(article.LastEdited)
+    entry.LastUpdatedTime <- DateTimeOffset(article.LastEdited.ToLocalTime())
     entry.Summary <- TextSyndicationContent(article.RenderedSummary, TextSyndicationContentKind.Html)
-    entry.PublishDate <- DateTimeOffset(article.Created.ToUniversalTime())
+    entry.PublishDate <- DateTimeOffset(article.Created.ToLocalTime())
     entry
 
 let generateFeed (articles: Article seq) =
@@ -32,7 +32,7 @@ let generateFeed (articles: Article seq) =
 
     feed.BaseUri <- Uri(Constants.address)
     feed.Id <- Constants.address
-    feed.LastUpdatedTime <- DateTimeOffset.Now
+    feed.LastUpdatedTime <- DateTimeOffset((articles |> Seq.head).LastEdited.ToLocalTime())
     feed.Authors.Add(SyndicationPerson("vaezt@outlook.com", "Zeeko Zhu", Constants.address))
     feed.ElementExtensions.Add("icon", "", Constants.blogPath "/favicon-192x192.png")
     feed.Items <- articles |> Seq.map generateFeedEntry
