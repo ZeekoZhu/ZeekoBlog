@@ -16,6 +16,7 @@ nuget xunit.runner.visualstudio
 nuget Z.EntityFramework.Plus.EFCore
 nuget FSharpx.Extras
 nuget FsToolkit.ErrorHandling
+nuget System.ServiceModel.Syndication
 // [ FAKE GROUP ]
 group Build
     storage: none

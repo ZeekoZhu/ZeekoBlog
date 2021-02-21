@@ -2,6 +2,7 @@ module App
 open Giraffe
 open ZeekoBlog.Fun
 open ZeekoBlog
+open ZeekoBlog.Fun.Handlers
 
 
 
@@ -22,6 +23,7 @@ let webApp: HttpHandler =
         GET >=>
             choose [
                 route "/" >=> (IndexHandler.handler "zeeko")
+                route "/feed" >=> (Feed.handler "zeeko")
                 routeCif "/u/%s" IndexHandler.handler
                 routeCif "/a/%i" ArticleHandler.handler
                 routeCif "/oops/%i" ErrorHandler.errorCodeHandler

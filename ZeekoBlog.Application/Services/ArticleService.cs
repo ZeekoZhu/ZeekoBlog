@@ -40,6 +40,15 @@ namespace ZeekoBlog.Application.Services
             return list;
         }
 
+        public async Task<List<Article>> GetRecentAsync(int count, int userId)
+        {
+            return await _context.ValidArticles
+                .Where(a => a.BlogUser.Id == userId)
+                .OrderByDescending(a => a.LastEdited)
+                .Take(count)
+                .ToListAsync();
+        }
+
         public async Task<Article> GetById(int id)
         {
             var result = await _context.ValidArticles.Include(a => a.TOCList).FirstOrDefaultAsync(a => a.Id == id);

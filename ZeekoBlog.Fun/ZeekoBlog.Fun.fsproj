@@ -9,6 +9,7 @@
     <ProjectReference Include="..\ZeekoBlog.Application\ZeekoBlog.Application.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.fs" />
     <Compile Include="Utils.fs" />
     <Compile Include="Pages/Common.fs" />
     <Compile Include="Pages/Layout.fs" />
@@ -19,6 +20,7 @@
     <Compile Include="Handlers\Error.fs" />
     <Compile Include="Handlers/Index.fs" />
     <Compile Include="Handlers/Article.fs" />
+    <Compile Include="Handlers\Feed.fs" />
     <Compile Include="Manage\Pages\Index.fs" />
     <Compile Include="Manage\Pages\Login.fs" />
     <Compile Include="Manage\Pages\Edit.fs" />

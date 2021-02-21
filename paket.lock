@@ -450,6 +450,7 @@ NUGET
       System.Security.AccessControl (>= 5.0)
       System.Windows.Extensions (>= 5.0)
     System.Security.Principal.Windows (5.0)
+    System.ServiceModel.Syndication (5.0)
     System.Text.Encoding (4.3)
       Microsoft.NETCore.Platforms (>= 1.1)
       Microsoft.NETCore.Targets (>= 1.1)
