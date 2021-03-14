@@ -64,32 +64,30 @@
 }
 
 @layer utilities {
-    .heimu {
-        color: #252525;
-        text-shadow: none;
-        background-color: #252525;
-        transition: color .13s linear;
-        @apply hover:text-white
+    .link {
+        color: #0072c6;
+        border-color: #0072c6;
+        @apply border-b;
+        transition: all 0.1s;
     }
 
-    @layer utilities {
-        .link {
-            color: #0072c6;
-            border-color: #0072c6;
-            @apply border-b;
-            transition: all 0.1s;
-        }
-
-        .link:hover {
-            color: #004185;
-            border-color: #004185;
-            border-bottom-width: 3px;
-            margin-bottom: -2px;
-        }
+    .link:hover {
+        color: #004185;
+        border-color: #004185;
+        border-bottom-width: 3px;
+        margin-bottom: -2px;
     }
 }
 
 .rendered {
     @apply text-z-gray;
+}
+
+.heimu {
+    color: #252525;
+    text-shadow: none;
+    background-color: #252525;
+    transition: color .13s linear;
+    @apply hover:text-white
 }
 
