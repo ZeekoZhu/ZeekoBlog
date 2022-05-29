@@ -13,7 +13,7 @@ let scripts =
     ]
 
 let header =
-    [ h1 [] [ rawText "今天要写点什么呢？" ]
+    [ h1 [ _class "my-8" ] [ rawText "今天要写点什么呢？" ]
     ]
 
 let layoutData: LayoutModel =
@@ -33,38 +33,40 @@ let view (model: EditModel) =
         else option [ value; ] [ text ]
     let viewBody =
         div []
-            [ div [ _class "actions" ]
-                  [ a [ _href "/sudo/" ] [ rawText "返回列表" ] ]
+            [ div [ _class "actions mb-4" ]
+                  [ a [ _href "/sudo/"; _class "link" ] [ rawText "返回列表" ] ]
               input [ _hidden; _id "id"; _data "id" (model.Id.ToString()) ]
-              div [ _class "form" ]
-                  [ div [ _class "field" ]
+              let fieldCls = "flex flex-col gap-2"
+              let inputCls = "px-2 py-1 border border-slate-200 rounded focus:border-gray-600 focus:outline-none"
+              div [ _class "form flex flex-col gap-4" ]
+                  [ div [ _class $"field {fieldCls}" ]
                         [
                             label [ _for "title" ] [ rawText "标题" ]
-                            input [ _class "control"; _id "title"; _value model.Title ]
+                            input [ _class $"{inputCls} control"; _id "title"; _value model.Title ]
                         ]
-                    div [ _class "field" ]
+                    div [ _class $"field {fieldCls}" ]
                         [
                             label [ _for "summary" ] [ rawText "摘要" ]
-                            textarea [ _class "control"; _id "summary" ] [ rawText model.Summary ]
+                            textarea [ _class $"{inputCls} control"; _id "summary" ] [ rawText model.Summary ]
                         ]
-                    div [ _class "field" ]
+                    div [ _class $"field {fieldCls}" ]
                         [
                             label [ _for "docType" ] [ rawText "类型" ]
-                            select [ _class "control"; _id "docType"; _value (model.DocType |> int |> string) ]
+                            select [ _class $"{inputCls} control"; _id "docType"; _value (model.DocType |> int |> string) ]
                                    [ selectedDocType ArticleDocType.Markdown
                                      selectedDocType ArticleDocType.AsciiDoc
                                      selectedDocType ArticleDocType.Raw
                                    ]
                         ]
-                    div [ _class "field" ]
+                    div [ _class $"field {fieldCls}" ]
                         [
                             label [ _for "content" ] [ rawText "正文" ]
-                            textarea [ _class "control"; _id "content" ] [ rawText model.Content ]
+                            textarea [ _class $"{inputCls} control min-h-[200px]"; _id "content" ] [ rawText model.Content ]
                         ]
-                    div [ _class "field" ]
+                    div [ _class $"field {fieldCls}" ]
                         [
                             label [ _id "tip" ] []
-                            button [ _class "control"; _id "save" ] [ rawText "保存" ]
+                            button [ _class $"control {Style.btnClass}"; _id "save" ] [ rawText "保存" ]
                         ]
                   ]
             ]

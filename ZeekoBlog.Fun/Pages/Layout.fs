@@ -37,7 +37,7 @@ let view (data: LayoutModel) (slots: LayoutSlot) =
                       _content "width=device-width, initial-scale=1.0" ]
                yield! slots.Meta
                title [] [
-                   rawText (sprintf "%s - 网上冲浪指南" data.Title)
+                   rawText $"{data.Title} - 网上冲浪指南"
                ]
                yandexTag
                linkStyle "/dist/styles.css"
@@ -49,7 +49,7 @@ let view (data: LayoutModel) (slots: LayoutSlot) =
             ([ yandexNoScript
                div [ _class "z-container relative" ] slots.Header
                div [ _class "z-container flex-grow flex sm:flex-row flex-col flex-nowrap" ] [
-                   div [ _class "module min-w-0" ] slots.Body
+                   div [ _class "module min-w-0 w-full" ] slots.Body
                    div [ _class "z-side-items" ] slots.Sidebar
                ]
                div [ _class "z-container font-mono text-sm mt-20 mb-10" ] [

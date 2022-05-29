@@ -21,6 +21,7 @@
     <Compile Include="Handlers/Index.fs" />
     <Compile Include="Handlers/Article.fs" />
     <Compile Include="Handlers\Feed.fs" />
+    <Compile Include="Manage\Pages\Style.fs" />
     <Compile Include="Manage\Pages\Index.fs" />
     <Compile Include="Manage\Pages\Login.fs" />
     <Compile Include="Manage\Pages\Edit.fs" />
