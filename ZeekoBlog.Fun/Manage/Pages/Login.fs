@@ -1,6 +1,6 @@
 module ZeekoBlog.Fun.Manage.Pages.Login
 
-open Giraffe.GiraffeViewEngine
+open Giraffe.ViewEngine
 open LayoutPage
 
 let scripts =

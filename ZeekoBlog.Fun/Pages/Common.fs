@@ -1,6 +1,6 @@
 module internal Common
 
-open Giraffe.GiraffeViewEngine
+open Giraffe.ViewEngine
 open ZeekoBlog.Core.Models
 
 let katexResource = [

@@ -1,6 +1,6 @@
 module ZeekoBlog.Fun.Manage.Pages.Edit
 open ZeekoBlog.Core.Models
-open Giraffe.GiraffeViewEngine
+open Giraffe.ViewEngine
 open LayoutPage
 
 type EditModel =

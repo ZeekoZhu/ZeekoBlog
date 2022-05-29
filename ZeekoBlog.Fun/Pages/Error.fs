@@ -1,6 +1,6 @@
 module ErrorPage
 
-open Giraffe.GiraffeViewEngine
+open Giraffe.ViewEngine
 open LayoutPage
 
 type ErrorModel =

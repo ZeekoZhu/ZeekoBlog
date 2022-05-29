@@ -1,5 +1,5 @@
 module ZeekoBlog.Fun.Manage.Pages.Index
-open Giraffe.GiraffeViewEngine
+open Giraffe.ViewEngine
 open LayoutPage
 open ZeekoBlog.Application.DTO
 

@@ -5,7 +5,7 @@
     <ProjectReference Include="..\ZeekoBlog.Core\ZeekoBlog.Core.csproj" />
   </ItemGroup>
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

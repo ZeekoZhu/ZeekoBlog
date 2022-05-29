@@ -1,8 +1,7 @@
 module ArticlePage
 
 open ZeekoBlog.Core.Models
-open Giraffe
-open GiraffeViewEngine
+open Giraffe.ViewEngine
 open LayoutPage
 open Common
 

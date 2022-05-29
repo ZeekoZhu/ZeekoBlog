@@ -1,8 +1,7 @@
 storage: none
-version 5.251.0
 source https://api.nuget.org/v3/index.json
 source https://www.myget.org/F/zeekoget/api/v3/index.json
-framework: net5.0
+framework: net6.0
 
 nuget mapster
 nuget EasyCaching.InMemory
@@ -22,9 +21,9 @@ group Build
     storage: none
     source https://api.nuget.org/v3/index.json
     source https://www.myget.org/F/zeekoget/api/v3/index.json
-    framework: netstandard2.0
+    framework: net6.0
     nuget Fake.DotNet.Cli
     nuget Fake.Core
-    nuget MyFakeTools 0.0.16
+    nuget MyFakeTools
     nuget Fake.JavaScript.Npm
     nuget Fake.BuildServer.GitHubActions

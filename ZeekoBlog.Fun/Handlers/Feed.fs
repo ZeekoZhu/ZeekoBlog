@@ -13,8 +13,7 @@ open ZeekoBlog.Core.Models
 open ZeekoBlog.Fun
 
 let generateFeedEntry (article: Article) =
-    let url =
-        Constants.blogPath "/a/" + article.Id.ToString()
+    let url = Constants.blogPath "/a/" + article.Id.ToString()
     let entry = SyndicationItem()
     entry.Id <- url
     entry.Title <- TextSyndicationContent(article.Title)
@@ -28,8 +27,7 @@ let generateFeedEntry (article: Article) =
 let generateFeed (articles: Article seq) =
     let feedUri = Uri(Constants.blogPath "/feed")
 
-    let feed =
-        SyndicationFeed("网上冲浪指南", "Zeeko's Blog", feedUri)
+    let feed = SyndicationFeed("网上冲浪指南", "Zeeko's Blog", feedUri)
 
     feed.BaseUri <- Uri(Constants.address)
     feed.Id <- Constants.address
@@ -40,7 +38,7 @@ let generateFeed (articles: Article seq) =
     feed
 
 
-let handler (user: string): HttpHandler =
+let handler (user: string) : HttpHandler =
     fun next ctx ->
         let articleSvc = ctx.GetService<ArticleService>()
         let accountSvc = ctx.GetService<AccountService>()
@@ -61,5 +59,5 @@ let handler (user: string): HttpHandler =
             feedWriter.Flush()
             ctx.SetContentType("application/atom+xml")
             ms.Seek(0L, SeekOrigin.Begin) |> ignore
-            return! ctx.WriteStreamAsync false ms None None
+            return! ctx.WriteStreamAsync(false, ms, None, None)
         }

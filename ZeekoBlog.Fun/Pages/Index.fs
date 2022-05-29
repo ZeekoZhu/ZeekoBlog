@@ -1,7 +1,6 @@
 module IndexPage
 
-open Giraffe
-open GiraffeViewEngine
+open Giraffe.ViewEngine
 open LayoutPage
 open Common
 open ZeekoBlog.Application.DTO

@@ -1,8 +1,7 @@
 module LayoutPage
 
 open Common
-open Giraffe
-open GiraffeViewEngine
+open Giraffe.ViewEngine
 
 type LayoutModel = { Title: string }
 
