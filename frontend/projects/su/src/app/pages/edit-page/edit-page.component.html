@@ -1,0 +1,38 @@
+<div class="layout">
+  <div class="my-4">
+    <app-button (click)="handleBack()">Back</app-button>
+  </div>
+  <div class="my-4 flex flex-col gap-4">
+    <div class="field">
+      <label class="label">Title</label>
+      <div class="control">
+        <input class="input" type="text" placeholder="Title">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Summary</label>
+      <div class="control">
+        <textarea class="input" rows="3" type="text" placeholder="Title"></textarea>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Doc Type</label>
+      <div class="control">
+        <select class="input">
+          <option>Asciidoc</option>
+          <option>Markdown</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Content</label>
+      <div class="control">
+        <textarea class="input" rows="10"></textarea>
+      </div>
+    </div>
+    <div class="flex justify-center">
+      <app-button class="w-64">Save</app-button>
+    </div>
+  </div>
+</div>

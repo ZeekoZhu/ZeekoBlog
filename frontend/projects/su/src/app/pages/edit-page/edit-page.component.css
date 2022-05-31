@@ -1,0 +1,10 @@
+.field {
+  @apply flex flex-col;
+}
+.label {
+  @apply text-sm text-slate-600 mb-1;
+}
+.input {
+  @apply border-2 rounded text-sm px-2 py-1 outline-none w-full block;
+}
+

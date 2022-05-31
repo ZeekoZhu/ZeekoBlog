@@ -1,5 +1,9 @@
+:host {
+  display: inline-block;
+}
+
 .btn {
-  @apply border-2 text-sm bg-white px-2 py-1 rounded ;
+  @apply border-2 text-sm bg-white px-2 py-1 rounded w-full;
   @apply text-slate-400 border-slate-400 ;
   @apply hover:text-slate-600 hover:border-slate-600;
 }

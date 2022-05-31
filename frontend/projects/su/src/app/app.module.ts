@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { GreetingComponent } from './components/greeting/greeting.component';
 import { EntryPageComponent } from './pages/entry-page/entry-page.component';
 import { ButtonComponent } from './components/button/button.component';
+import { EditPageComponent } from './pages/edit-page/edit-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GreetingComponent,
     EntryPageComponent,
-    ButtonComponent
+    ButtonComponent,
+    EditPageComponent
   ],
   imports: [
     BrowserModule,
