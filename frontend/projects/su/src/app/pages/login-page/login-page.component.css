@@ -1,0 +1,7 @@
+.label {
+  @apply w-32
+}
+
+.ng-invalid.ng-touched {
+  @apply border-red-700;
+}

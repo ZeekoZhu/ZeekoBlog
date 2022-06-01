@@ -1,4 +1,11 @@
 <button
-  class="btn">
-  <ng-content></ng-content>
+  class="btn" [class.loading]="loading" [disabled]="disabled || loading" [type]="type">
+  <ng-template #content>
+    <ng-content></ng-content>
+  </ng-template>
+  <ng-template #loadingContent>
+    <ng-content select="[loading]"></ng-content>
+  </ng-template>
+  <ng-container *ngIf="!loading;then content; else loadingContent">
+  </ng-container>
 </button>

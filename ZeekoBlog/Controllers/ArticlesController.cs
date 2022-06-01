@@ -45,7 +45,7 @@ namespace ZeekoBlog.Controllers
         /// </summary>
         /// <param name="id">文章 Id</param>
         /// <returns></returns>
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<ArticleDetailDto>> GetArticle([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -70,7 +70,7 @@ namespace ZeekoBlog.Controllers
         /// <param name="id">文章 Id</param>
         /// <param name="dto">数据</param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         [Authorize]
         public async Task<IActionResult> PutArticle([FromRoute] int id, [FromBody] ArticlePostDto dto)
         {
@@ -120,7 +120,7 @@ namespace ZeekoBlog.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPut("render/{id}")]
+        [HttpPut("render/{id:int}")]
         [Authorize]
         public async Task<IActionResult> Rerender([FromRoute] int id)
         {
@@ -140,7 +140,7 @@ namespace ZeekoBlog.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         [Authorize]
         public async Task<IActionResult> DeleteArticle([FromRoute] int id)
         {

@@ -1,0 +1,28 @@
+<div class="layout">
+  <form #loginForm="ngForm" (ngSubmit)="handleLogin()"
+        class="flex flex-col gap-4 w-[400px]">
+    <div class="flex items-baseline">
+      <label for="username" class="label">Username</label>
+      <input id="username" name="username" class="app-input" type="text"
+             [(ngModel)]="model.userName" required>
+    </div>
+    <div class="flex items-baseline">
+      <label for="password" class="label">Password</label>
+      <input id="password"
+             name="password"
+             class="app-input"
+             type="password"
+             [(ngModel)]="model.password" required>
+    </div>
+    <div>
+      <app-button type="submit" [disabled]="!loginForm.form.valid"
+                  [loading]="pending$ | async">
+        <ng-container>
+          Login
+        </ng-container>
+        <ng-container loading>Loading...</ng-container>
+      </app-button>
+      <span class="text-red-700 ml-8">{{error$ | async}}</span>
+    </div>
+  </form>
+</div>

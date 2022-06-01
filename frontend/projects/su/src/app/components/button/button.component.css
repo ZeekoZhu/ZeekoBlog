@@ -7,3 +7,7 @@
   @apply text-slate-400 border-slate-400 ;
   @apply hover:text-slate-600 hover:border-slate-600;
 }
+
+.loading {
+  @apply opacity-50;
+}

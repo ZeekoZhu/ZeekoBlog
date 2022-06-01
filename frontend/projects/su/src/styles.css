@@ -6,3 +6,7 @@
 .layout {
   @apply w-[960px] mx-auto;
 }
+
+.app-input {
+  @apply border-2 rounded text-sm px-2 py-1 outline-none w-full block;
+}
